@@ -1,0 +1,25 @@
+# Ignorar configuraciones locales y secretos
+/.env
+/.env.local
+/.env.prod
+/.env.local.php
+/.env.*.local
+/config/secrets/prod/prod.decrypt.private.php
+
+# Ignorar directorios y archivos generados
+/public/bundles/
+/var/
+/vendor/
+
+# Ignorar configuraciones de PHPUnit
+/phpunit.xml
+.phpunit.result.cache
+
+# Ignorar configuraciones de Symfony PHPUnit Bridge
+.phpunit.result.cache
+/phpunit.xml
+
+# Ignorar configuraciones de Symfony Asset Mapper
+/public/assets/
+/assets/vendor/
+
