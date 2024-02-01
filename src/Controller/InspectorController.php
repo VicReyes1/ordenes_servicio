@@ -11,6 +11,7 @@ class InspectorController extends AbstractController
     #[Route('/inspector', name: 'app_inspector')]
     public function index(): Response
     {
+        
         return $this->render('inspector/index.html.twig', [
             'controller_name' => 'InspectorController',
         ]);
