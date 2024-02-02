@@ -3,11 +3,169 @@
 {% block title %}Hello AdminController!{% endblock %}
 
 {% block body %}
-  {% include 'components/navbar.html.twig' %}
+   
+<style>
+  body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+  }
 
-  <br><br><br>
+  .container {
+    position: relative;
+    height: 100vh;
+  }
 
-  <div style="margin: 20px; overflow: auto;">
+  .spikes {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background: #9e2343;
+    height: 100px; /* Ajusta la altura según tus necesidades */
+  }
+
+  .spikes::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    left: -0%;
+    bottom: 100%; /* Ajuste necesario para que los picos se vean */
+    z-index: 10;
+    display: block;
+    height: 50px;
+    background-size: 50px 100%;
+    background-image: linear-gradient(45deg, #9e2343 25%, transparent 25%), linear-gradient(315deg, #9e2343 25%, transparent 25%);
+    background-position: 0 0;
+  }
+
+  @keyframes animate {
+    0%{
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+        border-radius: 0;
+    }
+    100%{
+        transform: translateY(-1000px) rotate(720deg);
+        opacity: 0;
+        border-radius: 50%;
+    }
+}
+
+.background {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    background: #d1d1d1;
+    overflow: hidden;
+}
+.background li {
+    position: absolute;
+    display: block;
+    list-style: none;
+    width: 20px;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.2);
+    animation: animate 19s linear infinite;
+}
+
+
+.background li:nth-child(0) {
+    left: 5%;
+    width: 179px;
+    height: 179px;
+    bottom: -179px;
+    animation-delay: 1s;
+}
+.background li:nth-child(1) {
+    left: 52%;
+    width: 141px;
+    height: 141px;
+    bottom: -141px;
+    animation-delay: 5s;
+}
+.background li:nth-child(2) {
+    left: 52%;
+    width: 109px;
+    height: 109px;
+    bottom: -109px;
+    animation-delay: 7s;
+}
+.background li:nth-child(3) {
+    left: 74%;
+    width: 196px;
+    height: 196px;
+    bottom: -196px;
+    animation-delay: 6s;
+}
+.background li:nth-child(4) {
+    left: 7%;
+    width: 155px;
+    height: 155px;
+    bottom: -155px;
+    animation-delay: 11s;
+}
+.background li:nth-child(5) {
+    left: 28%;
+    width: 194px;
+    height: 194px;
+    bottom: -194px;
+    animation-delay: 10s;
+}
+.background li:nth-child(6) {
+    left: 0%;
+    width: 170px;
+    height: 170px;
+    bottom: -170px;
+    animation-delay: 16s;
+}
+.background li:nth-child(7) {
+    left: 23%;
+    width: 188px;
+    height: 188px;
+    bottom: -188px;
+    animation-delay: 2s;
+}
+.background li:nth-child(8) {
+    left: 40%;
+    width: 141px;
+    height: 141px;
+    bottom: -141px;
+    animation-delay: 25s;
+}
+.background li:nth-child(9) {
+    left: 19%;
+    width: 182px;
+    height: 182px;
+    bottom: -182px;
+    animation-delay: 3s;
+}
+</style>
+
+
+
+
+ <ul class="background">
+   <li></li>
+   <li></li>
+   <li></li>
+   <li></li>
+   <li></li>
+   <li></li>
+   <li></li>
+   <li></li>
+   <li></li>
+   <li></li>
+    {% include 'components/navbar.html.twig' %}
+<br><br><br>
+
+  <div class="wave"></div>
+
+   <div style="margin: 20px; overflow: auto;">
     <table style="width: 100%; border-collapse: collapse;">
       <thead style="background-color: #9e2343; color: #ffffff; border: 1px solid #9e4323;">
         <tr>
@@ -74,5 +232,10 @@
       </tbody>
     </table>
   </div>
+
+  <section class="spikes"></section>
+
+</ul>
+ 
 
 {% endblock %}
