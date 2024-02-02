@@ -24,7 +24,7 @@ class Entrada
 
     #[ORM\ManyToOne(inversedBy: 'entradas')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?material $material = null;
+    private ?Material $material = null;
 
     #[ORM\ManyToOne(inversedBy: 'entradas')]
     #[ORM\JoinColumn(nullable: false)]
@@ -60,12 +60,12 @@ class Entrada
     }
 
 
-    public function getMaterial(): ?material
+    public function getMaterial(): ?Material
     {
         return $this->material;
     }
 
-    public function setMaterial(?material $material): static
+    public function setMaterial(?Material $material): static
     {
         $this->material = $material;
 
