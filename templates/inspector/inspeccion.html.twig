@@ -1,25 +1,54 @@
 {% extends 'base.html.twig' %}
 
-
-
 {% block body %}
-    <div class="container mt-4">
-        <h2>Datos</h2>
-        <div class="row">
-            {% for key, value in data %}
-                <div class="col-md-4 mb-3">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ key }}</h5>
-                            
+    <h1>Lista de Datos</h1>
+    <ul>
+        
+        <li>Fecha de captura: {{ data.fecha }}</li>
+        <li>Area solicitante: {{ data.area_solicitante }}</li>
+        <li>Centro de trabajo: {{ data.centro_trabajo}}</li>
+        <li>Nombre Solicitante: {{ data.nombre_solicitante}}</li>
+        <li>Puesto Solicitante: {{ data.puesto_solicitante}}</li>
+        <li>Telefono y extensión: {{ data.telefono_ext}}</li>
+        <li>Tipo de trabajo: {{ data.tipo_trabajo}}</li>
+        <li>Descripción trabajo: {{ data.descripcion_trabajo}}</li>
+    </ul>
 
-                        </div>
-                    </div>
-                </div>
-                {% if loop.index % 3 == 0 %}
-                    </div><div class="row">
-                {% endif %}
-            {% endfor %}
-        </div>
-    </div>
+    <form action="{{ path('app_iniciar_inspeccion_edit', {'id': data.id}) }}" method="post">
+        <input type="hidden" name="gas" value="0">
+        <label for="gas">Gas:</label>
+        <input type="checkbox" id="gasCheckbox" name="gas">
+        
+        <input type="hidden" name="flama" value="0">
+        <label for="flama">Flama:</label>
+        <input type="checkbox" id="flamaCheckbox" name="flama">
+        
+        <input type="hidden" name="altura" value="0">
+        <label for="altura">Altura:</label>
+        <input type="checkbox" id="alturaCheckbox" name="altura">
+        
+        <label for="especialidad">Especialidad:</label>
+        <input type="text" id="especialidad" name="especialidad">
+        
+        <label for="nombre_proyecto">Nombre del Proyecto:</label>
+        <input type="text" id="nombre_proyecto" name="nombre_proyecto">
+        
+        <label for="folio_identificacion">Folio de Identificación:</label>
+        <input type="text" id="folio_identificacion" name="folio_identificacion">
+        
+        <button type="submit">Enviar</button>
+    </form>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('input[type="checkbox"]').change(function() {
+                var checkbox = $(this);
+                var hiddenField = checkbox.prev('input[type="hidden"]');
+                hiddenField.val(checkbox.prop('checked') ? 1 : 0);
+            });
+        });
+    </script>
 {% endblock %}
+
+

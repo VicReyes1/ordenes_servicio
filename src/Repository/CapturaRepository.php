@@ -36,12 +36,23 @@ class CapturaRepository extends ServiceEntityRepository
     public function findById($value): ?array
     {
         return $this->createQueryBuilder('e')
-            ->select('e.id, e.fecha', 'e.area_solicitante', 'e.centro_trabajo', 'e.nombre_solicitante', 'e.puesto_solicitante', 'e.telefono_ext', 'e.tipo_trabajo', 'e.descripcion_trabajo')
+            ->select(
+                'e.id',
+                'e.fecha as fecha', // Alias para la fecha
+                'e.area_solicitante',
+                'e.centro_trabajo',
+                'e.nombre_solicitante',
+                'e.puesto_solicitante',
+                'e.telefono_ext',
+                'e.tipo_trabajo',
+                'e.descripcion_trabajo'
+            )
             ->andWhere('e.id = :val')
             ->setParameter('val', $value)
             ->getQuery()
             ->getOneOrNullResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
     }
+
 
 
 }
