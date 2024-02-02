@@ -16,4 +16,13 @@ class InspectorController extends AbstractController
             'controller_name' => 'InspectorController',
         ]);
     }
+
+    #[Route('/inspector3', name: 'app_inspector3')]
+    public function inspector3(): Response
+    {
+        return $this->render('inspector/index.html.twig', [
+            'controller_name' => 'InspectorController',
+        ]);
+    }
+    
 }
