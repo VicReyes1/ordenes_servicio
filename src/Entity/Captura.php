@@ -65,6 +65,9 @@ class Captura
     {
         $this->entradas = new ArrayCollection();
         $this->salidas = new ArrayCollection();
+        $this->gas = false;
+        $this->flama = false;
+        $this->altura = false;
     }
 
     public function getId(): ?int

@@ -21,28 +21,15 @@ class CapturaRepository extends ServiceEntityRepository
         parent::__construct($registry, Captura::class);
     }
 
-//    /**
-//     * @return Captura[] Returns an array of Captura objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('c.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    public function findCapturasWithSecretaria(): array
+    {
+        return $this->createQueryBuilder('c')
+            ->leftJoin('c.secretaria', 's') // Realiza un left join con la relación 'secretaria'
+            ->addSelect('s') // Selecciona la entidad 'Secretaria' para incluir sus campos
+            ->orderBy('c.id', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
 
-//    public function findOneBySomeField($value): ?Captura
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+
 }

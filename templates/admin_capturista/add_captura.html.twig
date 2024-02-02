@@ -7,12 +7,8 @@
 {% include 'components/navbar.html.twig' %}
 
 <div class="container mt-4">
-    <h2>Capturas</h2>
+    <h2>Captura un nuevo proyecto</h2>
     <form action="{{ path('app_admin_capturista_add_action') }}" method="post">
-        <div class="mb-3">
-            <label for="fecha" class="form-label">Fecha:</label>
-            <input type="date" id="fecha" name="fecha" class="form-control" required>
-        </div>
 
         <div class="mb-3">
             <label for="area_solicitante" class="form-label">Área Solicitante:</label>
@@ -52,11 +48,12 @@
         <div class="mb-3">
             <label for="secretaria" class="form-label">Secretaría:</label>
             <select id="secretaria" name="secretaria" class="form-select">
-                <option value="1">Secretaría 1</option>
-                <option value="2">Secretaría 2</option>
-                <!-- Agrega opciones adicionales según tus necesidades -->
+                {% for secretaria in secretarias %}
+                    <option value="{{ secretaria.id }}">{{ secretaria.nombre }}</option>
+                {% endfor %}
             </select>
         </div>
+
 
         <button type="submit" class="btn btn-primary">Agregar Captura</button>
     </form>

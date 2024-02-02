@@ -23,18 +23,22 @@ class AdminCapturistaController extends AbstractController
     #[Route('/capturas', name: 'app_admin_capturista')]
     public function index(): Response
     {
+        // Ejemplo de uso en un controlador
+        $capturasWithSecretaria = $this->entityManager->getRepository(Captura::class)->findCapturasWithSecretaria();
 
+        
         return $this->render('admin_capturista/index.html.twig', [
-            'controller_name' => 'AdminCapturistaController',
+            'capturas' => $capturasWithSecretaria,
         ]);
     }
 
     #[Route('/capturas/add', name: 'app_admin_capturista_add')]
     public function capturasAdd(): Response
     {
+        $secretarias = $this->entityManager->getRepository(Secretaria::class)->findAll();
         
         return $this->render('admin_capturista/add_captura.html.twig', [
-            'controller_name' => 'AdminCapturistaController',
+            'secretarias' => $secretarias
         ]);
     }
 
@@ -43,25 +47,31 @@ class AdminCapturistaController extends AbstractController
     {
         // Obtener los datos del formulario
         $captura = new Captura();
+        $data = $request->request->all();
 
+       
+        foreach ($data as $key => $value) {
+            
+            // Verificar si existe el setter correspondiente en la entidad Registro
+            $setter = 'set' . str_replace('_', '', ucwords($key, '_'));
+            if ($key == 'secretaria') {
+                $captura->setSecretaria($this->entityManager->getRepository(Secretaria::class)->find($data['secretaria']));
+            }else{
+                if (method_exists($captura, $setter)) {
+                    $captura->$setter($value);
+                }
+            }
+            
+        }
 
-        $fecha = $request->request->get('fecha');
-        $areaSolicitante = $request->request->get('area_solicitante');
-        $centroTrabajo = $request->request->get('centro_trabajo');
-        $nombreSolicitante = $request->request->get('nombre_solicitante');
-        $puestoSolicitante = $request->request->get('puesto_solicitante');
-        $telefonoExt = $request->request->get('telefono_ext');
-        $tipoTrabajo = $request->request->get('tipo_trabajo');
-        $descripcionTrabajo = $request->request->get('descripcion_trabajo');
-        $secretaria = $request->request->get('secretaria');
-
-        
-        $fechaf = new \DateTime($fecha);
-        $captura->setFecha($fechaf);
-        $captura->setSecretaria($this->entityManager->getRepository(Secretaria::class)->find($data['secretaria']));
+        date_default_timezone_set('America/Mexico_City');
+        $fechaActual = new \DateTime();
+        $captura->setFecha($fechaActual);
         $this->entityManager->persist($captura);
         $this->entityManager->flush();
         
-        return $this->redirectToRoute('app_admin_capturista_add');
+        $this->addFlash('success', 'Captura guardada exitosamente');
+        return $this->redirectToRoute('app_admin_capturista');
+        
     }
 }
