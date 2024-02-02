@@ -29,6 +29,10 @@ class Entrada
     #[ORM\JoinColumn(nullable: false)]
     private ?material $material = null;
 
+    #[ORM\ManyToOne(inversedBy: 'entradas')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Captura $Captura = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -78,6 +82,18 @@ class Entrada
     public function setMaterial(?material $material): static
     {
         $this->material = $material;
+
+        return $this;
+    }
+
+    public function getCaptura(): ?Captura
+    {
+        return $this->Captura;
+    }
+
+    public function setCaptura(?Captura $Captura): static
+    {
+        $this->Captura = $Captura;
 
         return $this;
     }

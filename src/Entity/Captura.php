@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CapturaRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -52,6 +54,18 @@ class Captura
 
     #[ORM\ManyToOne]
     private ?Secretaria $secretaria = null;
+
+    #[ORM\OneToMany(mappedBy: 'Captura', targetEntity: Entrada::class)]
+    private Collection $entradas;
+
+    #[ORM\OneToMany(mappedBy: 'captura', targetEntity: Salida::class)]
+    private Collection $salidas;
+
+    public function __construct()
+    {
+        $this->entradas = new ArrayCollection();
+        $this->salidas = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -210,6 +224,66 @@ class Captura
     public function setSecretaria(?Secretaria $secretaria): static
     {
         $this->secretaria = $secretaria;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Entrada>
+     */
+    public function getEntradas(): Collection
+    {
+        return $this->entradas;
+    }
+
+    public function addEntrada(Entrada $entrada): static
+    {
+        if (!$this->entradas->contains($entrada)) {
+            $this->entradas->add($entrada);
+            $entrada->setCaptura($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEntrada(Entrada $entrada): static
+    {
+        if ($this->entradas->removeElement($entrada)) {
+            // set the owning side to null (unless already changed)
+            if ($entrada->getCaptura() === $this) {
+                $entrada->setCaptura(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Salida>
+     */
+    public function getSalidas(): Collection
+    {
+        return $this->salidas;
+    }
+
+    public function addSalida(Salida $salida): static
+    {
+        if (!$this->salidas->contains($salida)) {
+            $this->salidas->add($salida);
+            $salida->setCaptura($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSalida(Salida $salida): static
+    {
+        if ($this->salidas->removeElement($salida)) {
+            // set the owning side to null (unless already changed)
+            if ($salida->getCaptura() === $this) {
+                $salida->setCaptura(null);
+            }
+        }
 
         return $this;
     }
