@@ -1,0 +1,12 @@
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+
+    {% if form.vars.data.Material is not null %}
+        <div>
+            <label for="material_precio">Precio del Material:</label>
+            <span id="material_precio">{{ form.vars.data.Material.precio }}</span>
+        </div>
+    {% endif %}
+
+    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}

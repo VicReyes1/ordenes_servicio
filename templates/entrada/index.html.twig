@@ -1,20 +1,41 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello EntradaController!{% endblock %}
+{% block title %}Entrada index{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <h1>Entrada index</h1>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/Users/edgar/OneDrive/Escritorio/HGO/REPOS/ordenes_servicio/src/Controller/EntradaController.php</code></li>
-        <li>Your template at <code>C:/Users/edgar/OneDrive/Escritorio/HGO/REPOS/ordenes_servicio/templates/entrada/index.html.twig</code></li>
-    </ul>
-</div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Material</th>
+                <th>Precio_compra</th>
+                <th>Fecha</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entrada in entradas %}
+            <tr>
+                <td>{{ entrada.id }}</td>
+                <td>{{ entrada.material.nombre }}</td>
+                <td>{{ entrada.material.precio }}</td>
+                <td>{{ entrada.precioCompra }}</td>
+                <td>{{ entrada.fecha ? entrada.fecha|date('Y-m-d') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_entrada_show', {'id': entrada.id}) }}">show</a>
+                    <a href="{{ path('app_entrada_edit', {'id': entrada.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">No se encontraron registros</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_entrada_new') }}">Create new</a>
 {% endblock %}
