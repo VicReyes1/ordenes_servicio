@@ -22,9 +22,6 @@ class Entrada
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $fecha = null;
 
-    #[ORM\Column]
-    private ?int $proyecto = null;
-
     #[ORM\ManyToOne(inversedBy: 'entradas')]
     #[ORM\JoinColumn(nullable: false)]
     private ?material $material = null;
@@ -62,17 +59,6 @@ class Entrada
         return $this;
     }
 
-    public function getProyecto(): ?int
-    {
-        return $this->proyecto;
-    }
-
-    public function setProyecto(int $proyecto): static
-    {
-        $this->proyecto = $proyecto;
-
-        return $this;
-    }
 
     public function getMaterial(): ?material
     {

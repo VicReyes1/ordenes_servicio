@@ -61,6 +61,15 @@ class Captura
     #[ORM\OneToMany(mappedBy: 'captura', targetEntity: Salida::class)]
     private Collection $salidas;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $nombre_proyecto = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $folio_identificacion = null;
+
+    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $fecha_revision = null;
+
     public function __construct()
     {
         $this->entradas = new ArrayCollection();
@@ -287,6 +296,42 @@ class Captura
                 $salida->setCaptura(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getNombreProyecto(): ?string
+    {
+        return $this->nombre_proyecto;
+    }
+
+    public function setNombreProyecto(?string $nombre_proyecto): static
+    {
+        $this->nombre_proyecto = $nombre_proyecto;
+
+        return $this;
+    }
+
+    public function getFolioIdentificacion(): ?string
+    {
+        return $this->folio_identificacion;
+    }
+
+    public function setFolioIdentificacion(?string $folio_identificacion): static
+    {
+        $this->folio_identificacion = $folio_identificacion;
+
+        return $this;
+    }
+
+    public function getFechaRevision(): ?\DateTimeInterface
+    {
+        return $this->fecha_revision;
+    }
+
+    public function setFechaRevision(?\DateTimeInterface $fecha_revision): static
+    {
+        $this->fecha_revision = $fecha_revision;
 
         return $this;
     }
