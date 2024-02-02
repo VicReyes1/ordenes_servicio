@@ -1,9 +1,89 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello InspectorController!{% endblock %}
-
 {% block body %}
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
 
-{% include 'components/navbar.html.twig' %}
+        #capturas-section {
+            text-align: center;
+            margin-top: 50px;
+        }
 
+        #capturas-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        #add-captura-button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #add-captura-button:hover {
+            background-color: #45a049;
+        }
+    </style>
+
+    <div id="capturas-section">
+    <h2 id="capturas-title">Capturas</h2>
+    <a href="{{ path('app_admin_capturista_add') }}" id="add-captura-button">Agregar Captura</a>
+
+    <div style="margin: 20px; overflow: auto;">
+    <table style="width: 100%; border-collapse: collapse;">
+      <thead style="background-color: #9e2343; color: #ffffff; border: 1px solid #9e4323;">
+        <tr>
+          <th scope="col" style="padding: 10px; border: 1px solid #9e4323;">Fecha de captura</th>
+          <th scope="col" style="padding: 10px; border: 1px solid #9e4323;">Area solicitante</th>
+          <th scope="col" style="padding: 10px; border: 1px solid #9e4323;">Centro de trabajo</th>
+          <th scope="col" style="padding: 10px; border: 1px solid #9e4323;">Nombre del solicitante</th>
+          <th scope="col" style="padding: 10px; border: 1px solid #9e4323;">Nombre secretaria</th>
+          <th scope="col" style="padding: 10px; border: 1px solid #9e4323;">Inicar inspeccion</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for captura in capturas %}
+            <tr style="background-color: #ffffff;">
+                <td style="padding: 10px; border: 1px solid #98989a;">{{ captura.fecha ? captura.fecha|date('Y-m-d') : '' }}</td>
+                <td style="padding: 10px; border: 1px solid #98989a;">{{ captura.areaSolicitante ?? '' }}</td>
+                <td style="padding: 10px; border: 1px solid #98989a;">{{ captura.centroTrabajo ?? '' }}</td>
+                <td style="padding: 10px; border: 1px solid #98989a;">{{ captura.nombreSolicitante ?? '' }}</td>
+                <td style="padding: 10px; border: 1px solid #98989a;">{{ captura.secretaria ? captura.secretaria.nombre ?? '' : '' }}</td>
+                <td style="padding: 10px; border: 1px solid #98989a;">
+                    <a class="btn btn-primary">Inicar inspeccion</a>
+                </td>
+                <!-- Agrega más celdas según tus necesidades -->
+            </tr>
+        {% endfor %}
+
+        <!-- Agrega más filas según sea necesario -->
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+    {% for flash_message in app.flashes('success') %}
+        <script>
+            setTimeout(function() {
+                Swal.fire({
+                    icon: 'success',
+                    title: '¡Éxito!',
+                    text: '{{ flash_message }}',
+                    timer: 3000, // Duración en milisegundos
+                    timerProgressBar: true, // Barra de progreso del temporizador
+                    showConfirmButton: false // Ocultar botón de confirmación
+                });
+            }, 100); // Cambia el valor del retraso según sea necesario
+        </script>
+    {% endfor %}
 {% endblock %}
