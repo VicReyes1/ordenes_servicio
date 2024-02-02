@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello InspectorController!{% endblock %}
+
+{% block body %}
+
+{% include 'components/navbar.html.twig' %}
+
+<div class="container mt-4">
+    <h2>Capturas</h2>
+    <form action="{{ path('app_admin_capturista_add_action') }}" method="post">
+        <div class="mb-3">
+            <label for="fecha" class="form-label">Fecha:</label>
+            <input type="date" id="fecha" name="fecha" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="area_solicitante" class="form-label">Área Solicitante:</label>
+            <input type="text" id="area_solicitante" name="area_solicitante" class="form-control">
+        </div>
+
+        <div class="mb-3">
+            <label for="centro_trabajo" class="form-label">Centro de Trabajo:</label>
+            <input type="text" id="centro_trabajo" name="centro_trabajo" class="form-control">
+        </div>
+
+        <div class="mb-3">
+            <label for="nombre_solicitante" class="form-label">Nombre Solicitante:</label>
+            <input type="text" id="nombre_solicitante" name="nombre_solicitante" class="form-control">
+        </div>
+
+        <div class="mb-3">
+            <label for="puesto_solicitante" class="form-label">Puesto Solicitante:</label>
+            <input type="text" id="puesto_solicitante" name="puesto_solicitante" class="form-control">
+        </div>
+
+        <div class="mb-3">
+            <label for="telefono_ext" class="form-label">Teléfono Ext:</label>
+            <input type="text" id="telefono_ext" name="telefono_ext" class="form-control">
+        </div>
+
+        <div class="mb-3">
+            <label for="tipo_trabajo" class="form-label">Tipo de Trabajo:</label>
+            <input type="text" id="tipo_trabajo" name="tipo_trabajo" class="form-control">
+        </div>
+
+        <div class="mb-3">
+            <label for="descripcion_trabajo" class="form-label">Descripción del Trabajo:</label>
+            <textarea id="descripcion_trabajo" name="descripcion_trabajo" class="form-control"></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label for="secretaria" class="form-label">Secretaría:</label>
+            <select id="secretaria" name="secretaria" class="form-select">
+                <option value="1">Secretaría 1</option>
+                <option value="2">Secretaría 2</option>
+                <!-- Agrega opciones adicionales según tus necesidades -->
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Agregar Captura</button>
+    </form>
+</div>
+
+{% endblock %}
+
