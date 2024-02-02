@@ -1,20 +1,39 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello EntradaController!{% endblock %}
+{% block title %}Entrada index{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <h1>Entrada index</h1>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Precio_compra</th>
+                <th>Fecha</th>
+                <th>Proyecto</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entrada in entradas %}
+            <tr>
+                <td>{{ entrada.id }}</td>
+                <td>{{ entrada.precioCompra }}</td>
+                <td>{{ entrada.fecha ? entrada.fecha|date('Y-m-d') : '' }}</td>
+                <td>{{ entrada.proyecto }}</td>
+                <td>
+                    <a href="{{ path('app_entrada_show', {'id': entrada.id}) }}">show</a>
+                    <a href="{{ path('app_entrada_edit', {'id': entrada.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/Users/edgar/OneDrive/Escritorio/HGO/REPOS/ordenes_servicio/src/Controller/EntradaController.php</code></li>
-        <li>Your template at <code>C:/Users/edgar/OneDrive/Escritorio/HGO/REPOS/ordenes_servicio/templates/entrada/index.html.twig</code></li>
-    </ul>
-</div>
+    <a href="{{ path('app_entrada_new') }}">Create new</a>
 {% endblock %}
