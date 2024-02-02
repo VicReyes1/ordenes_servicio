@@ -9,6 +9,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Doctrine\ORM\EntityRepository;
 
 class EntradaType extends AbstractType
 {
@@ -17,14 +18,14 @@ class EntradaType extends AbstractType
         $builder
             ->add('precio_compra')
             ->add('fecha')
-            ->add('proyecto')
             ->add('Material', EntityType::class, [
                 'class' => Material::class,
-'choice_label' => 'id',
+                'choice_label' => 'nombre',
+                'choice_value' => 'id', // Asegúrate de que coincida con el campo de identificación en tu entidad
             ])
             ->add('Captura', EntityType::class, [
                 'class' => Captura::class,
-'choice_label' => 'id',
+'choice_label' => 'nombre_proyecto',
             ])
         ;
     }

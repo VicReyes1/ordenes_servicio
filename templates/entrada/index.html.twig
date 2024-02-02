@@ -3,25 +3,27 @@
 {% block title %}Entrada index{% endblock %}
 
 {% block body %}
+
     <h1>Entrada index</h1>
 
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
+                <th>Material</th>
                 <th>Precio_compra</th>
                 <th>Fecha</th>
-                <th>Proyecto</th>
-                <th>actions</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for entrada in entradas %}
             <tr>
                 <td>{{ entrada.id }}</td>
+                <td>{{ entrada.material.nombre }}</td>
+                <td>{{ entrada.material.precio }}</td>
                 <td>{{ entrada.precioCompra }}</td>
                 <td>{{ entrada.fecha ? entrada.fecha|date('Y-m-d') : '' }}</td>
-                <td>{{ entrada.proyecto }}</td>
                 <td>
                     <a href="{{ path('app_entrada_show', {'id': entrada.id}) }}">show</a>
                     <a href="{{ path('app_entrada_edit', {'id': entrada.id}) }}">edit</a>
@@ -29,7 +31,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="5">no records found</td>
+                <td colspan="6">No se encontraron registros</td>
             </tr>
         {% endfor %}
         </tbody>
