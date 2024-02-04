@@ -287,14 +287,17 @@ a:hover {
             <label for="descripcion_trabajo" class="form-label">Descripción del Trabajo:</label>
             <textarea id="descripcion_trabajo" name="descripcion_trabajo" class="form-control"></textarea>
         </div>
-
+        
         <div class="mb-3">
             <label for="secretaria" class="form-label">Secretaría:</label>
             <select id="secretaria" name="secretaria" class="form-select">
-              
-             
+                {% for secretaria in secretarias %}
+                    <option value="{{ secretaria.id }}">{{ secretaria.nombre }}</option>
+                {% endfor %}
             </select>
         </div>
+
+        
 
 
         <button type="submit" class="button">Agregar Captura</button>
