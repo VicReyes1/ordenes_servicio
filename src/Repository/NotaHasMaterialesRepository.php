@@ -21,28 +21,18 @@ class NotaHasMaterialesRepository extends ServiceEntityRepository
         parent::__construct($registry, NotaHasMateriales::class);
     }
 
-//    /**
-//     * @return NotaHasMateriales[] Returns an array of NotaHasMateriales objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('n')
-//            ->andWhere('n.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('n.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
 
-//    public function findOneBySomeField($value): ?NotaHasMateriales
-//    {
-//        return $this->createQueryBuilder('n')
-//            ->andWhere('n.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    public function getAllMaterialesInNota($capturaID): array
+    {
+        return $this->createQueryBuilder('nhm')
+            ->select('m.id', 'm.nombre', 'm.unidad_medida', 'c.nombre as categoria', 'nhm.cantidad') // Agregando 'c.nombre' para obtener el nombre de la categoría
+            ->join('nhm.Material', 'm') // Usar 'material' con "m" minúscula
+            ->join('m.categoria', 'c') // Agregar join con la entidad Categoria
+            ->join('nhm.nota', 'n') // Ajustar 'nota' según la relación en tu entidad NotaHasMateriales
+            ->where('n.id = :capturaID') // Ajustar 'id' según la propiedad id en tu entidad Nota
+            ->setParameter('capturaID', $capturaID)
+            ->getQuery()
+            ->getResult();
+    }
+
 }

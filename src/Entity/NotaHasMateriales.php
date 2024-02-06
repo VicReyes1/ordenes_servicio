@@ -21,8 +21,10 @@ class NotaHasMateriales
     #[ORM\JoinColumn(nullable: false)]
     private ?Material $Material = null;
 
-    #[ORM\Column(length: 50)]
-    private ?string $estatus = null;
+    #[ORM\Column]
+    private ?float $cantidad = null;
+
+
 
     public function getId(): ?int
     {
@@ -53,15 +55,16 @@ class NotaHasMateriales
         return $this;
     }
 
-    public function getEstatus(): ?string
+    public function getCantidad(): ?float
     {
-        return $this->estatus;
+        return $this->cantidad;
     }
 
-    public function setEstatus(string $estatus): static
+    public function setCantidad(float $cantidad): static
     {
-        $this->estatus = $estatus;
+        $this->cantidad = $cantidad;
 
         return $this;
     }
+
 }

@@ -21,28 +21,37 @@ class NotaRepository extends ServiceEntityRepository
         parent::__construct($registry, Nota::class);
     }
 
-//    /**
-//     * @return Nota[] Returns an array of Nota objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('n')
-//            ->andWhere('n.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('n.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
 
-//    public function findOneBySomeField($value): ?Nota
-//    {
-//        return $this->createQueryBuilder('n')
-//            ->andWhere('n.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    public function getAllAceptedNotas($capturaID): array
+    {
+        return $this->createQueryBuilder('n')
+            ->andWhere('n.captura = :capturaID')
+            ->andWhere('n.estatus = :aceptado') // Ajusta según tu mapeo de entidad
+            ->setParameter('capturaID', $capturaID)
+            ->setParameter('aceptado', 'aceptado') // Ajusta según los valores reales de tu estatus
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function getAllPendingNotas($capturaID): array
+    {
+        return $this->createQueryBuilder('n')
+            ->andWhere('n.captura = :capturaID')
+            ->andWhere('n.estatus = :pendiente') // Ajusta según tu mapeo de entidad
+            ->setParameter('capturaID', $capturaID)
+            ->setParameter('pendiente', 'pendiente') // Ajusta según los valores reales de tu estatus
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function getAllRefusedNotas($capturaID): array
+    {
+        return $this->createQueryBuilder('n')
+            ->andWhere('n.captura = :capturaID')
+            ->andWhere('n.estatus = :rechazado') // Ajusta según tu mapeo de entidad
+            ->setParameter('capturaID', $capturaID)
+            ->setParameter('rechazado', 'rechazado') // Ajusta según los valores reales de tu estatus
+            ->getQuery()
+            ->getResult();
+    }
 }

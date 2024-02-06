@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% set id = app.request.attributes.get('id') %}
+    
+    <form method="post"  action="{{ path('generar_nota', {'id': id}) }}">
+
+        <!-- Agregar el campo de texto para el nombre -->
+        <label for="nombre">Nombre:</label>
+        <input type="text" name="nombre" class="form-control">
+
+        <label for="materiales">Agregar Materiales a solicitar</label>
+        <div id="camposDinamicos"></div>
+
+        <button type="button" onclick="agregarCampo()">Agregar Partida</button>
+
+        <!-- Agregar el textarea para las observaciones -->
+        <label for="observaciones">Observaciones:</label>
+        <textarea name="observaciones" class="form-control" rows="4"></textarea>
+
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Guardar</button>
+        </div>
+    </form>
+
+    <script>
+        function agregarCampo() {
+            var nuevoCampo = '<div class="campoDinamico">' +
+                '<label for="nuevoCampo">Nueva partida:</label>' +
+                '<select name="materiales[]" class="nuevoCampo" >' +
+                '<option value="" disabled selected>Seleccione nuevo material</option>' + // Opción predeterminada
+                '{% for material in materiales %}' +
+                '<option value="{{material.id}}" >{{material.nombre}}</option>' +
+                '{% endfor %}' +
+                '</select>' +
+                '<label for="cantidad">Cantidad:</label>' +
+                '<input type="number" name="cantidades[]" class="nuevoCampo" step="any">' + // Permitir puntos decimales
+                '</div>';
+
+            $('#camposDinamicos').append(nuevoCampo);
+        }
+    </script>
+
+{% endblock %}

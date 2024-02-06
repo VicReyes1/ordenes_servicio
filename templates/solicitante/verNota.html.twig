@@ -1,0 +1,49 @@
+{# ruta_de_tu_plantilla.twig #}
+
+{% extends 'base.html.twig' %}
+
+
+
+{% block body %}
+
+ {% include 'components/navbar.html.twig' %}
+
+<h1>Detalles de la Nota</h1>
+
+<dl>
+    <dt>ID:</dt>
+    <dd>{{ nota.id }}</dd>
+
+    <dt>Nombre:</dt>
+    <dd>{{ nota.nombre }}</dd>
+
+    <dt>Fecha de Petición:</dt>
+    <dd>{{ nota.fechaPeticion|date('Y-m-d') }}</dd>
+
+    <dt>Observaciones:</dt>
+    <dd>{{ nota.observaciones }}</dd>
+
+    <dt>Captura:</dt>
+    {# Puedes imprimir más detalles de la entidad Captura según sea necesario #}
+    <dd>{{ nota.captura.id }}</dd>
+
+    <dt>Estatus:</dt>
+    <dd>{{ nota.estatus }}</dd>
+</dl>
+
+        
+        
+<ul>
+    {% for material in materiales %}
+        <li>
+            <strong>Nombre:</strong> {{ material.nombre }}<br>
+            <strong>Unidad de Medida:</strong> {{ material.unidad_medida }}<br>
+            <strong>Categoría:</strong> {{ material.categoria }}<br>
+            <strong>Cantidad:</strong> {{ material.cantidad }}<br>
+        </li>
+    {% endfor %}
+</ul>
+
+{% endblock %}
+
+

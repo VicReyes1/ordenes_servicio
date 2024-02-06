@@ -27,6 +27,10 @@ class Nota
     #[ORM\JoinColumn(nullable: false)]
     private ?Captura $captura = null;
 
+    #[ORM\Column(length: 50)]
+    private ?string $estatus = null;
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -79,4 +83,18 @@ class Nota
 
         return $this;
     }
+
+    public function getEstatus(): ?string
+    {
+        return $this->estatus;
+    }
+
+    public function setEstatus(string $estatus): static
+    {
+        $this->estatus = $estatus;
+
+        return $this;
+    }
+
+    
 }
