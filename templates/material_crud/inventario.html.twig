@@ -1,0 +1,42 @@
+{# material/inventario.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Inventario de Materiales</h1>
+
+    <h3>Entradas</h3>
+    <ul>
+        {% for entrada in entradas %}
+            <li>{{ entrada.cantidad }} unidades de {{ entrada.material.nombre }} ({{ entrada.fecha|date('Y-m-d') }})</li>
+        {% endfor %}
+    </ul>
+
+    <h3>Salidas</h3>
+    <ul>
+        {% for salida in salidas %}
+            <li>{{ salida.cantidad }} unidades de {{ salida.material.nombre }} ({{ salida.fecha|date('Y-m-d') }})</li>
+        {% endfor %}
+    </ul>
+
+    <h3>Materiales</h3>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Unidad de Medida</th>
+            <th>Precio</th>
+            <th>Inventario</th> {# Nueva columna para el inventario #}
+            {# Agrega más encabezados según tus campos de Material #}
+        </tr>
+        {% for material in materiales %}
+            <tr>
+                <td>{{ material.id }}</td>
+                <td>{{ material.nombre }}</td>
+                <td>{{ material.getUnidadMedida() }}</td>
+                <td>{{ material.precio }}</td>
+                <td>{{ inventarioPorMaterial[material.id] }}</td> {# Muestra el inventario correspondiente al material #}
+                {# Agrega más celdas según tus campos de Material #}
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
