@@ -15,6 +15,9 @@
         #capturas-section {
             text-align: center;
             margin-top: 50px;
+             max-height: 75%; /* Altura máxima del contenedor */
+    overflow-y: auto; /* Agrega una barra de desplazamiento vertical cuando el contenido desborda */
+    overflow-x: hidden;
         }
 
         #capturas-title {
@@ -132,13 +135,8 @@
     bottom: -182px;
     animation-delay: 3s;
 }
-/* estilos boton  */
-  #add-captura-container {
-        text-align: right;
-        margin-top: 0px;
-        margin-right: 80px;
-        margin-left: 1520px;
-    }
+
+    
 .button {
   all: unset;
   display: flex;
@@ -154,6 +152,8 @@
   overflow: hidden;
   transition: border 300ms, color 300ms;
   user-select: none;
+    max-width:20%;
+  margin-left: 40%;
 }
 
 .button p {
@@ -255,8 +255,7 @@ a:hover {
 }
 
  .bodybotoon {
-            margin-left: 850px;
-            margin-right:850px;
+          
             align-items: center;
             
         }

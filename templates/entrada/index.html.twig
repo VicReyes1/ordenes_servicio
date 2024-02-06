@@ -14,6 +14,10 @@
         #capturas-section {
             text-align: center;
             margin-top: 50px;
+             max-height: 80%;
+             max-width:100%; /* Altura máxima del contenedor */
+    overflow-y: auto; /* Agrega una barra de desplazamiento vertical cuando el contenido desborda */
+    overflow-x: auto;
         }
 
         #capturas-title {
@@ -141,9 +145,8 @@
 .button {
   all: unset;
   display: flex;
-  align-items: center;
   position: relative;
-  padding: 0.5em 1.5em; /* Ajustado el padding */
+  padding: 0.2em 0.5em; /* Ajustado el padding */
   border: #9e2343 solid 0.15em;
   border-radius: 0.25em;
   color: #9e2343; /* Cambiado a #9e2343 */
@@ -153,6 +156,9 @@
   overflow: hidden;
   transition: border 300ms, color 300ms;
   user-select: none;
+  max-width:20%;
+  margin-left: 40%;
+  
 }
 
 .button p {
@@ -254,11 +260,15 @@ a:hover {
 }
 
  .bodybotoon {
-            margin-left: 850px;
-            margin-right:850px;
+           
             align-items: center;
             
         }
+          .responsive{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(10rem,100%),1fr));
+    grid-gap:1rem;
+  }
     </style>
     <ul class="background">
    <li></li>
@@ -272,10 +282,11 @@ a:hover {
    <li></li>
    <li></li>
    {% include 'components/navbar.html.twig' %}
+    
     <div id="capturas-section">
     <a href="#">Entrada index </a>
 
-
+  
         <div style="margin: 20px; overflow: auto;">
     <table style="width: 100%; border-collapse: collapse;">
       <thead style="background-color: #9e2343; color: #ffffff; border: 1px solid #9e4323;">
@@ -308,8 +319,10 @@ a:hover {
         {% endfor %}
         </tbody>
     </table>
+
     </div>
-  <div class="bodybotoon">
+
+    <div class="bodybotoon">
     <a href="{{ path('app_entrada_new') }}" class="button">Create new</a>
     </div>
  </div>
