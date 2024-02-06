@@ -58,12 +58,31 @@
 {{ form_start(form, {'attr': {'class': 'form-container'}}) }}
     {{ form_widget(form) }}
 
-    {% if form.vars.data.Material is not null %}
-        <div>
-            <label for="material_precio">Precio del Material:</label>
-            <span id="material_precio">{{ form.vars.data.Material.precio }}</span>
-        </div><br>
-    {% endif %}
 
-    <button class="button2">Guardar</button>
+
+    <button class="btn">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        // Escuchar cambios en el campo de selección de Material
+        $('select[name="entrada[Material]"]').change(function() {
+            // Obtener el valor seleccionado
+            var materialId = $(this).val();
+
+            // Realizar una solicitud AJAX para obtener el precio del material seleccionado
+            $.ajax({
+                url: 'http://127.0.0.1:8000/material/crud/obtener-precio/' + materialId,
+                method: 'GET',
+                success: function(response) {
+                    // Actualizar el precio de compra en el formulario
+                    $('#entrada_precio_compra').val(response.precio);
+                },
+                error: function() {
+                    console.log('Error al obtener el precio del material');
+                }
+            });
+        });
+    });
+</script>

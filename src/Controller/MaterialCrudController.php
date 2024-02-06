@@ -78,4 +78,20 @@ class MaterialCrudController extends AbstractController
 
         return $this->redirectToRoute('app_material_crud_index', [], Response::HTTP_SEE_OTHER);
     }
+
+    #[Route("/obtener-precio/{id}", name:"obtener_precio_material", methods:["GET"])]
+public function obtenerPrecio(MaterialRepository $materialRepository, $id): Response
+{
+    $material = $materialRepository->find($id);
+
+    if (!$material) {
+        return $this->json(['error' => 'Material no encontrado'], 404);
+    }
+
+    $precio = $material->getPrecio();
+
+    // Asegúrate de devolver un JsonResponse en lugar de simplemente $this->json
+    return $this->json(['precio' => $precio]);
+}
+
 }
