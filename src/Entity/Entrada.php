@@ -28,7 +28,12 @@ class Entrada
 
     #[ORM\ManyToOne(inversedBy: 'entradas')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Captura $Captura = null;
+
+    #[ORM\Column]
+    private ?float $precio_adquirido = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $cantidad = null;
 
     public function getId(): ?int
     {
@@ -72,15 +77,29 @@ class Entrada
         return $this;
     }
 
-    public function getCaptura(): ?Captura
+
+    public function getPrecioAdquirido(): ?float
     {
-        return $this->Captura;
+        return $this->precio_adquirido;
     }
 
-    public function setCaptura(?Captura $Captura): static
+    public function setPrecioAdquirido(float $precio_adquirido): static
     {
-        $this->Captura = $Captura;
+        $this->precio_adquirido = $precio_adquirido;
 
         return $this;
     }
+
+    public function getCantidad(): ?int
+    {
+        return $this->cantidad;
+    }
+
+    public function setCantidad(?int $cantidad): static
+    {
+        $this->cantidad = $cantidad;
+
+        return $this;
+    }
+
 }
