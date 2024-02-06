@@ -16,12 +16,15 @@ class EntradaType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('precio_compra')
+        ->add('precio_compra', null, [
+            'attr' => ['readonly' => true],
+        ])
             ->add('fecha')
             ->add('Material', EntityType::class, [
                 'class' => Material::class,
                 'choice_label' => 'nombre',
-                'choice_value' => 'id', // Asegúrate de que coincida con el campo de identificación en tu entidad
+                'choice_value' => 'id', 
+                'placeholder' => 'Seleccionar',
             ])
             ->add('Captura', EntityType::class, [
                 'class' => Captura::class,

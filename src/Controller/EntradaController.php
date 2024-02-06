@@ -78,4 +78,6 @@ class EntradaController extends AbstractController
 
         return $this->redirectToRoute('app_entrada_index', [], Response::HTTP_SEE_OTHER);
     }
+
+    
 }
