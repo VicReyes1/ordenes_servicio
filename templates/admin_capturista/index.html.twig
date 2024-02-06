@@ -1,7 +1,6 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-
     <style>
         body {
             margin: 0;
@@ -128,77 +127,7 @@
     bottom: -182px;
     animation-delay: 3s;
 }
-/* estilos boton  */
-  #add-captura-container {
-        text-align: right;
-        margin-top: 0px;
-        margin-right: 80px;
-        margin-left: 1520px;
-    }
-.button {
-  all: unset;
-  display: flex;
-  align-items: center;
-  position: relative;
-  padding: 0.5em 1.5em; /* Ajustado el padding */
-  border: #9e2343 solid 0.15em;
-  border-radius: 0.25em;
-  color: #9e2343; /* Cambiado a #9e2343 */
-  font-size: 1.2em; /* Tamaño de fuente más pequeño */
-  font-weight: 600;
-  cursor: pointer;
-  overflow: hidden;
-  transition: border 300ms, color 300ms;
-  user-select: none;
-}
 
-.button p {
-  z-index: 1;
-}
-
-.button:hover {
-  color: #9e2343; /* Cambiado a #9e2343 */
-}
-
-.button:active {
-  border-color: teal;
-}
-
-.button::after,
-.button::before {
-  content: "";
-  position: absolute;
-  width: 6em; /* Ajustado el tamaño del pseudo-elemento */
-  aspect-ratio: 1;
-  background: #9e2343; /* Cambiado a #9e2343 */
-  opacity: 50%;
-  border-radius: 50%;
-  transition: transform 500ms, background 300ms;
-}
-
-.button::before {
-  left: 0;
-  transform: translateX(-5em);
-}
-
-.button::after {
-  right: 0;
-  transform: translateX(5em);
-}
-
-.button:hover:before {
-  transform: translateX(-0.5em);
-}
-
-.button:hover:after {
-  transform: translateX(0.5em);
-}
-
-.button:active:before,
-.button:active:after {
-  background: teal;
-  
-}
 
 /* estilos titulo  */
 body {
@@ -249,27 +178,42 @@ a:hover {
     background-position-x: 200%;
   }
 }
-    </style>
-    <ul class="background">
-   <li></li>
-   <li></li>
-   <li></li>
-   <li></li>
-   <li></li>
-   <li></li>
-   <li></li>
-   <li></li>
-   <li></li>
-   <li></li>
-   {% include 'components/navbar.html.twig' %}
-   <div id="capturas-section">
-    <a href="#">CAPTURAS </a>
-    <div id="add-captura-container">
-    <a href="{{ path('app_admin_capturista_add') }}" class="button">Agregar Captura</a>
-</div>
 
+#nueva-captura-button {
+        
+        top: 10px;
+        right: 10px;
+        background-color: #4CAF50; /* Color de fondo del botón */
+        color: white; /* Color del texto del botón */
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-bottom: 15px; /* Ajusta el valor según sea necesario */
+    }
+  
+    </style>
+
+ <ul class="background">
+   <li></li>
+   <li></li>
+   <li></li>
+   <li></li>
+   <li></li>
+   <li></li>
+   <li></li>
+   <li></li>
+   <li></li>
+   <li></li>
+    {% include 'components/navbar.html.twig' %}
+    <div id="capturas-section">
+    <a href="#">Capturas</a>
+
+    
     <div style="margin: 20px; overflow: auto;">
+      
     <table style="width: 100%; border-collapse: collapse;">
+      <button id="nueva-captura-button" onclick="location.href='{{ path('app_admin_capturista_add') }}'">Nueva Captura</button>
       <thead style="background-color: #9e2343; color: #ffffff; border: 1px solid #9e4323;">
         <tr>
           <th scope="col" style="padding: 10px; border: 1px solid #9e4323;">Fecha de captura</th>
@@ -277,18 +221,41 @@ a:hover {
           <th scope="col" style="padding: 10px; border: 1px solid #9e4323;">Centro de trabajo</th>
           <th scope="col" style="padding: 10px; border: 1px solid #9e4323;">Nombre del solicitante</th>
           <th scope="col" style="padding: 10px; border: 1px solid #9e4323;">Nombre secretaria</th>
+          
         </tr>
       </thead>
       <tbody>
-        
+        {% for captura in capturas %}
+            <tr style="background-color: #ffffff;">
+                <td style="padding: 10px; border: 1px solid #98989a;">{{ captura.fecha ? captura.fecha|date('Y-m-d') : '' }}</td>
+                <td style="padding: 10px; border: 1px solid #98989a;">{{ captura.areaSolicitante ?? '' }}</td>
+                <td style="padding: 10px; border: 1px solid #98989a;">{{ captura.centroTrabajo ?? '' }}</td>
+                <td style="padding: 10px; border: 1px solid #98989a;">{{ captura.nombreSolicitante ?? '' }}</td>
+                <td style="padding: 10px; border: 1px solid #98989a;">{{ captura.secretaria ? captura.secretaria.nombre ?? '' : '' }}</td>
+              
+                <!-- Agrega más celdas según tus necesidades -->
+            </tr>
+        {% endfor %}
+
         <!-- Agrega más filas según sea necesario -->
       </tbody>
     </table>
   </div>
 </div>
-
 </ul>
-    
 
-   
+    {% for flash_message in app.flashes('success') %}
+        <script>
+            setTimeout(function() {
+                Swal.fire({
+                    icon: 'success',
+                    title: '¡Éxito!',
+                    text: '{{ flash_message }}',
+                    timer: 3000, // Duración en milisegundos
+                    timerProgressBar: true, // Barra de progreso del temporizador
+                    showConfirmButton: false // Ocultar botón de confirmación
+                });
+            }, 100); // Cambia el valor del retraso según sea necesario
+        </script>
+    {% endfor %}
 {% endblock %}

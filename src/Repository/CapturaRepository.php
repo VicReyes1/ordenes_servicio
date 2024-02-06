@@ -33,6 +33,18 @@ class CapturaRepository extends ServiceEntityRepository
     
     }
 
+    public function findProyectosWithSecretaria(): array
+    {
+        return $this->createQueryBuilder('c')
+        ->leftJoin('c.secretaria', 's') // Realiza un left join con la relación 'secretaria'
+        ->addSelect('s') // Selecciona la entidad 'Secretaria' para incluir sus campos
+        ->where('c.nombre_proyecto IS NOT NULL')
+        ->orderBy('c.id', 'ASC')
+        ->getQuery()
+        ->getResult();
+    
+    }
+
     public function findById($value): ?array
     {
         return $this->createQueryBuilder('e')
