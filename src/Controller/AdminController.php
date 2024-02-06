@@ -8,6 +8,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Captura;
+use App\Entity\Nota;
+use App\Entity\NotaHasMateriales;
 
 class AdminController extends AbstractController
 {
@@ -33,9 +35,57 @@ class AdminController extends AbstractController
     {
         $captura = $this->entityManager->getRepository(Captura::class)->findById($id);
         $captura['fecha'] = $captura['fecha']->format('Y-m-d');
+        $notasAceptadas = $this->entityManager->getRepository(Nota::class)->getAllAceptedNotas($id);
+        $notasPendientes = $this->entityManager->getRepository(Nota::class)->getAllPendingNotas($id);
+        $notasRechazadas = $this->entityManager->getRepository(Nota::class)->getAllRefusedNotas($id);
         
         return $this->render('admin/verProyecto.html.twig', [
             'data' => $captura,
+            'aceptadas' => $notasAceptadas,
+            'pendientes' => $notasPendientes,
+            'recahazadas' => $notasRechazadas
         ]);
+    }
+
+    #[Route('/proyecto/nota/{id}', name: 'proyecto_ver_nota')]
+    public function solicitanteNota($id): Response
+    {
+       
+        $nota = $this->entityManager->getRepository(Nota::class)->find($id);
+        $materiales = $this->entityManager->getRepository(NotaHasMateriales::class)->getAllMaterialesInNota($id);
+
+        
+        return $this->render('admin/verNota.html.twig', [
+            'nota' => $nota,
+            'materiales' => $materiales
+        ]);
+    }
+
+    #[Route('/aceptar/{id}', name: 'proyecto_aceptar_nota')]
+    public function aceptarNota($id): Response
+    {
+        $nota = $this->entityManager->getRepository(Nota::class)->find($id);
+        $nota->setEstatus('aceptado');
+
+        $idProyecto = $nota->getCaptura()->getId();
+        $this->entityManager->persist($nota);
+        $this->entityManager->flush();
+
+        return $this->redirectToRoute('app_proyecto', ['id' => $idProyecto]);
+
+    }
+
+    #[Route('/rechazar/{id}', name: 'proyecto_rechazar_nota')]
+    public function rechazarNota($id): Response
+    {
+        $nota = $this->entityManager->getRepository(Nota::class)->find($id);
+        $nota->setEstatus('rechazado');
+
+        $idProyecto = $nota->getCaptura()->getId();
+        $this->entityManager->persist($nota);
+        $this->entityManager->flush();
+
+        return $this->redirectToRoute('app_proyecto', ['id' => $idProyecto]);
+
     }
 }
