@@ -1,4 +1,60 @@
-{{ form_start(form) }}
+<style>
+  /* Add container styles */
+  .form-container {
+    max-width: 1000px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #dec9a3;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: auto;
+    max-height: 80vh;
+  }
+
+  /* Add form styles */
+  form {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: grid;
+    gap: 20px;
+  }
+
+  label {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    font-weight: bold;
+  }
+
+  input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+    border-color: #9e2343;
+  }
+
+  input[type="checkbox"] {
+    margin-right: 8px;
+    border-color: #9e2343;
+  }
+
+  .button2 {
+    padding: 10px;
+    background-color: #9e2343;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%; /* Hacer que el botón ocupe el ancho completo */
+  }
+</style>
+
+{{ form_start(form, {'attr': {'class': 'form-container'}}) }}
     {{ form_widget(form) }}
 
 

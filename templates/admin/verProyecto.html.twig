@@ -300,54 +300,52 @@ a:hover {
     </ul><br><br>
 
   </div>
-  
-  
+
+  <div class="accordion" id="accordionExample">
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+        Notas Aceptadas
+      </button>
+    </h2>
+    <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+        <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+        Notas Pendientes
+      </button>
+    </h2>
+    <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+        <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+        Notas Rechazadas
+      </button>
+    </h2>
+    <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+        <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+      </div>
+    </div>
+  </div>
+</div>
 
   </div>
-   <form action="{{ path('app_iniciar_inspeccion_edit', {'id': data.id}) }}" method="post">
-    <p style="font-weight: bold; font-size: 18px; color: #9e2343; margin-bottom: 15px;">Marca la/s casillas con los riesgos:</p><br>
-
-    <div style="display: flex; align-items: center;">
-
-        <label for="gas" style="margin-right: 15px;">
-            <input type="hidden" name="gas" value="0">
-            <input type="checkbox" id="gasCheckbox" name="gas"> Gas
-        </label>
-
-        <label for="flama" style="margin-right: 15px;">
-            <input type="hidden" name="flama" value="0">
-            <input type="checkbox" id="flamaCheckbox" name="flama"> Flama
-        </label>
-
-        <label for="altura" style="margin-right: 15px;">
-            <input type="hidden" name="altura" value="0">
-            <input type="checkbox" id="alturaCheckbox" name="altura"> Altura
-        </label>
-
-        <!-- ... (resto de las checkboxes) ... -->
-
-    </div>
-
-    <label for="especialidad">
-        Especialidad:
-        <input type="text" id="especialidad" name="especialidad">
-    </label>
-
-    <label for="nombre_proyecto">
-        Nombre del Proyecto:
-        <input type="text" id="nombre_proyecto" name="nombre_proyecto">
-    </label>
-
-    <label for="folio_identificacion">
-        Folio de Identificación:
-        <input type="text" id="folio_identificacion" name="folio_identificacion">
-    </label>
-
-    <button type="submit">Enviar</button>
-</form>
   </div>
   
  </ul>
+
+    
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function() {
@@ -359,5 +357,3 @@ a:hover {
         });
     </script>
 {% endblock %}
-
-

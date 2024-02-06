@@ -24,11 +24,14 @@ class AdminCapturistaController extends AbstractController
     public function index(): Response
     {
         // Ejemplo de uso en un controlador
+        
+        
+        
         $capturasWithSecretaria = $this->entityManager->getRepository(Captura::class)->findCapturasWithSecretaria();
 
         
         return $this->render('admin_capturista/index.html.twig', [
-            'capturas' => $capturasWithSecretaria,
+            'capturas' => $capturasWithSecretaria,  
         ]);
     }
 
