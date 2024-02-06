@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Entity\Material;
 use App\Form\MaterialType;
 use App\Repository\MaterialRepository;
+use App\Repository\EntradaRepository;
+use App\Repository\SalidaRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,6 +21,45 @@ class MaterialCrudController extends AbstractController
     {
         return $this->render('material_crud/index.html.twig', [
             'materials' => $materialRepository->findAll(),
+        ]);
+    }
+
+    #[Route('/inventario', name: 'app_material_inventario')]
+    public function inventario(EntradaRepository $entradaRepository, SalidaRepository $salidaRepository, MaterialRepository $materialRepository): Response
+    {
+        // Obtén las entradas y salidas desde tus repositorios
+        $entradas = $entradaRepository->findAll();
+        $salidas = $salidaRepository->findAll();
+        $materiales = $materialRepository->findAll();
+
+        // Inicializa el array de inventario por material
+        $inventarioPorMaterial = [];
+
+        // Calcula el inventario por material
+        foreach ($materiales as $material) {
+            $inventario = 0;
+
+            foreach ($entradas as $entrada) {
+                if ($entrada->getMaterial() === $material) {
+                    $inventario += $entrada->getCantidad();
+                }
+            }
+
+            foreach ($salidas as $salida) {
+                if ($salida->getMaterial() === $material) {
+                    $inventario -= $salida->getCantidad();
+                }
+            }
+
+            $inventarioPorMaterial[$material->getId()] = $inventario;
+        }
+
+        // Pasa el resultado a la plantilla
+        return $this->render('material_crud/inventario.html.twig', [
+            'materiales' => $materiales,
+            'entradas' => $entradas,
+            'salidas' => $salidas,
+            'inventarioPorMaterial' => $inventarioPorMaterial,
         ]);
     }
 
@@ -80,18 +121,19 @@ class MaterialCrudController extends AbstractController
     }
 
     #[Route("/obtener-precio/{id}", name:"obtener_precio_material", methods:["GET"])]
-public function obtenerPrecio(MaterialRepository $materialRepository, $id): Response
-{
-    $material = $materialRepository->find($id);
+    public function obtenerPrecio(MaterialRepository $materialRepository, $id): Response
+    {
+        $material = $materialRepository->find($id);
 
-    if (!$material) {
-        return $this->json(['error' => 'Material no encontrado'], 404);
+        if (!$material) {
+            return $this->json(['error' => 'Material no encontrado'], 404);
+        }
+
+        $precio = $material->getPrecio();
+
+        // Asegúrate de devolver un JsonResponse en lugar de simplemente $this->json
+        return $this->json(['precio' => $precio]);
     }
 
-    $precio = $material->getPrecio();
-
-    // Asegúrate de devolver un JsonResponse en lugar de simplemente $this->json
-    return $this->json(['precio' => $precio]);
-}
 
 }
