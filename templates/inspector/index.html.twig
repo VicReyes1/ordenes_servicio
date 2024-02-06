@@ -194,7 +194,7 @@ a:hover {
    <li></li>
     {% include 'components/navbar.html.twig' %}
     <div id="capturas-section">
-    <a href="#">CAPTURA UN NUEVO PROYECTO </a>
+    <a href="#">Inspecciones pendientes</a>
 
     <!--<a href="{{ path('app_admin_capturista_add') }}" id="add-captura-button">Agregar Captura</a> -->
     <div style="margin: 20px; overflow: auto;">
@@ -218,9 +218,10 @@ a:hover {
                 <td style="padding: 10px; border: 1px solid #98989a;">{{ captura.nombreSolicitante ?? '' }}</td>
                 <td style="padding: 10px; border: 1px solid #98989a;">{{ captura.secretaria ? captura.secretaria.nombre ?? '' : '' }}</td>
               <td style="padding: 10px; border: 1px solid #98989a;">
-    <a class="btn custom-btn" style="background-color: #dec93a; color:#9e2343; border-color:#9e2343;">
+    <a class="btn custom-btn" style="background-color: #dec93a; color:#9e2343; border-color:#9e2343;" href="{{ path('app_iniciar_inspeccion', {'id': captura.id}) }}">
         Iniciar inspección
     </a>
+   
 </td>
                 <!-- Agrega más celdas según tus necesidades -->
             </tr>
