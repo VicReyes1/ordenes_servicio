@@ -172,7 +172,10 @@
 
         #capturas-section {
             text-align: center;
-            margin-top: 50px;
+            margin-top: 50px; max-height: 80%; /* Altura máxima del contenedor */
+    overflow-y: auto; /* Agrega una barra de desplazamiento vertical cuando el contenido desborda */
+    overflow-x: hidden;
+
         }
 
         #capturas-title {

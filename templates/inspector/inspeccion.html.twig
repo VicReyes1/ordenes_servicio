@@ -167,19 +167,20 @@ a:hover {
 
 /* Add container styles */
     .form-container {
-        max-width: 800px; /* Adjust the maximum width as needed */
+        max-width: 100%; /* Adjust the maximum width as needed */
         margin: 50px auto;
         padding: 20px;
         background-color: #fff;
         border-radius: 10px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+         max-height: 80%; /* Altura máxima del contenedor */
+    overflow-y: auto; /* Agrega una barra de desplazamiento vertical cuando el contenido desborda */
+    overflow-x: auto;
     }
 
     /* Add form styles */
     form {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
+       
     }
 
     label {
@@ -210,18 +211,20 @@ a:hover {
   }
 
   .form-container {
-    max-width: 1000px;
+    max-width: 100%;
     margin: 50px auto;
     padding: 20px;
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-     overflow: auto;
+     overflow-y: auto; /* Agrega una barra de desplazamiento vertical cuando el contenido desborda */
+    overflow-x: auto;
     max-height: 80vh;
+    
   }
 
    form {
-    max-width: 1000px;
+    max-width: 100%px;
     margin: 0 auto;
     padding: 20px;
     background-color: #f4f4f4;
@@ -230,10 +233,11 @@ a:hover {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
+     overflow-x: auto;
   }
 
   label {
-    display: flex;
+    
     align-items: center;
     margin-bottom: 8px;
     font-weight: bold;
@@ -262,6 +266,12 @@ a:hover {
     cursor: pointer;
   }
 
+  .responsive{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(10rem,100%),1fr));
+    grid-gap:1rem;
+  }
+
 </style>
 
 <ul class="background"  >
@@ -277,7 +287,7 @@ a:hover {
    <li></li>
      
     {% include 'components/navbar.html.twig' %}
-
+ <div class="responsive">
  <div class="form-container"  >
      
    
@@ -347,6 +357,7 @@ a:hover {
     <button type="submit">Enviar</button>
 </form>
   </div>
+   </div>
   
  </ul>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

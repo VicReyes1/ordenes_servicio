@@ -3,32 +3,186 @@
 {% block title %}Salida{% endblock %}
 
 {% block body %}
-    <h1>Salida</h1>
+<style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
 
-    <table class="table">
-        <tbody>
+        #capturas-section {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        #capturas-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+
+/* estilos boton  */
+  #add-captura-container {
+        text-align: right;
+        margin-top: 0px;
+        margin-right: 80px;
+        margin-left: 1520px;
+    }
+.button {
+  all: unset;
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: 0.5em 1.5em; /* Ajustado el padding */
+  border: #9e2343 solid 0.15em;
+  border-radius: 0.25em;
+  color: #9e2343; /* Cambiado a #9e2343 */
+  font-size: 1.2em; /* Tamaño de fuente más pequeño */
+  font-weight: 600;
+  cursor: pointer;
+  overflow: hidden;
+  transition: border 300ms, color 300ms;
+  user-select: none;
+}
+
+.button p {
+  z-index: 1;
+}
+
+.button:hover {
+  color: #9e2343; /* Cambiado a #9e2343 */
+}
+
+.button:active {
+  border-color: teal;
+}
+
+.button::after,
+.button::before {
+  content: "";
+  position: absolute;
+  width: 6em; /* Ajustado el tamaño del pseudo-elemento */
+  aspect-ratio: 1;
+  background: #9e2343; /* Cambiado a #9e2343 */
+  opacity: 50%;
+  border-radius: 50%;
+  transition: transform 500ms, background 300ms;
+}
+
+.button::before {
+  left: 0;
+  transform: translateX(-5em);
+}
+
+.button::after {
+  right: 0;
+  transform: translateX(5em);
+}
+
+.button:hover:before {
+  transform: translateX(-0.5em);
+}
+
+.button:hover:after {
+  transform: translateX(0.5em);
+}
+
+.button:active:before,
+.button:active:after {
+  background: teal;
+  
+}
+
+/* estilos titulo  */
+body {
+  background: #001224;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+a {
+  font-size: 3em;
+  font-weight: bold;
+  font-family: sans-serif;
+  text-decoration: none;
+  color: transparent;
+  background: url("{{ asset('images/image.png') }}") repeat-x #9E2343;
+  background-position-x: 0%;
+  background-position-y: 0%;
+  background-size: auto;
+  background-clip: border-box;
+  -webkit-background-clip: text;
+  background-clip: text;
+  background-size: 200% 100%;
+  background-position-x: 0;
+  background-position-y: 2em;
+  -webkit-transition: background-position-y 0.6s ease;
+  transition: background-position-y 0.6s ease;
+  -webkit-animation: waveAnimation 4s infinite linear;
+  animation: waveAnimation 4s infinite linear;
+  animation-play-state: running;
+  -webkit-animation-play-state: paused;
+  animation-play-state: paused;
+}
+
+a:hover {
+  background-position-x: 0;
+  background-position-y: 0;
+  -webkit-animation-play-state: running;
+  animation-play-state: running;
+}
+
+@keyframes waveAnimation{
+  from {
+    background-position-x: 0%;
+  }
+  to {
+    background-position-x: 200%;
+  }
+}
+
+ .bodybotoon {
+            margin-left: 850px;
+            margin-right:850px;
+            align-items: center;
+            
+        }
+    </style>
+     <div id="capturas-section">
+    <a href="#"> Salida </a>
+
+    <div style="margin: 20px; overflow: auto;">
+    <table style="width: 100%; border-collapse: collapse;">
+      <thead style="background-color: #9e2343; color: #ffffff; border: 1px solid #9e4323;">
+        <tr>
+          <th scope="col" style="padding: 10px; border: 1px solid #9e4323;">Id</th>
+          <th scope="col" style="padding: 10px; border: 1px solid #9e4323;">Precio_salida</th>
+          <th scope="col" style="padding: 10px; border: 1px solid #9e4323;">Fecha</th>
+          <th scope="col" style="padding: 10px; border: 1px solid #9e4323;">Cantidad</th>
+        </tr>
+      </thead>
+
+       <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ salida.id }}</td>
-            </tr>
-            <tr>
-                <th>Precio_salida</th>
-                <td>{{ salida.precioSalida }}</td>
-            </tr>
-            <tr>
-                <th>Fecha</th>
-                <td>{{ salida.fecha ? salida.fecha|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Cantidad</th>
-                <td>{{ salida.cantidad }}</td>
+                <td scope="col" style="padding: 10px; border: 1px solid #9e4323;">{{ salida.id }}</td>
+                <td scope="col" style="padding: 10px; border: 1px solid #9e4323;">{{ salida.precioSalida }}</td>
+                <td scope="col" style="padding: 10px; border: 1px solid #9e4323;">{{ salida.fecha ? salida.fecha|date('Y-m-d') : '' }}</td>
+                <td scope="col" style="padding: 10px; border: 1px solid #9e4323;">{{ salida.cantidad }}</td>
+               
             </tr>
         </tbody>
+
     </table>
+    </div>
 
     <a href="{{ path('app_salida_index') }}">back to list</a>
 
     <a href="{{ path('app_salida_edit', {'id': salida.id}) }}">edit</a>
 
     {{ include('salida/_delete_form.html.twig') }}
+
+    </div>
 {% endblock %}
