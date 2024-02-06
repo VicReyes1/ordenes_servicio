@@ -297,8 +297,8 @@ a:hover {
                 <td scope="col" style="padding: 10px; border: 1px solid #9e4323;">{{ entrada.precioCompra }}</td>
                 <td scope="col" style="padding: 10px; border: 1px solid #9e4323;">{{ entrada.fecha ? entrada.fecha|date('Y-m-d') : '' }}</td>
                 <td scope="col" style="padding: 10px; border: 1px solid #9e4323;">
-                    <a href="{{ path('app_entrada_show', {'id': entrada.id}) }}">show</a>
-                    <a href="{{ path('app_entrada_edit', {'id': entrada.id}) }}">edit</a>
+                    <a href="{{ path('app_entrada_show', {'id': entrada.id}) }}" class="button">show</a>
+                    <a href="{{ path('app_entrada_edit', {'id': entrada.id}) }}" class="button">edit</a>
                 </td>
             </tr>
         {% else %}

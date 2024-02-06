@@ -30,6 +30,9 @@ class Salida
     #[ORM\JoinColumn(nullable: false)]
     private ?Captura $captura = null;
 
+    #[ORM\Column]
+    private ?int $cantidad = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -80,6 +83,18 @@ class Salida
     public function setCaptura(?Captura $captura): static
     {
         $this->captura = $captura;
+
+        return $this;
+    }
+
+    public function getCantidad(): ?int
+    {
+        return $this->cantidad;
+    }
+
+    public function setCantidad(int $cantidad): static
+    {
+        $this->cantidad = $cantidad;
 
         return $this;
     }

@@ -143,7 +143,7 @@
         margin-right: 80px;
         margin-left: 1520px;
     }
-.button {
+.button1 {
   all: unset;
   display: flex;
   align-items: center;
@@ -160,20 +160,20 @@
   user-select: none;
 }
 
-.button p {
+.button1 p {
   z-index: 1;
 }
 
-.button:hover {
+.button1:hover {
   color: #9e2343; /* Cambiado a #9e2343 */
 }
 
-.button:active {
+.button1:active {
   border-color: teal;
 }
 
-.button::after,
-.button::before {
+.button1::after,
+.button1::before {
   content: "";
   position: absolute;
   width: 6em; /* Ajustado el tamaño del pseudo-elemento */
@@ -184,26 +184,26 @@
   transition: transform 500ms, background 300ms;
 }
 
-.button::before {
+.button1::before {
   left: 0;
   transform: translateX(-5em);
 }
 
-.button::after {
+.button1::after {
   right: 0;
   transform: translateX(5em);
 }
 
-.button:hover:before {
+.button1:hover:before {
   transform: translateX(-0.5em);
 }
 
-.button:hover:after {
+.button1:hover:after {
   transform: translateX(0.5em);
 }
 
-.button:active:before,
-.button:active:after {
+.button1:active:before,
+.button1:active:after {
   background: teal;
   
 }
@@ -259,11 +259,30 @@ a:hover {
 }
 
  .bodybotoon {
-            margin-left: 850px;
-            margin-right:850px;
+            margin-left: 650px;
+            margin-right:650px;
             align-items: center;
             
         }
+  .button2 {
+   
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: 0.2em 0.7em; /* Ajustado el padding */
+  border: #9e2343 solid 0.15em;
+  border-radius: 0.25em;
+  color: #ffffff; /* Cambiado a #9e2343 */
+  background: #9e2343;
+  font-size: 1em; /* Tamaño de fuente más pequeño */
+  font-weight: 600;
+  cursor: pointer;
+  overflow: hidden;
+  transition: border 300ms, color 300ms;
+  user-select: none;
+  width: 20%;
+
+  }
     </style>
     <ul class="background">
    <li></li>
@@ -300,8 +319,8 @@ a:hover {
                 <td scope="col" style="padding: 10px; border: 1px solid #9e4323;">{{ material.unidadMedida }}</td>
                 <td scope="col" style="padding: 10px; border: 1px solid #9e4323;">{{ material.precio }}</td>
                 <td scope="col" style="padding: 10px; border: 1px solid #9e4323;">
-                    <a href="{{ path('app_material_crud_show', {'id': material.id}) }}">show</a>
-                    <a href="{{ path('app_material_crud_edit', {'id': material.id}) }}">edit</a>
+                    <a href="{{ path('app_material_crud_show', {'id': material.id}) }}" class="button2">show</a><br>
+                    <a href="{{ path('app_material_crud_edit', {'id': material.id}) }}" class="button2">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -314,7 +333,7 @@ a:hover {
     </table>
      </div>
      <div class="bodybotoon">
-    <a href="{{ path('app_material_crud_new') }}" class="button">Create new</a>
+    <a href="{{ path('app_material_crud_new') }}" class="button1">Create new</a>
     </div>
  </div>
  </ul>
