@@ -33,7 +33,7 @@ class EntradaController extends AbstractController
             $entityManager->persist($entrada);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_entrada_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_entrada_index');
         }
 
         return $this->render('entrada/new.html.twig', [
