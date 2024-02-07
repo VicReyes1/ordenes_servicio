@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Captura;
 use App\Entity\Nota;
+use App\Entity\User;
 use App\Entity\NotaHasMateriales;
 
 class AdminController extends AbstractController
@@ -19,6 +20,28 @@ class AdminController extends AbstractController
     {
         $this->entityManager = $entityManager;
     }
+
+    #[Route('/createUser', name: 'app_createUser')]
+    public function guardarUsuario(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $data = json_decode($request->getContent(), true);
+        $usuario = new User();
+        $usuario
+            
+            ->setEmail($data['email'])
+            ->setPassword(password_hash($data['password'], PASSWORD_DEFAULT)) // Hashear la contraseña
+            ->setRoles($data['roles'])
+            ->setNombreCompleto($data['nombre'])
+            ->setCargo($data['cargo']);
+            
+        // Persistir y guardar el usuario en la base de datos
+        $entityManager->persist($usuario);
+        $entityManager->flush();
+
+        // Retorna una respuesta adecuada (por ejemplo, un mensaje de éxito)
+        return new Response('Usuario guardado correctamente', Response::HTTP_CREATED);
+    }
+
 
     #[Route('/admin', name: 'app_admin')]
     public function index(): Response
