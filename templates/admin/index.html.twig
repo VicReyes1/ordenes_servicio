@@ -3,7 +3,9 @@
 {% block body %}
    
 <style>
-  body, html {
+
+/* Estilos PIE DE PAGINA*/
+  bo1dy, html {
     margin: 0;
     padding: 0;
     height: 100%;
@@ -20,7 +22,7 @@
     bottom: 0;
     width: 100%;
     background: #9e2343;
-    height: 100px; /* Ajusta la altura según tus necesidades */
+    height: 50px; /* Ajusta la altura según tus necesidades */
   }
 
   .spikes::after {
@@ -36,8 +38,31 @@
     background-image: linear-gradient(45deg, #9e2343 25%, transparent 25%), linear-gradient(315deg, #9e2343 25%, transparent 25%);
     background-position: 0 0;
   }
+ /* ----------------------------------------------+++++++++++++++7777777777777777777777777777777777777777788888888*/
+ 
+    body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
 
-  @keyframes animate {
+
+        #capturas-section {
+            text-align: center;
+            margin-top: 50px;
+              max-height: 80%; /* Altura máxima del contenedor */
+    overflow-y: auto; /* Agrega una barra de desplazamiento vertical cuando el contenido desborda */
+    overflow-x: hidden;
+        }
+
+        #capturas-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        /* estilos fondo  */
+@keyframes animate {
     0%{
         transform: translateY(0) rotate(0deg);
         opacity: 1;
@@ -71,6 +96,8 @@
     animation: animate 19s linear infinite;
     pointer-events: none; /* Esto permitirá que los eventos pasen a través de los elementos */
 }
+
+
 
 
 .background li:nth-child(0) {
@@ -143,12 +170,86 @@
     bottom: -182px;
     animation-delay: 3s;
 }
+
+/* estilos titulo  */
+body {
+  background: #001224;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+a {
+  font-size: 3em;
+  font-weight: bold;
+  font-family: sans-serif;
+  text-decoration: none;
+  color: transparent;
+  background: url("{{ asset('images/image.png') }}") repeat-x #9E2343;
+  background-position-x: 0%;
+  background-position-y: 0%;
+  background-size: auto;
+  background-clip: border-box;
+  -webkit-background-clip: text;
+  background-clip: text;
+  background-size: 200% 100%;
+  background-position-x: 0;
+  background-position-y: 2em;
+  -webkit-transition: background-position-y 0.6s ease;
+  transition: background-position-y 0.6s ease;
+  -webkit-animation: waveAnimation 4s infinite linear;
+  animation: waveAnimation 4s infinite linear;
+  animation-play-state: running;
+  -webkit-animation-play-state: paused;
+  animation-play-state: paused;
+}
+
+a:hover {
+  background-position-x: 0;
+  background-position-y: 0;
+  -webkit-animation-play-state: running;
+  animation-play-state: running;
+}
+
+@keyframes waveAnimation{
+  from {
+    background-position-x: 0%;
+  }
+  to {
+    background-position-x: 200%;
+  }
+}
+
+ .bodybotoon {
+         
+            align-items: center;
+            
+        }
+ .button2 {
+   
+  display: flex;
+  align-items: center;
+  position: relative;
+   justify-content: center;
+  border: #9e2343 solid 0.15em;
+  border-radius: 0.25em;
+  color: #ffffff; /* Cambiado a #9e2343 */
+  background: #9e2343;
+  font-size: 1em; /* Tamaño de fuente más pequeño */
+  font-weight: 600;
+  cursor: pointer;
+  overflow: hidden;
+  transition: border 300ms, color 300ms;
+  user-select: none;
+
+  width:100%;
+
+  }
+ 
 </style>
 
-
-
-
- <ul class="background">
+    <ul class="background">
    <li></li>
    <li></li>
    <li></li>
@@ -159,49 +260,13 @@
    <li></li>
    <li></li>
    <li></li>
-    {% include 'components/navbar.html.twig' %}
-<br><br><br>
-
-  <div class="wave"></div>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-        }
-
-        #capturas-section {
-            text-align: center;
-            margin-top: 50px; max-height: 80%; /* Altura máxima del contenedor */
-    overflow-y: auto; /* Agrega una barra de desplazamiento vertical cuando el contenido desborda */
-    overflow-x: hidden;
-
-        }
-
-        #capturas-title {
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-
-        #add-captura-button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
-            font-size: 16px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        #add-captura-button:hover {
-            background-color: #45a049;
-        }
-    </style>
+   {% include 'components/navbar.html.twig' %}
 
     <div id="capturas-section">
-    <h2 id="capturas-title">Proyectos</h2>
+    <a href="#">PROYECTOS</a>
 
+  
+ 
    <div style="margin: 20px; overflow: auto;">
     <table style="width: 100%; border-collapse: collapse;">
       <thead style="background-color: #9e2343; color: #ffffff; border: 1px solid #9e4323;">
@@ -223,7 +288,7 @@
                 <td style="padding: 10px; border: 1px solid #98989a;">{{ captura.nombreSolicitante ?? '' }}</td>
                 <td style="padding: 10px; border: 1px solid #98989a;">{{ captura.secretaria ? captura.secretaria.nombre ?? '' : '' }}</td>
                 <td style="padding: 10px; border: 1px solid #98989a;">
-                    <a class="btn btn-primary" href="{{ path('app_proyecto', {'id': captura.id}) }}">Ver detalles</a>
+                    <a class="button2" href="{{ path('app_proyecto', {'id': captura.id}) }}">Ver detalles</a>
                 </td>
                 <!-- Agrega más celdas según tus necesidades -->
             </tr>

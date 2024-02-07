@@ -15,7 +15,7 @@
         #capturas-section {
             text-align: center;
             margin-top: 50px;
-             max-height: 75%; /* Altura máxima del contenedor */
+             max-height: 70%; /* Altura máxima del contenedor */
     overflow-y: auto; /* Agrega una barra de desplazamiento vertical cuando el contenido desborda */
     overflow-x: hidden;
         }
@@ -136,74 +136,7 @@
     animation-delay: 3s;
 }
 
-    
-.button {
-  all: unset;
-  display: flex;
-  align-items: center;
-  position: relative;
-  padding: 0.5em 1.5em; /* Ajustado el padding */
-  border: #9e2343 solid 0.15em;
-  border-radius: 0.25em;
-  color: #9e2343; /* Cambiado a #9e2343 */
-  font-size: 1.2em; /* Tamaño de fuente más pequeño */
-  font-weight: 600;
-  cursor: pointer;
-  overflow: hidden;
-  transition: border 300ms, color 300ms;
-  user-select: none;
-    max-width:20%;
-  margin-left: 40%;
-}
-
-.button p {
-  z-index: 1;
-}
-
-.button:hover {
-  color: #9e2343; /* Cambiado a #9e2343 */
-}
-
-.button:active {
-  border-color: teal;
-}
-
-.button::after,
-.button::before {
-  content: "";
-  position: absolute;
-  width: 6em; /* Ajustado el tamaño del pseudo-elemento */
-  aspect-ratio: 1;
-  background: #9e2343; /* Cambiado a #9e2343 */
-  opacity: 50%;
-  border-radius: 50%;
-  transition: transform 500ms, background 300ms;
-}
-
-.button::before {
-  left: 0;
-  transform: translateX(-5em);
-}
-
-.button::after {
-  right: 0;
-  transform: translateX(5em);
-}
-
-.button:hover:before {
-  transform: translateX(-0.5em);
-}
-
-.button:hover:after {
-  transform: translateX(0.5em);
-}
-
-.button:active:before,
-.button:active:after {
-  background: teal;
-  
-}
-
+ 
 /* estilos titulo  */
 body {
   background: #001224;
@@ -254,11 +187,21 @@ a:hover {
   }
 }
 
- .bodybotoon {
-          
-            align-items: center;
-            
-        }
+.button3 {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Centrar el contenido horizontalmente */
+  text-align: center;
+  border: #9e2343 solid 0.15em;
+  border-radius: 0.25em;
+  color: #ffffff; 
+  background: #9e2343;
+  font-size: 1em; /* Tamaño de fuente más pequeño */
+  margin-left: 10%;
+ 
+  width: 80%;
+  height: 40px;
+}
     </style>
 
 
@@ -274,13 +217,17 @@ a:hover {
    <li></li>
    <li></li>
    {% include 'components/navbar.html.twig' %}
-    <div id="capturas-section">
-    <a href="#">Create new Entrada </a>
+   
+   <div id="capturas-section">
+    <a href="#" style="margin-right: auto;">CREAR NUEVA ENTRADA</a>
 
-
+    
     {{ include('entrada/_form.html.twig') }}
-<div class="bodybotoon">
-    <a href="{{ path('app_entrada_index') }}" class="button">back to list</a>
 </div>
+
+   <a href="{{ path('app_entrada_index') }}" class="button3">Regresar</a>
+
+    
+
     </ul>
 {% endblock %}

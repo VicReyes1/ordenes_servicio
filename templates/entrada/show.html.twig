@@ -22,77 +22,8 @@
         }
 
 
-/* estilos boton  */
-  #add-captura-container {
-        text-align: right;
-        margin-top: 0px;
-        margin-right: 80px;
-        margin-left: 1520px;
-    }
-.button {
-  all: unset;
-  display: flex;
-  align-items: center;
-  position: relative;
-  padding: 0.5em 1.5em; /* Ajustado el padding */
-  border: #9e2343 solid 0.15em;
-  border-radius: 0.25em;
-  color: #9e2343; /* Cambiado a #9e2343 */
-  font-size: 1.2em; /* Tamaño de fuente más pequeño */
-  font-weight: 600;
-  cursor: pointer;
-  overflow: hidden;
-  transition: border 300ms, color 300ms;
-  user-select: none;
-}
 
-.button p {
-  z-index: 1;
-}
 
-.button:hover {
-  color: #9e2343; /* Cambiado a #9e2343 */
-}
-
-.button:active {
-  border-color: teal;
-}
-
-.button::after,
-.button::before {
-  content: "";
-  position: absolute;
-  width: 6em; /* Ajustado el tamaño del pseudo-elemento */
-  aspect-ratio: 1;
-  background: #9e2343; /* Cambiado a #9e2343 */
-  opacity: 50%;
-  border-radius: 50%;
-  transition: transform 500ms, background 300ms;
-}
-
-.button::before {
-  left: 0;
-  transform: translateX(-5em);
-}
-
-.button::after {
-  right: 0;
-  transform: translateX(5em);
-}
-
-.button:hover:before {
-  transform: translateX(-0.5em);
-}
-
-.button:hover:after {
-  transform: translateX(0.5em);
-}
-
-.button:active:before,
-.button:active:after {
-  background: teal;
-  
-}
 
 /* estilos titulo  */
 body {
@@ -150,6 +81,28 @@ a:hover {
             align-items: center;
             
         }
+  
+  .button3 {
+  display: flex;
+  justify-content: center; /* Centrar el contenido horizontalmente */
+  text-align: center;
+  position: relative;
+  border: #9e2343 solid 0.15em;
+  border-radius: 0.25em;
+  color: #ffffff; /* Cambiado a #9e2343 */
+  background: #9e2343;
+  font-size: 1em; /* Tamaño de fuente más pequeño */
+  font-weight: 600;
+  cursor: pointer;
+  overflow: hidden;
+  transition: border 300ms, color 300ms;
+  user-select: none;
+  margin-left: 0%;
+  margin-right: 20%;
+  width: 10%;
+  height: 40px;
+}
+
     </style>
 
  <div id="capturas-section">
@@ -164,7 +117,7 @@ a:hover {
         <tr>
           <th scope="col" style="padding: 10px; border: 1px solid #9e4323;">Id</th>
           <th scope="col" style="padding: 10px; border: 1px solid #9e4323;">Precio_compra</th>
-          <th scope="col" style="padding: 10px; border: 1px solid #9e4323;">Fecha</th>
+          <th scope="col" style="padding: 10px; border: 1px solid #9e4323; ">Fecha</th>
         </tr>
       </thead>
 
@@ -172,16 +125,16 @@ a:hover {
             <tr>
                 <td scope="col" style="padding: 10px; border: 1px solid #9e4323;">{{ entrada.id }}</td>
                 <td scope="col" style="padding: 10px; border: 1px solid #9e4323;">{{ entrada.precioCompra }}</td>
-                <td scope="col" style="padding: 10px; border: 1px solid #9e4323;">{{ entrada.fecha ? entrada.fecha|date('Y-m-d') : '' }}</td>
+                <td scope="col" style="padding: 10px; border: 1px solid #9e4323;  width: 80%; ">{{ entrada.fecha ? entrada.fecha|date('Y-m-d') : '' }}</td>
                
             </tr>
         </tbody>
     </table>
     </div>
 
-    <a href="{{ path('app_entrada_index') }}">back to list</a>
+    <a href="{{ path('app_entrada_index') }}" class="button3">Regresar</a>
 
-    <a href="{{ path('app_entrada_edit', {'id': entrada.id}) }}">edit</a>
+    <a href="{{ path('app_entrada_edit', {'id': entrada.id}) }}">Editar</a>
 
     {{ include('entrada/_delete_form.html.twig') }}
 

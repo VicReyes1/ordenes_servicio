@@ -7,69 +7,7 @@
 
 
 <style>
-.button {
-  all: unset;
-  display: flex;
-  align-items: center;
-  position: relative;
-  padding: 0.5em 1.5em; /* Ajustado el padding */
-  border: #9e2343 solid 0.15em;
-  border-radius: 0.25em;
-  color: #9e2343; /* Cambiado a #9e2343 */
-  font-size: 1.2em; /* Tamaño de fuente más pequeño */
-  font-weight: 600;
-  cursor: pointer;
-  overflow: hidden;
-  transition: border 300ms, color 300ms;
-  user-select: none;
-}
 
-.button p {
-  z-index: 1;
-}
-
-.button:hover {
-  color: #9e2343; /* Cambiado a #9e2343 */
-}
-
-.button:active {
-  border-color: teal;
-}
-
-.button::after,
-.button::before {
-  content: "";
-  position: absolute;
-  width: 6em; /* Ajustado el tamaño del pseudo-elemento */
-  aspect-ratio: 1;
-  background: #9e2343; /* Cambiado a #9e2343 */
-  opacity: 50%;
-  border-radius: 50%;
-  transition: transform 500ms, background 300ms;
-}
-
-.button::before {
-  left: 0;
-  transform: translateX(-5em);
-}
-
-.button::after {
-  right: 0;
-  transform: translateX(5em);
-}
-
-.button:hover:before {
-  transform: translateX(-0.5em);
-}
-
-.button:hover:after {
-  transform: translateX(0.5em);
-}
-
-.button:active:before,
-.button:active:after {
-  background: teal;
-}
 
 @keyframes animate {
     0%{
@@ -235,6 +173,19 @@ a:hover {
     background-position-x: 200%;
   }
 }
+
+#nueva-captura-button {
+        
+        top: 10px;
+        right: 10px;
+        background-color: #9e2343; /* Color de fondo del botón */
+        color: white; /* Color del texto del botón */
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-bottom: 15px; /* Ajusta el valor según sea necesario */
+    }
 </style>
 
   <ul class="background">
@@ -301,7 +252,7 @@ a:hover {
         
 
 
-        <button type="submit" class="button">Agregar Captura</button>
+        <button type="submit" id="nueva-captura-button">Agregar Captura</button>
       
  
     </form>

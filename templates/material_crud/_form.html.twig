@@ -1,65 +1,62 @@
 <style>
   /* Add container styles */
   .form-container {
-    max-width: 800px;
-    margin: 50px auto;
+    max-width: 80%; /* Adjust the maximum width as needed */
+    margin: 20px auto;
     padding: 20px;
-    background-color: #dec9a3;
-    color:#ffffff;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    overflow: auto;
-    max-height: 80vh;
-    
-  }
-
-  /* Add form styles */
-  form {
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f4f4f4;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    display: grid;
-    gap: 20px;
-    
+    background-color: transparent;
+    max-height: 80%; /* Altura máxima del contenedor */
+    overflow-y: auto; /* Agrega una barra de desplazamiento vertical cuando el contenido desborda */
+    overflow-x: hidden;
   }
 
   label {
-    display: flex;
-    align-items: center;
-    margin-bottom: 8px;
+    display: block;
+    margin-bottom: 0.5rem;
     font-weight: bold;
   }
-
-  input[type="text"] {
+  
+  textarea,
+  input[type="text"],
+  input[type="date"], /* Estilo para el input de fecha */
+  input[type="number"], /* Estilo para el input numérico */
+  select {
     width: 100%;
-    padding: 8px;
-    margin-bottom: 16px;
-    box-sizing: border-box;
-    border-color: #9e2343;
+    padding: 0.375rem 0.75rem;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   }
 
   input[type="checkbox"] {
-    margin-right: 8px;
-    border-color: #9e2343;
+    width: auto;
+    margin-top: 0.3rem;
+    margin-bottom: 0;
   }
 
-  .button2 {
-    padding: 10px;
-    background-color: #9e2343;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    width: 100%; /* Hacer que el botón ocupe el ancho completo */
-  }
+  #nueva-captura-button {
+        
+        top: 10px;
+        right: 10px;
+        background-color: #9e2343; /* Color de fondo del botón */
+        color: white; /* Color del texto del botón */
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-bottom: 15px; /* Ajusta el valor según sea necesario */
+    }
 </style>
 
 
 {{ form_start(form, {'attr': {'class': 'form-container'}}) }}
     {{ form_widget(form) }}
-    <button class="button2">{{ button_label|default('Save') }}</button>
+    <button id="nueva-captura-button">{{ button_label|default('Guardar') }}</button>
 {{ form_end(form) }}
 
