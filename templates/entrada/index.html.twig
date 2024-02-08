@@ -238,7 +238,7 @@ a:hover {
    {% include 'components/navbar.html.twig' %}
     
     <div id="capturas-section">
-    <a href="#">Entrada  </a>
+    <a href="#">ENTRADA  </a>
 
   
         <div style="margin: 20px; overflow: auto;">
@@ -247,7 +247,7 @@ a:hover {
         <tr>
           <th scope="col" style="padding: 10px; border: 1px solid #9e4323;">Id</th>
           <th scope="col" style="padding: 10px; border: 1px solid #9e4323;">Material</th>
-          <th scope="col" style="padding: 10px; border: 1px solid #9e4323;">Precio_compra</th>
+          <th scope="col" style="padding: 10px; border: 1px solid #9e4323;">Precio de compra</th>
           <th scope="col" style="padding: 10px; border: 1px solid #9e4323;">Fecha</th>
           <th scope="col" style="padding: 10px; border: 1px solid #9e4323;">Acciones</th> 
         </tr>
@@ -263,7 +263,7 @@ a:hover {
                 <td scope="col" style="padding: 10px; border: 1px solid #9e4323;">{{ entrada.fecha ? entrada.fecha|date('Y-m-d') : '' }}</td>
                 <td scope="col" style="padding: 10px; border: 1px solid #9e4323;">
                
-                    <a href="{{ path('app_entrada_edit', {'id': entrada.id}) }}" class="button">edit</a>
+                    <a href="{{ path('app_entrada_edit', {'id': entrada.id}) }}" class="button">Editar</a>
                 </td>
             </tr>
         {% else %}
@@ -277,7 +277,7 @@ a:hover {
     </div>
 
     <div class="bodybotoon">
-    <a href="{{ path('app_entrada_new') }}" class="button2">Crear Nueva Entrada</a>
+    <a href="{{ path('app_entrada_new') }}" class="button2">Crear nueva entrada</a>
     </div>
 
  </div>

@@ -187,8 +187,8 @@ a:hover {
     padding: 20px;
     background-color: #f4f4f4;
     
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+ 
+    
     gap: 20px;
      overflow-x: auto;
   }
@@ -234,7 +234,7 @@ a:hover {
 
   .responsive{
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(10rem,100%),1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(10rem,120%),1fr));
     grid-gap:1rem;
   }
 
@@ -261,7 +261,7 @@ a:hover {
 
     <div class="w-60 bg-gradient-to-l from-slate-300 to-slate-100 text-slate-600 border border-slate-300 grid grid-col-2 justify-center p-4 gap-4 rounded-lg shadow-md" style="background-color: #f4f4f4; color: #000000; font-size:18px; font-weight:bold;">
   <div class="col-span-2 text-lg font-bold capitalize rounded-md" >
-   <a href="#">LISTA DE DATOS </a>
+   <a href="#">Datos de la captura </a>
   </div>
   <div class="col-span-2 rounded-md">
      <ul>
@@ -269,8 +269,8 @@ a:hover {
         <li2>Fecha de captura: {{ data.fecha }}</li2><br>
         <li2>Area solicitante: {{ data.area_solicitante }}</li2><br>
         <li2>Centro de trabajo: {{ data.centro_trabajo}}</li2><br>
-        <li2>Nombre Solicitante: {{ data.nombre_solicitante}}</li2><br>
-        <li2>Puesto Solicitante: {{ data.puesto_solicitante}}</li2><br>
+        <li2>Nombre solicitante: {{ data.nombre_solicitante}}</li2><br>
+        <li2>Puesto solicitante: {{ data.puesto_solicitante}}</li2><br>
         <li2>Telefono y extensión: {{ data.telefono_ext}}</li2><br>
         <li2>Tipo de trabajo: {{ data.tipo_trabajo}}</li2><br>
         <li2>Descripción trabajo: {{ data.descripcion_trabajo}}</li2><br>
@@ -303,12 +303,8 @@ a:hover {
 
         <!-- ... (resto de las checkboxes) ... -->
 
-    </div>
+    </div><br>
 
-    <label for="especialidad">
-        Especialidad:
-        <input type="text" id="especialidad" name="especialidad">
-    </label>
 
     <label for="nombre_proyecto">
         Nombre del Proyecto:
@@ -319,6 +315,13 @@ a:hover {
         Folio de Identificación:
         <input type="text" id="folio_identificacion" name="folio_identificacion">
     </label>
+
+
+    <label for="especialidad">
+        Especialidad:
+        <input type="text" id="especialidad" name="especialidad">
+    </label>
+
 
     <label for="imagen1">
         Imagen 1:
@@ -334,6 +337,7 @@ a:hover {
         Imagen 2:
         <input type="file" id="imagen3" name="imagen3">
     </label>
+
 
 
     <button type="submit">Enviar</button>

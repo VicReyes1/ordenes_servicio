@@ -139,7 +139,7 @@ a {
   font-family: sans-serif;
   text-decoration: none;
   color: transparent;
-  background: url("{{ asset('images/image.png') }}") repeat-x #9E2343;
+  background: url("{{ asset('.') }}") repeat-x #9E2343;
   background-position-x: 0%;
   background-position-y: 0%;
   background-size: auto;
@@ -202,41 +202,41 @@ a:hover {
 
 {% include 'components/navbar.html.twig' %}
 <div class="container mt-4">
-    <a href="#">CAPTURA UN NUEVO PROYECTO </a>
+    <a href="#">Captura nuevo proyecto </a>
     <form action="{{ path('app_admin_capturista_add_action') }}" method="post">
 
         <div class="mb-3">
-            <label for="area_solicitante" class="form-label">Área Solicitante:</label>
+            <label for="area_solicitante" class="form-label">Área solicitante:</label>
             <input type="text" id="area_solicitante" name="area_solicitante" class="form-control">
         </div>
 
         <div class="mb-3">
-            <label for="centro_trabajo" class="form-label">Centro de Trabajo:</label>
+            <label for="centro_trabajo" class="form-label">Centro de trabajo:</label>
             <input type="text" id="centro_trabajo" name="centro_trabajo" class="form-control">
         </div>
 
         <div class="mb-3">
-            <label for="nombre_solicitante" class="form-label">Nombre Solicitante:</label>
+            <label for="nombre_solicitante" class="form-label">Nombre solicitante:</label>
             <input type="text" id="nombre_solicitante" name="nombre_solicitante" class="form-control">
         </div>
 
         <div class="mb-3">
-            <label for="puesto_solicitante" class="form-label">Puesto Solicitante:</label>
+            <label for="puesto_solicitante" class="form-label">Puesto solicitante:</label>
             <input type="text" id="puesto_solicitante" name="puesto_solicitante" class="form-control">
         </div>
 
         <div class="mb-3">
-            <label for="telefono_ext" class="form-label">Teléfono Ext:</label>
+            <label for="telefono_ext" class="form-label">Teléfono ext:</label>
             <input type="text" id="telefono_ext" name="telefono_ext" class="form-control">
         </div>
 
         <div class="mb-3">
-            <label for="tipo_trabajo" class="form-label">Tipo de Trabajo:</label>
+            <label for="tipo_trabajo" class="form-label">Tipo de trabajo:</label>
             <input type="text" id="tipo_trabajo" name="tipo_trabajo" class="form-control">
         </div>
 
         <div class="mb-3">
-            <label for="descripcion_trabajo" class="form-label">Descripción del Trabajo:</label>
+            <label for="descripcion_trabajo" class="form-label">Descripción del trabajo:</label>
             <textarea id="descripcion_trabajo" name="descripcion_trabajo" class="form-control"></textarea>
         </div>
         
@@ -252,7 +252,7 @@ a:hover {
         
 
 
-        <button type="submit" id="nueva-captura-button">Agregar Captura</button>
+        <button type="submit" id="nueva-captura-button">Agregar captura</button>
       
  
     </form>

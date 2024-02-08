@@ -39,6 +39,7 @@
     height: 20px;
     background: rgba(255, 255, 255, 0.2);
     animation: animate 19s linear infinite;
+    pointer-events: none; /* Esto permitirá que los eventos pasen a través de los elementos */
 }
 
 
@@ -131,7 +132,7 @@ a {
   font-family: sans-serif;
   text-decoration: none;
   color: transparent;
-  background: url("{{ asset('images/image.png') }}") repeat-x #9E2343;
+  background: url("{{ asset('.') }}") repeat-x #9E2343;
   background-position-x: 0%;
   background-position-y: 0%;
   background-size: auto;
@@ -168,12 +169,15 @@ a:hover {
 
 /* Add container styles */
     .form-container {
-        max-width: 800px; /* Adjust the maximum width as needed */
-        margin: 50px auto;
+        max-width: 80%; /* Adjust the maximum width as needed */
+        margin: 20px auto;
         padding: 20px;
-        background-color: #fff;
-        border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        background-color: transparent;
+       
+         max-height: 80%; /* Altura máxima del contenedor */
+    overflow-y: auto; /* Agrega una barra de desplazamiento vertical cuando el contenido desborda */
+    overflow-x: hidden;
+        
     }
 
     /* Add form styles */
@@ -206,62 +210,10 @@ a:hover {
         border-radius: 5px;
         cursor: pointer;
     }
-    .container-with-overflow {
-    overflow: auto;
-  }
+ 
+  
 
-  .form-container {
-    max-width: 1000px;
-    margin: 50px auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-     overflow: auto;
-    max-height: 80vh;
-  }
 
-   form {
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f4f4f4;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-  }
-
-  label {
-    display: flex;
-    align-items: center;
-    margin-bottom: 8px;
-    font-weight: bold;
-  }
-
-  input[type="text"] {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 16px;
-    box-sizing: border-box;
-    border-color: #9e2343;
-  }
-
-  input[type="checkbox"] {
-    margin-right: 8px;
-    border-color: #9e2343;
-  }
-
-  button {
-    grid-column: span 2; /* Ocupar las dos columnas */
-    padding: 10px;
-    background-color: #9e2343;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
 
 </style>
 
@@ -281,24 +233,19 @@ a:hover {
 
  <div class="form-container"  >
      
-   
-   
-
-    <div class="w-60 bg-gradient-to-l from-slate-300 to-slate-100 text-slate-600 border border-slate-300 grid grid-col-2 justify-center p-4 gap-4 rounded-lg shadow-md" style="background-color: #dec9a3; color: #ffffff; font-size:18px; font-weight:bold;">
-  <div class="col-span-2 text-lg font-bold capitalize rounded-md" >
-   <a href="#">LISTA DE DATOS </a>
-  </div>
+   <a href="#">Lista de datos </a>
+ 
   <div class="col-span-2 rounded-md">
      <ul>
         
-        <li2>Fecha de captura: {{ data.fecha }}</li2><br>
-        <li2>Area solicitante: {{ data.area_solicitante }}</li2><br>
-        <li2>Centro de trabajo: {{ data.centro_trabajo}}</li2><br>
-        <li2>Nombre Solicitante: {{ data.nombre_solicitante}}</li2><br>
-        <li2>Puesto Solicitante: {{ data.puesto_solicitante}}</li2><br>
-        <li2>Telefono y extensión: {{ data.telefono_ext}}</li2><br>
-        <li2>Tipo de trabajo: {{ data.tipo_trabajo}}</li2><br>
-        <li2>Descripción trabajo: {{ data.descripcion_trabajo}}</li2><br>
+        <li2 style="font-weight: bold;">Fecha de captura: {{ data.fecha }}</li2><br>
+        <li2 style="font-weight: bold;">Area solicitante: {{ data.area_solicitante }}</li2><br>
+        <li2 style="font-weight: bold;">Centro de trabajo: {{ data.centro_trabajo}}</li2><br>
+        <li2 style="font-weight: bold;">Nombre Solicitante: {{ data.nombre_solicitante}}</li2><br>
+        <li2 style="font-weight: bold;">Puesto Solicitante: {{ data.puesto_solicitante}}</li2><br>
+        <li2 style="font-weight: bold;">Telefono y extensión: {{ data.telefono_ext}}</li2><br>
+        <li2 style="font-weight: bold;">Tipo de trabajo: {{ data.tipo_trabajo}}</li2><br>
+        <li2 style="font-weight: bold;">Descripción trabajo: {{ data.descripcion_trabajo}}</li2><br>
     </ul><br><br>
 
   </div>
@@ -308,7 +255,7 @@ a:hover {
   <div class="accordion-item">
     <h2 class="accordion-header">
       <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-        Notas Aceptadas
+        Ordenes aceptadas
       </button>
     </h2>
     <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
@@ -320,7 +267,7 @@ a:hover {
   <div class="accordion-item">
         <h2 class="accordion-header">
             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                Notas Pendientes
+                Ordenes pendientes
             </button>
         </h2>
         <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
@@ -357,7 +304,7 @@ a:hover {
   <div class="accordion-item">
     <h2 class="accordion-header">
       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTree" aria-expanded="false" aria-controls="collapseTwo">
-        Notas Rechazadas
+        Ordenes rechazadas
       </button>
     </h2>
     <div id="collapseTree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
@@ -365,8 +312,7 @@ a:hover {
         <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
       </div>
     </div>
-  </div>
-</div>
+
 
   </div>
   </div>
