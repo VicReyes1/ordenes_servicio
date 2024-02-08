@@ -152,7 +152,7 @@ class InspectorController extends AbstractController
             case IMAGETYPE_PNG:
                 $image = imagecreatefrompng($filePath);
                 // Reducir la calidad de la imagen PNG
-                imagepng($image, $filePath, $quality);
+                imagepng($image, $filePath, round(9 * $quality / 100));
                 break;
             // Puedes agregar más casos para otros tipos de imágenes según sea necesario
         }
