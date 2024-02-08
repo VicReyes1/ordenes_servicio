@@ -19,7 +19,25 @@ class AuthController extends AbstractController
     public function login(AuthenticationUtils $authenticationUtils, Security $security): Response
     {
        
+        if ($security->isGranted('ROLE_ADMIN')) {
+            // Si el usuario ya tiene el rol de administrador, redirige a la página de administrador
+            return $this->redirectToRoute('app_admin_capturista');
+        }
 
+        if ($security->isGranted('ROLE_CAPTURA')) {
+            // Si el usuario ya tiene el rol de administrador, redirige a la página de administrador
+            return $this->redirectToRoute('app_admin_capturista');
+        }
+
+        if ($security->isGranted('ROLE_INSPECTOR')) {
+            // Si el usuario ya tiene el rol de administrador, redirige a la página de administrador
+            return $this->redirectToRoute('app_inspector');
+        }
+
+        if ($security->isGranted('ROLE_SOLICITANTE')) {
+            // Si el usuario ya tiene el rol de administrador, redirige a la página de administrador
+            return $this->redirectToRoute('app_solicitante');
+        }
         // Obtener el error de autenticación si existe
         $error = $authenticationUtils->getLastAuthenticationError();
 

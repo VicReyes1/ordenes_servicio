@@ -16,9 +16,7 @@ class EntradaType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-        ->add('precio_compra', null, [
-            'attr' => ['readonly' => true],
-        ])
+        
             ->add('precio_adquirido')
             ->add('fecha')
             ->add('Material', EntityType::class, [

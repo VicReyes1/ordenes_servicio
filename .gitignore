@@ -10,6 +10,7 @@
 /public/bundles/
 /var/
 /vendor/
+/public/uploads
 
 # Ignorar configuraciones de PHPUnit
 /phpunit.xml

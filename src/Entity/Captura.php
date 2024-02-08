@@ -70,6 +70,15 @@ class Captura
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $fecha_revision = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $imagen1 = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $imagen2 = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $imagen3 = null;
+
     public function __construct()
     {
         $this->entradas = new ArrayCollection();
@@ -332,6 +341,42 @@ class Captura
     public function setFechaRevision(?\DateTimeInterface $fecha_revision): static
     {
         $this->fecha_revision = $fecha_revision;
+
+        return $this;
+    }
+
+    public function getImagen1(): ?string
+    {
+        return $this->imagen1;
+    }
+
+    public function setImagen1(?string $imagen1): static
+    {
+        $this->imagen1 = $imagen1;
+
+        return $this;
+    }
+
+    public function getImagen2(): ?string
+    {
+        return $this->imagen2;
+    }
+
+    public function setImagen2(?string $imagen2): static
+    {
+        $this->imagen2 = $imagen2;
+
+        return $this;
+    }
+
+    public function getImagen3(): ?string
+    {
+        return $this->imagen3;
+    }
+
+    public function setImagen3(?string $imagen3): static
+    {
+        $this->imagen3 = $imagen3;
 
         return $this;
     }

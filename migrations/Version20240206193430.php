@@ -20,10 +20,10 @@ final class Version20240206193430 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE nota ADD captura_id INT NOT NULL');
+        //$this->addSql('ALTER TABLE nota ADD captura_id INT NOT NULL');
         $this->addSql('ALTER TABLE nota ADD estatus BOOLEAN NOT NULL');
-        $this->addSql('ALTER TABLE nota ADD CONSTRAINT FK_C8D03E0DE45284D3 FOREIGN KEY (captura_id) REFERENCES captura (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
-        $this->addSql('CREATE INDEX IDX_C8D03E0DE45284D3 ON nota (captura_id)');
+        //$this->addSql('ALTER TABLE nota ADD CONSTRAINT FK_C8D03E0DE45284D3 FOREIGN KEY (captura_id) REFERENCES captura (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
+        //$this->addSql('CREATE INDEX IDX_C8D03E0DE45284D3 ON nota (captura_id)');
         $this->addSql('ALTER TABLE nota_has_materiales ADD cantidad DOUBLE PRECISION NOT NULL');
         $this->addSql('ALTER TABLE nota_has_materiales DROP estatus');
     }

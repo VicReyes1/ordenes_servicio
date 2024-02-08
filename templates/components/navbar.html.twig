@@ -13,10 +13,16 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-link active" aria-current="page"  href="{{ path('app_admin') }}" style="color: #ffffff; font-size: 24px; font-weight: bold;">Proyectos</a>
-        <a class="nav-link" href="{{ path('app_material_crud_index') }}" style="color: #ffffff; font-size: 24px; font-weight: bold;">Inventario</a>
-        <a class="nav-link" href="#" style="color: #ffffff; font-size: 24px; font-weight: bold;">Entradas y salidas</a>
-     
+              
+        {% if is_granted('ROLE_ADMIN') %}
+          <a class="nav-link" href="{{ path('app_admin_capturista') }}" style="color: #ffffff; font-size: 24px; font-weight: bold;">Capturas</a>
+            <a class="nav-link active" aria-current="page" href="{{ path('app_admin') }}" style="color: #ffffff; font-size: 24px; font-weight: bold;">Proyectos</a>
+            <a class="nav-link" href="{{ path('app_material_crud_index') }}" style="color: #ffffff; font-size: 24px; font-weight: bold;">Materiales</a>
+            <a class="nav-link" href="{{ path('app_material_inventario') }}"  style="color: #ffffff; font-size: 24px; font-weight: bold;">Inventario</a>
+        {% elseif is_granted('ROLE_CAPTURA') %}
+            <a class="nav-link" href="{{ path('app_admin_capturista') }}" style="color: #ffffff; font-size: 24px; font-weight: bold;">Capturas</a>
+            <a class="nav-link" href="{{ path('app_material_crud_index') }}" style="color: #ffffff; font-size: 24px; font-weight: bold;">Inventario</a>
+        {% endif %}
       </div>
     </div>
   </div>
