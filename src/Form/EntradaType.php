@@ -10,13 +10,16 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Doctrine\ORM\EntityRepository;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
 class EntradaType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-        
+        ->add('precio_compra', HiddenType::class, [
+            'attr' => ['readonly' => true],
+        ])
             ->add('precio_adquirido')
             ->add('fecha')
             ->add('Material', EntityType::class, [
