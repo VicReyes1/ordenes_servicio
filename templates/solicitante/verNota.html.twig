@@ -6,28 +6,9 @@
 
 {% block body %}
 <style>
-  body {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-        }
 
 
-        #capturas-section {
-            text-align: center;
-            margin-top: 50px;
-              max-height: 80%; /* Altura máxima del contenedor */
-    overflow-y: auto; /* Agrega una barra de desplazamiento vertical cuando el contenido desborda */
-    overflow-x: hidden;
-        }
-
-        #capturas-title {
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-
-        /* estilos fondo  */
+ /* estilos fondo  */
 @keyframes animate {
     0%{
         transform: translateY(0) rotate(0deg);
@@ -147,13 +128,40 @@ body {
   align-items: center;
 }
 
+.bodybotoon {
+         
+            align-items: center;
+            
+        }
+.button2 {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Centrar el contenido horizontalmente */
+  text-align: center;
+  position: relative;
+  border: #9e2343 solid 0.15em;
+  border-radius: 0.25em;
+  color: #ffffff; /* Cambiado a #9e2343 */
+  background: #9e2343;
+  font-size: 1em; /* Tamaño de fuente más pequeño */
+  font-weight: 600;
+  cursor: pointer;
+  overflow: hidden;
+  transition: border 300ms, color 300ms;
+  user-select: none;
+  margin-left: 35%;
+  margin-right: 35%;
+  width: 30%;
+  height: 40px;
+}
+
 a {
-  font-size: 3em;
+  font-size: 2.5em;
   font-weight: bold;
   font-family: sans-serif;
   text-decoration: none;
   color: transparent;
-  background: url("{{ asset('images/image.png') }}") repeat-x #9E2343;
+  background: url("{{ asset('...') }}") repeat-x #9E2343;
   background-position-x: 0%;
   background-position-y: 0%;
   background-size: auto;
@@ -188,51 +196,39 @@ a:hover {
   }
 }
 
- .bodybotoon {
-         
-            align-items: center;
-            
-        }
-.button2 {
-  display: flex;
-  align-items: center;
-  justify-content: center; /* Centrar el contenido horizontalmente */
-  text-align: center;
-  position: relative;
-  border: #9e2343 solid 0.15em;
-  border-radius: 0.25em;
-  color: #ffffff; /* Cambiado a #9e2343 */
-  background: #9e2343;
-  font-size: 1em; /* Tamaño de fuente más pequeño */
-  font-weight: 600;
-  cursor: pointer;
-  overflow: hidden;
-  transition: border 300ms, color 300ms;
-  user-select: none;
-  margin-left: 35%;
-  margin-right: 35%;
-  width: 30%;
-  height: 40px;
-}
+/* Add container styles */
 
-  /* Add container styles */
-  .form-container {
-    max-width: 80%; /* Adjust the maximum width as needed */
-    margin: 20px auto;
+   .form-container {
+    max-width: 100%;
+    margin: 50px auto;
     padding: 20px;
-    background-color: transparent;
-    max-height: 70%; /* Altura máxima del contenedor */
-    overflow-y: auto; /* Agrega una barra de desplazamiento vertical cuando el contenido desborda */
-    overflow-x: hidden;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+     overflow-y: auto; /* Agrega una barra de desplazamiento vertical cuando el contenido desborda */
+    overflow-x: auto;
+    max-height: 70vh;
+    
   }
 
-  label {
+   form {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f4f4f4;
+    
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+     overflow-x: auto;
+  }
+
+   label {
     display: block;
     margin-bottom: 0.5rem;
     font-weight: bold;
   }
-  
-  textarea,
+
   input[type="text"],
   input[type="date"], /* Estilo para el input de fecha */
   input[type="number"], /* Estilo para el input numérico */
@@ -256,18 +252,30 @@ a:hover {
     margin-bottom: 0;
   }
 
-  #nueva-captura-button {
-        
-        top: 10px;
-        right: 10px;
-        background-color: #9e2343; /* Color de fondo del botón */
-        color: white; /* Color del texto del botón */
-        padding: 10px 15px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        margin-bottom: 15px; /* Ajusta el valor según sea necesario */
-    }
+  button {
+    grid-column: span 2; /* Ocupar las dos columnas */
+    padding: 10px;
+    background-color: #9e2343;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .responsive{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(10rem,100%),1fr));
+    grid-gap:1rem;
+  }
+.inline-dl dt {
+    display: inline-block;
+    width: 120px; /* Ancho deseado para los dt */
+    margin: 0;
+}
+
+
+
+
 </style>
 <ul class="background">
    <li></li>
@@ -282,28 +290,25 @@ a:hover {
    <li></li>
  {% include 'components/navbar.html.twig' %}
 
-<h1>Detalles de la Nota</h1>
+<div class="responsive">
+ <div class="form-container"  >
 
-<dl>
-    <dt>ID:</dt>
-    <dd>{{ nota.id }}</dd>
+  <div class="w-60 bg-gradient-to-l from-slate-300 to-slate-100 text-slate-600 border border-slate-300 grid grid-col-2 justify-center p-4 gap-4 rounded-lg shadow-md" style="background-color: #f4f4f4; color: #000000; font-size:18px; font-weight:;">
+  <div class="col-span-2 text-lg font-bold capitalize rounded-md" >
 
-    <dt>Nombre:</dt>
-    <dd>{{ nota.nombre }}</dd>
+  <a href="#">Detalles de la Nota</a>
+     </div>
 
-    <dt>Fecha de Petición:</dt>
-    <dd>{{ nota.fechaPeticion|date('Y-m-d') }}</dd>
+  <dl>
+    <dt>ID:</dt><dd>{{ nota.id }}</dd>
+    <dt>Nombre:</dt><dd>{{ nota.nombre }}</dd>
+    <dt>Fecha de Petición:</dt><dd>{{ nota.fechaPeticion|date('Y-m-d') }}</dd>
+    <dt>Observaciones:</dt><dd>{{ nota.observaciones }}</dd>
+    <dt>Captura:</dt><dd>{{ nota.captura.id }}</dd>
+    <dt>Estatus:</dt><dd>{{ nota.estatus }}</dd>
+  </dl>
 
-    <dt>Observaciones:</dt>
-    <dd>{{ nota.observaciones }}</dd>
 
-    <dt>Captura:</dt>
-    {# Puedes imprimir más detalles de la entidad Captura según sea necesario #}
-    <dd>{{ nota.captura.id }}</dd>
-
-    <dt>Estatus:</dt>
-    <dd>{{ nota.estatus }}</dd>
-</dl>
 
         
         
@@ -317,6 +322,12 @@ a:hover {
         </li2>
     {% endfor %}
 </ul2>
+
+  </div>
+    </div>
+
+    </div>
+    </div>
 </ul>
 {% endblock %}
 

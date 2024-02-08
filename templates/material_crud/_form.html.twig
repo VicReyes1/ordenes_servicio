@@ -58,5 +58,9 @@
 {{ form_start(form, {'attr': {'class': 'form-container'}}) }}
     {{ form_widget(form) }}
     <button id="nueva-captura-button">{{ button_label|default('Guardar') }}</button>
+
+    {{ include('material_crud/_delete_form.html.twig') }}
+    
 {{ form_end(form) }}
+
 

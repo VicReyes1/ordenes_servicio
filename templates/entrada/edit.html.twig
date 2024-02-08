@@ -1,15 +1,256 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Entrada{% endblock %}
+{% block title %}Edit entrada{% endblock %}
 
 {% block body %}
 
+<style>
 
-    <h1>Edit Entrada</h1>
+body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+
+        #capturas-section {
+            text-align: center;
+            margin-top: 50px;
+              max-height: 70%; /* Altura máxima del contenedor */
+    overflow-y: auto; /* Agrega una barra de desplazamiento vertical cuando el contenido desborda */
+    overflow-x: hidden;
+        }
+
+        #capturas-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+@keyframes animate {
+    0%{
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+        border-radius: 0;
+    }
+    100%{
+        transform: translateY(-1000px) rotate(720deg);
+        opacity: 0;
+        border-radius: 50%;
+    }
+}
+
+.background {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    background: #d1d1d1;
+    overflow: hidden;
+}
+.background li {
+    position: absolute;
+    display: block;
+    list-style: none;
+    width: 20px;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.2);
+    animation: animate 19s linear infinite;
+    pointer-events: none; /* Esto permitirá que los eventos pasen a través de los elementos */
+}
+
+
+
+
+.background li:nth-child(0) {
+    left: 5%;
+    width: 179px;
+    height: 179px;
+    bottom: -179px;
+    animation-delay: 1s;
+}
+.background li:nth-child(1) {
+    left: 52%;
+    width: 141px;
+    height: 141px;
+    bottom: -141px;
+    animation-delay: 5s;
+}
+.background li:nth-child(2) {
+    left: 52%;
+    width: 109px;
+    height: 109px;
+    bottom: -109px;
+    animation-delay: 7s;
+}
+.background li:nth-child(3) {
+    left: 74%;
+    width: 196px;
+    height: 196px;
+    bottom: -196px;
+    animation-delay: 6s;
+}
+.background li:nth-child(4) {
+    left: 7%;
+    width: 155px;
+    height: 155px;
+    bottom: -155px;
+    animation-delay: 11s;
+}
+.background li:nth-child(5) {
+    left: 28%;
+    width: 194px;
+    height: 194px;
+    bottom: -194px;
+    animation-delay: 10s;
+}
+.background li:nth-child(6) {
+    left: 0%;
+    width: 170px;
+    height: 170px;
+    bottom: -170px;
+    animation-delay: 16s;
+}
+.background li:nth-child(7) {
+    left: 23%;
+    width: 188px;
+    height: 188px;
+    bottom: -188px;
+    animation-delay: 2s;
+}
+.background li:nth-child(8) {
+    left: 40%;
+    width: 141px;
+    height: 141px;
+    bottom: -141px;
+    animation-delay: 25s;
+}
+.background li:nth-child(9) {
+    left: 19%;
+    width: 182px;
+    height: 182px;
+    bottom: -182px;
+    animation-delay: 3s;
+}
+
+.container {
+        max-height: 80vh; /* Altura máxima del contenedor */
+        overflow-y: auto; /* Barra de desplazamiento vertical cuando es necesario */
+        padding: 20px; /* Ajuste del espacio interno del contenedor */
+    }
+
+    /* estilos titulo  */
+body {
+  background: #001224;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+a {
+  font-size: 3em;
+  font-weight: bold;
+  font-family: sans-serif;
+  text-decoration: none;
+  color: transparent;
+  background: url("{{ asset('.') }}") repeat-x #9E2343;
+  background-position-x: 0%;
+  background-position-y: 0%;
+  background-size: auto;
+  background-clip: border-box;
+  -webkit-background-clip: text;
+  background-clip: text;
+  background-size: 200% 100%;
+  background-position-x: 0;
+  background-position-y: 2em;
+  -webkit-transition: background-position-y 0.6s ease;
+  transition: background-position-y 0.6s ease;
+  -webkit-animation: waveAnimation 4s infinite linear;
+  animation: waveAnimation 4s infinite linear;
+  animation-play-state: running;
+  -webkit-animation-play-state: paused;
+  animation-play-state: paused;
+}
+
+a:hover {
+  background-position-x: 0;
+  background-position-y: 0;
+  -webkit-animation-play-state: running;
+  animation-play-state: running;
+}
+
+@keyframes waveAnimation{
+  from {
+    background-position-x: 0%;
+  }
+  to {
+    background-position-x: 200%;
+  }
+}
+
+#nueva-captura-button {
+        
+        top: 10px;
+        right: 10px;
+        background-color: #9e2343; /* Color de fondo del botón */
+        color: white; /* Color del texto del botón */
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-bottom: 15px; /* Ajusta el valor según sea necesario */
+    }
+
+    .button2 {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Centrar el contenido horizontalmente */
+  text-align: center;
+  position: relative;
+  border: #9e2343 solid 0.15em;
+  border-radius: 0.25em;
+  color: #ffffff; /* Cambiado a #9e2343 */
+  background: #9e2343;
+  font-size: 1em; /* Tamaño de fuente más pequeño */
+  font-weight: 600;
+  cursor: pointer;
+  overflow: hidden;
+  transition: border 300ms, color 300ms;
+  user-select: none;
+  margin-left: 35%;
+  margin-right: 35%;
+  width: 30%;
+  height: 50px;
+}
+</style>
+
+<ul class="background">
+   <li></li>
+   <li></li>
+   <li></li>
+   <li></li>
+   <li></li>
+   <li></li>
+   <li></li>
+   <li></li>
+   <li></li>
+   <li></li>
+
+ {{ include('entrada/_delete_form.html.twig') }}
+<div class="container mt-4">
+    <a href="#">Editar entrada</a>
 
     {{ include('entrada/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('app_entrada_index') }}">Regresar</a>
+    <a href="{{ path('app_entrada_index') }}" class="button2">Regresar</a><br>
 
-    {{ include('entrada/_delete_form.html.twig') }}
+      </div>
+
+</ul>
+
+    
 {% endblock %}
