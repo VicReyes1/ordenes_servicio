@@ -125,6 +125,33 @@ body {
   align-items: center;
 }
 
+.bodybotoon {
+         
+            align-items: center;
+            
+        }
+.button2 {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Centrar el contenido horizontalmente */
+  text-align: center;
+  position: relative;
+  border: #9e2343 solid 0.15em;
+  border-radius: 0.25em;
+  color: #ffffff; /* Cambiado a #9e2343 */
+  background: #9e2343;
+  font-size: 1em; /* Tamaño de fuente más pequeño */
+  font-weight: 600;
+  cursor: pointer;
+  overflow: hidden;
+  transition: border 300ms, color 300ms;
+  user-select: none;
+  margin-left: 35%;
+  margin-right: 35%;
+  width: 30%;
+  height: 40px;
+}
+
 a {
   font-size: 2.5em;
   font-weight: bold;
@@ -304,7 +331,9 @@ a:hover {
         {% endfor %}
     </table>
     </div>
-
+      <div class="bodybotoon">
+        <a href="{{ path('app_entrada_index') }}" class="button2">Ver entradas</a>
+      </div>
      </div>
       
 {% endblock %}
