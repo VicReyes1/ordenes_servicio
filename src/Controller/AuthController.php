@@ -64,6 +64,6 @@ class AuthController extends AbstractController
         // Realiza aquí cualquier limpieza o tareas adicionales que necesites antes del cierre de sesión
         
         // Redirige a la página de inicio de sesión o a cualquier otra página que desees después del cierre de sesión
-        return new RedirectResponse('/login');
+        return new RedirectResponse('/');
     }
 }
