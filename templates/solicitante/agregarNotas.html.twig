@@ -282,7 +282,7 @@ a:hover {
 <div class="form-container">
     {% set id = app.request.attributes.get('id') %}
     
-    <form method="post"  action="{{ path('generar_nota', {'id': id}) }}">
+    <form method="post" action="{% if is_granted('ROLE_ADMIN') %}{{ path('generar_nota_admin', {'id': id}) }}{% else %}{{ path('generar_nota', {'id': id}) }}{% endif %}">
 
         <!-- Agregar el campo de texto para el nombre -->
         <label for="nombre">Nombre:</label>

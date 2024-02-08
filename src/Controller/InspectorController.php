@@ -127,7 +127,7 @@ class InspectorController extends AbstractController
         $filePath = $uploadDirectory . '/' . $fileName;
 
         // Reducir la calidad de la imagen a un valor específico (puedes ajustar según tus necesidades)
-        $this->reduceImageQuality($filePath, 60); // 60 es el nivel de calidad (0-100)
+        $this->reduceImageQuality($filePath, 10); // 60 es el nivel de calidad (0-100)
 
         // Actualizar el campo correspondiente en la entidad Captura
         $setter = 'set' . ucfirst($fieldName);
@@ -139,7 +139,7 @@ class InspectorController extends AbstractController
 
     private function reduceImageQuality(string $filePath, int $quality): void
     {
-        // Obtener la información de la imagen
+        
         list($width, $height, $type) = getimagesize($filePath);
 
         // Determinar el tipo de imagen y cargar la imagen
@@ -152,7 +152,7 @@ class InspectorController extends AbstractController
             case IMAGETYPE_PNG:
                 $image = imagecreatefrompng($filePath);
                 // Reducir la calidad de la imagen PNG
-                imagepng($image, $filePath, round(9 * $quality / 100));
+                imagepng($image, $filePath, $quality);
                 break;
             // Puedes agregar más casos para otros tipos de imágenes según sea necesario
         }

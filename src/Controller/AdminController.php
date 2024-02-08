@@ -10,7 +10,10 @@ use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Captura;
 use App\Entity\Nota;
 use App\Entity\User;
+use App\Entity\Material;
 use App\Entity\NotaHasMateriales;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class AdminController extends AbstractController
 {
@@ -110,5 +113,63 @@ class AdminController extends AbstractController
 
         return $this->redirectToRoute('app_proyecto', ['id' => $idProyecto]);
 
+    }
+
+    #[Route('/generar-nota-admin/{id}', name: 'generar_nota_admin')]
+    public function guardarMateriales(Request $request, UrlGeneratorInterface $urlGenerator ,$id): Response
+    {
+        // Obtén los datos del formulario
+        $data = $request->request->all();
+        $materiales = $data['materiales'];
+        $cantidades = $data['cantidades'];
+
+        $nota = new Nota();
+
+        $nota
+            ->setNombre($data['nombre'])
+            ->setObservaciones($data['observaciones'])
+            ->setEstatus('aceptado'); // Establecer estatus pendiente
+
+        date_default_timezone_set('America/Mexico_City');
+        $fechaActual = new \DateTime();
+        $nota->setFechaPeticion($fechaActual); // Cambiar setFechaPeticion
+
+        // Captura la entidad Material
+        $captura = $this->entityManager->getRepository(Captura::class)->find($id);
+
+        // Establece la relación con Nota
+        $nota->setCaptura($captura);
+
+        $this->entityManager->persist($nota);
+
+        // Antes de hacer el flush, puedes obtener el ID
+        $notaId = $nota->getId();
+
+        // Luego, haces el flush
+        $this->entityManager->flush();
+
+        for ($i = 0; $i < sizeof($materiales); $i++) {
+            $notaHasMateriales = new NotaHasMateriales();
+            $material = $this->entityManager->getRepository(Material::class)->find($materiales[$i]); // Corregir $material[$i]
+            $cantidad = $cantidades[$i];
+
+            // Asigna la relación con Nota y Material
+            $notaHasMateriales->setNota($nota);
+            $notaHasMateriales->setMaterial($material);
+            $notaHasMateriales->setCantidad($cantidad);
+
+            // Persiste el objeto NotaHasMateriales
+            $this->entityManager->persist($notaHasMateriales);
+        }
+
+        // Haz el flush después de agregar todas las relaciones
+        $this->entityManager->flush();
+
+        // Haz lo que necesites con los datos
+
+        // Redirige a donde sea necesario
+        $url = $urlGenerator->generate('app_proyecto', ['id' => $id]);
+
+        return new RedirectResponse($url);
     }
 }
