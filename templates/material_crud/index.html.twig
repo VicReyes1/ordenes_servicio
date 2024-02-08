@@ -15,7 +15,7 @@
         #capturas-section {
             text-align: center;
             margin-top: 50px;
-              max-height: 80%; /* Altura máxima del contenedor */
+              max-height: 70%; /* Altura máxima del contenedor */
     overflow-y: auto; /* Agrega una barra de desplazamiento vertical cuando el contenido desborda */
     overflow-x: hidden;
         }
@@ -135,79 +135,7 @@
     bottom: -182px;
     animation-delay: 3s;
 }
-/* estilos boton  */
-  #add-captura-container {
-        text-align: right;
-        margin-top: 0px;
-        margin-right: 80px;
-        margin-left: 1520px;
-    }
-.button1 {
-  all: unset;
-  display: flex;
-  align-items: center;
-  position: relative;
-  padding: 0.5em 1.5em; /* Ajustado el padding */
-  border: #9e2343 solid 0.15em;
-  border-radius: 0.25em;
-  color: #9e2343; /* Cambiado a #9e2343 */
-  font-size: 1.2em; /* Tamaño de fuente más pequeño */
-  font-weight: 600;
-  cursor: pointer;
-  overflow: hidden;
-  transition: border 300ms, color 300ms;
-  user-select: none;
-    max-width:20%;
-  margin-left: 40%;
-}
 
-.button1 p {
-  z-index: 1;
-}
-
-.button1:hover {
-  color: #9e2343; /* Cambiado a #9e2343 */
-}
-
-.button1:active {
-  border-color: teal;
-}
-
-.button1::after,
-.button1::before {
-  content: "";
-  position: absolute;
-  width: 6em; /* Ajustado el tamaño del pseudo-elemento */
-  aspect-ratio: 1;
-  background: #9e2343; /* Cambiado a #9e2343 */
-  opacity: 50%;
-  border-radius: 50%;
-  transition: transform 500ms, background 300ms;
-}
-
-.button1::before {
-  left: 0;
-  transform: translateX(-5em);
-}
-
-.button1::after {
-  right: 0;
-  transform: translateX(5em);
-}
-
-.button1:hover:before {
-  transform: translateX(-0.5em);
-}
-
-.button1:hover:after {
-  transform: translateX(0.5em);
-}
-
-.button1:active:before,
-.button1:active:after {
-  background: teal;
-  
-}
 
 /* estilos titulo  */
 body {
@@ -265,11 +193,11 @@ a:hover {
             
         }
 .button2 {
+   
   display: flex;
   align-items: center;
-  justify-content: center; /* Centrar el contenido horizontalmente */
-  text-align: center;
   position: relative;
+   justify-content: center;
   border: #9e2343 solid 0.15em;
   border-radius: 0.25em;
   color: #ffffff; /* Cambiado a #9e2343 */
@@ -280,11 +208,10 @@ a:hover {
   overflow: hidden;
   transition: border 300ms, color 300ms;
   user-select: none;
-  margin-left: 35%;
-  margin-right: 35%;
-  width: 30%;
-  height: 40px;
-}
+
+  width:100%;
+
+  }
     </style>
     <ul class="background">
    <li></li>
@@ -324,6 +251,7 @@ a:hover {
                 <td scope="col" style="padding: 10px; border: 1px solid #9e4323;">
                 
                     <a href="{{ path('app_material_crud_edit', {'id': material.id}) }}" class="button2">Editar</a>
+
                 </td>
             </tr>
         {% else %}
