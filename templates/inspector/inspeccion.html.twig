@@ -281,7 +281,7 @@ a:hover {
   
 
   
-   <form action="{{ path('app_iniciar_inspeccion_edit', {'id': data.id}) }}" method="post">
+   <form action="{{ path('app_iniciar_inspeccion_edit', {'id': data.id}) }}" method="post" enctype="multipart/form-data">
     <p style="font-weight: bold; font-size: 18px; color: #9e2343; margin-bottom: 15px;">Marca la/s casillas con los riesgos:</p><br>
 
     <div style="display: flex; align-items: center;">
@@ -319,6 +319,22 @@ a:hover {
         Folio de Identificación:
         <input type="text" id="folio_identificacion" name="folio_identificacion">
     </label>
+
+    <label for="imagen1">
+        Imagen 1:
+        <input type="file" id="imagen1" name="imagen1">
+    </label>
+
+    <label for="imagen2">
+        Imagen 2:
+        <input type="file" id="imagen2" name="imagen2">
+    </label>
+
+    <label for="imagen3">
+        Imagen 2:
+        <input type="file" id="imagen3" name="imagen3">
+    </label>
+
 
     <button type="submit">Enviar</button>
 </form>

@@ -9,6 +9,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Inspector;
 use App\Entity\Captura;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Intervention\Image\Image;
 
 class InspectorController extends AbstractController
 {
@@ -64,6 +66,27 @@ class InspectorController extends AbstractController
 
         $data = $request->request->all();
 
+        // Manejar las imágenes
+        $imagen1File = $request->files->get('imagen1');
+        $imagen2File = $request->files->get('imagen2');
+        $imagen3File = $request->files->get('imagen3');
+
+        // Verificar si se cargó la imagen 1
+        if ($imagen1File instanceof UploadedFile) {
+            // Procesar y guardar la imagen 1
+            $this->handleImage($captura, $imagen1File, 'imagen1');
+        }
+
+        // Verificar si se cargó la imagen 2
+        if ($imagen2File instanceof UploadedFile) {
+            // Procesar y guardar la imagen 2
+            $this->handleImage($captura, $imagen2File, 'imagen2');
+        }
+
+        if ($imagen3File instanceof UploadedFile) {
+            // Procesar y guardar la imagen 2
+            $this->handleImage($captura, $imagen3File, 'imagen3');
+        }
         
        
         foreach ($data as $key => $value) {
@@ -89,5 +112,53 @@ class InspectorController extends AbstractController
         
     }
 
+    private function handleImage(Captura $captura, UploadedFile $file, string $fieldName): string
+    {
+        // Definir el directorio de destino para las imágenes
+        $uploadDirectory = $this->getParameter('app.upload_directory');
+
+        // Generar un nombre único para el archivo
+        $fileName = md5(uniqid()) . '.' . $file->guessExtension();
+
+        // Mover el archivo al directorio de destino
+        $file->move($uploadDirectory, $fileName);
+
+        // Obtener la ruta completa del archivo
+        $filePath = $uploadDirectory . '/' . $fileName;
+
+        // Reducir la calidad de la imagen a un valor específico (puedes ajustar según tus necesidades)
+        $this->reduceImageQuality($filePath, 60); // 60 es el nivel de calidad (0-100)
+
+        // Actualizar el campo correspondiente en la entidad Captura
+        $setter = 'set' . ucfirst($fieldName);
+        $captura->$setter($fileName);
+
+        // Devolver la ruta del archivo
+        return $filePath;
+    }
+
+    private function reduceImageQuality(string $filePath, int $quality): void
+    {
+        // Obtener la información de la imagen
+        list($width, $height, $type) = getimagesize($filePath);
+
+        // Determinar el tipo de imagen y cargar la imagen
+        switch ($type) {
+            case IMAGETYPE_JPEG:
+                $image = imagecreatefromjpeg($filePath);
+                // Reducir la calidad de la imagen JPEG
+                imagejpeg($image, $filePath, $quality);
+                break;
+            case IMAGETYPE_PNG:
+                $image = imagecreatefrompng($filePath);
+                // Reducir la calidad de la imagen PNG
+                imagepng($image, $filePath, round(9 * $quality / 100));
+                break;
+            // Puedes agregar más casos para otros tipos de imágenes según sea necesario
+        }
+
+        // Liberar la memoria
+        imagedestroy($image);
+    }
     
 }
