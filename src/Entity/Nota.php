@@ -30,6 +30,15 @@ class Nota
     #[ORM\Column(length: 50)]
     private ?string $estatus = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $imagen1 = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $imagen2 = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $imagen3 = null;
+
 
     public function getId(): ?int
     {
@@ -92,6 +101,42 @@ class Nota
     public function setEstatus(string $estatus): static
     {
         $this->estatus = $estatus;
+
+        return $this;
+    }
+
+    public function getImagen1(): ?string
+    {
+        return $this->imagen1;
+    }
+
+    public function setImagen1(?string $imagen1): static
+    {
+        $this->imagen1 = $imagen1;
+
+        return $this;
+    }
+
+    public function getImagen2(): ?string
+    {
+        return $this->imagen2;
+    }
+
+    public function setImagen2(?string $imagen2): static
+    {
+        $this->imagen2 = $imagen2;
+
+        return $this;
+    }
+
+    public function getImagen3(): ?string
+    {
+        return $this->imagen3;
+    }
+
+    public function setImagen3(?string $imagen3): static
+    {
+        $this->imagen3 = $imagen3;
 
         return $this;
     }

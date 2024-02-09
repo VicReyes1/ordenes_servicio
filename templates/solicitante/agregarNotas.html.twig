@@ -285,13 +285,29 @@ a:hover {
     <form method="post" action="{% if is_granted('ROLE_ADMIN') %}{{ path('generar_nota_admin', {'id': id}) }}{% else %}{{ path('generar_nota', {'id': id}) }}{% endif %}">
 
         <!-- Agregar el campo de texto para el nombre -->
-        <label for="nombre">Nombre:</label>
+        <label for="nombre">Nombre a asignar a la nota:</label>
         <input type="text" name="nombre" class="form-control">
 
         <label for="materiales">Agregar Materiales a solicitar</label>
         <div id="camposDinamicos"></div>
 
-        <button type="button" onclick="agregarCampo()"  id="nueva-captura-button">Agregar Partida</button>
+        <button type="button" onclick="agregarCampo()"  id="nueva-captura-button">Agregar Materiales</button>
+
+        <label for="imagen1">
+            Imagen 1:
+            <input type="file" id="imagen1" name="imagen1" accept="image/jpeg,image/png">
+        </label>
+
+        <label for="imagen2">
+            Imagen 2:
+            <input type="file" id="imagen2" name="imagen2" accept="image/jpeg,image/png">
+        </label>
+
+        <label for="imagen3">
+            Imagen 2:
+            <input type="file" id="imagen3" name="imagen3" accept="image/jpeg,image/png">
+        </label>
+
 
         <!-- Agregar el textarea para las observaciones -->
         <label for="observaciones">Observaciones:</label>

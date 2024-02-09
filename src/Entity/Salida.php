@@ -33,6 +33,10 @@ class Salida
     #[ORM\Column]
     private ?int $cantidad = null;
 
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Nota $nota = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -95,6 +99,18 @@ class Salida
     public function setCantidad(int $cantidad): static
     {
         $this->cantidad = $cantidad;
+
+        return $this;
+    }
+
+    public function getNota(): ?Nota
+    {
+        return $this->nota;
+    }
+
+    public function setNota(?Nota $nota): static
+    {
+        $this->nota = $nota;
 
         return $this;
     }

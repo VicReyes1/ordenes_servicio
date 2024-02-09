@@ -17,8 +17,10 @@ class SalidaController extends AbstractController
     #[Route('/', name: 'app_salida_index', methods: ['GET'])]
     public function index(SalidaRepository $salidaRepository): Response
     {
+       
+        
         return $this->render('salida/index.html.twig', [
-            'salidas' => $salidaRepository->findAll(),
+            'salidas' => $salidaRepository->findWithInfo(),
         ]);
     }
 

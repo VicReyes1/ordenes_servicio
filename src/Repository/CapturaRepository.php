@@ -57,7 +57,10 @@ class CapturaRepository extends ServiceEntityRepository
                 'e.puesto_solicitante',
                 'e.telefono_ext',
                 'e.tipo_trabajo',
-                'e.descripcion_trabajo'
+                'e.descripcion_trabajo',
+                'e.imagen1',
+                'e.imagen2',
+                'e.imagen3'
             )
             ->andWhere('e.id = :val')
             ->setParameter('val', $value)

@@ -21,6 +21,22 @@ class SalidaRepository extends ServiceEntityRepository
         parent::__construct($registry, Salida::class);
     }
 
+    public function findWithInfo(): array
+    {
+        return $this->createQueryBuilder('s')
+        ->addSelect('s.id,s.fecha,s.cantidad')
+        ->leftJoin('s.material', 'm') 
+        ->addSelect('m.nombre as nombre_material') 
+        ->leftJoin('s.captura', 'c') 
+        ->addSelect('c.nombre_proyecto, c.id as captura_id')
+        ->leftJoin('s.nota', 'n') 
+        ->addSelect('n.nombre as nombre_nota,n.id as nota_id')
+        ->orderBy('s.id', 'ASC')
+        ->getQuery()
+        ->getResult();
+    
+    }
+
 //    /**
 //     * @return Salida[] Returns an array of Salida objects
 //     */

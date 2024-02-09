@@ -12,6 +12,7 @@ use App\Entity\Nota;
 use App\Entity\User;
 use App\Entity\Material;
 use App\Entity\NotaHasMateriales;
+use App\Entity\Salida;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
@@ -65,6 +66,7 @@ class AdminController extends AbstractController
         $notasPendientes = $this->entityManager->getRepository(Nota::class)->getAllPendingNotas($id);
         $notasRechazadas = $this->entityManager->getRepository(Nota::class)->getAllRefusedNotas($id);
         
+        
         return $this->render('admin/verProyecto.html.twig', [
             'data' => $captura,
             'aceptadas' => $notasAceptadas,
@@ -79,7 +81,6 @@ class AdminController extends AbstractController
        
         $nota = $this->entityManager->getRepository(Nota::class)->find($id);
         $materiales = $this->entityManager->getRepository(NotaHasMateriales::class)->getAllMaterialesInNota($id);
-
         
         return $this->render('admin/verNota.html.twig', [
             'nota' => $nota,
@@ -148,8 +149,10 @@ class AdminController extends AbstractController
         // Luego, haces el flush
         $this->entityManager->flush();
 
+
         for ($i = 0; $i < sizeof($materiales); $i++) {
             $notaHasMateriales = new NotaHasMateriales();
+            $salida = new Salida();
             $material = $this->entityManager->getRepository(Material::class)->find($materiales[$i]); // Corregir $material[$i]
             $cantidad = $cantidades[$i];
 
@@ -158,8 +161,15 @@ class AdminController extends AbstractController
             $notaHasMateriales->setMaterial($material);
             $notaHasMateriales->setCantidad($cantidad);
 
+            $salida->setCaptura($captura);
+            $salida->setFecha($fechaActual);
+            $salida->setMaterial($material);
+            $salida->setCantidad($cantidad);
+            $salida->setNota($nota);
+
             // Persiste el objeto NotaHasMateriales
             $this->entityManager->persist($notaHasMateriales);
+            $this->entityManager->persist($salida);
         }
 
         // Haz el flush después de agregar todas las relaciones

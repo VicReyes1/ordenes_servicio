@@ -218,7 +218,7 @@ body {
   align-items: center;
 }
 
-a {
+h1 {
   font-size: 3em;
   font-weight: bold;
   font-family: sans-serif;
@@ -243,7 +243,7 @@ a {
   animation-play-state: paused;
 }
 
-a:hover {
+h1:hover {
   background-position-x: 0;
   background-position-y: 0;
   -webkit-animation-play-state: running;
@@ -300,16 +300,18 @@ a:hover {
    {% include 'components/navbar.html.twig' %}
 
     <div id="capturas-section">
-    <a href="#">SALIDA </a>
+    <h1>SALIDA </h1>
 
         <div style="margin: 20px; overflow: auto;">
     <table style="width: 100%; border-collapse: collapse;">
       <thead style="background-color: #9e2343; color: #ffffff; border: 1px solid #9e4323;">
         <tr>
           <th scope="col" style="padding: 10px; border: 1px solid #9e4323;">Id</th>
-          <th scope="col" style="padding: 10px; border: 1px solid #9e4323;">Precio de salida</th>
           <th scope="col" style="padding: 10px; border: 1px solid #9e4323;">Fecha</th>
+          <th scope="col" style="padding: 10px; border: 1px solid #9e4323;">Material</th>
           <th scope="col" style="padding: 10px; border: 1px solid #9e4323;">Cantidad</th>
+          <th scope="col" style="padding: 10px; border: 1px solid #9e4323;">Proyecto al que pertenece</th>
+          <th scope="col" style="padding: 10px; border: 1px solid #9e4323;">Nota especifica a la que pertenece</th>
           <th scope="col" style="padding: 10px; border: 1px solid #9e4323;">Acciones</th> 
         </tr>
       </thead>
@@ -317,9 +319,29 @@ a:hover {
         {% for salida in salidas %}
             <tr style="background-color: #ffffff;">
                 <td scope="col" style="padding: 10px; border: 1px solid #9e4323;">{{ salida.id }}</td>
-                <td scope="col" style="padding: 10px; border: 1px solid #9e4323;">{{ salida.precioSalida }}</td>
                 <td scope="col" style="padding: 10px; border: 1px solid #9e4323;">{{ salida.fecha ? salida.fecha|date('Y-m-d') : '' }}</td>
+                <td scope="col" style="padding: 10px; border: 1px solid #9e4323;">{{ salida.nombre_material}}</td>
                 <td scope="col" style="padding: 10px; border: 1px solid #9e4323;">{{ salida.cantidad }}</td>
+                <td scope="col" style="padding: 10px; border: 1px solid #9e4323;">
+                  <a href="{% if is_granted('ROLE_ADMIN') %}
+                              {{ path('app_proyecto', {'id': salida.captura_id}) }}
+                            {% else %}
+                              {{ path('app_proyecto_solicitante', {'id': salida.captura_id}) }}
+                            {% endif %}">
+                    {{ salida.nombre_proyecto }}
+                  </a>
+                </td>
+                <td scope="col" style="padding: 10px; border: 1px solid #9e4323;">
+                  <a href="{% if is_granted('ROLE_ADMIN') %}
+                              {{ path('proyecto_ver_nota', {'id': salida.nota_id}) }}
+                            {% else %}
+                              {{ path('solicitante_ver_nota', {'id': salida.nota_id}) }}
+                            {% endif %}">
+                    {{ salida.nombre_nota }}
+                  </a>
+                </td>
+                
+
                 <td scope="col" style="padding: 10px; border: 1px solid #9e4323;">
           
                     <a href="{{ path('app_salida_edit', {'id': salida.id}) }}" class="button2">Editar</a>
@@ -327,7 +349,7 @@ a:hover {
             </tr>
         {% else %}
             <tr>
-                <td colspan="5" scope="col" style="background-color: #ffffff; padding: 10px; border: 1px solid #9e4323;">No se encontraron registros</td>
+                <td colspan="7" scope="col" style="background-color: #ffffff; padding: 10px; border: 1px solid #9e4323;">No se encontraron registros</td>
             </tr>
         {% endfor %}
         </tbody>
