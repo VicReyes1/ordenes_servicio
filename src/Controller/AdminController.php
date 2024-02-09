@@ -17,6 +17,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
+#[Route('/admin')]
 class AdminController extends AbstractController
 {
     private $entityManager;
@@ -48,11 +49,11 @@ class AdminController extends AbstractController
     }
 
 
-    #[Route('/admin', name: 'app_admin')]
+    #[Route('/', name: 'app_admin')]
     public function index(): Response
     {
         $proyectosWithSecretaria = $this->entityManager->getRepository(Captura::class)->findProyectosWithSecretaria();
-        
+       
         return $this->render('admin/index.html.twig', [
             'capturas' => $proyectosWithSecretaria,
         ]);
@@ -62,7 +63,7 @@ class AdminController extends AbstractController
     public function proyecto($id): Response
     {
         $captura = $this->entityManager->getRepository(Captura::class)->findById($id);
-        $captura['fecha'] = $captura['fecha']->format('Y-m-d');
+        $captura['fecha'] = $captura['fecha']->format('d-m-Y');
         $notasAceptadas = $this->entityManager->getRepository(Nota::class)->getAllAceptedNotas($id);
         $notasPendientes = $this->entityManager->getRepository(Nota::class)->getAllPendingNotas($id);
         $notasRechazadas = $this->entityManager->getRepository(Nota::class)->getAllRefusedNotas($id);

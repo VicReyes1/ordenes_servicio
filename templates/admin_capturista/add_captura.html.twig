@@ -260,5 +260,31 @@ a:hover {
 
 </ul>
 
+<script>
+    $(document).ready(function () {
+        // Inicializa el select2
+        $('#secretaria').select2({
+            tags: true
+        });
+
+        // Agrega un evento de cambio en el select
+        $('#secretaria').on('change', function () {
+            var query = $(this).val().toLowerCase();
+
+            // Recorre las opciones y muestra/oculta según la búsqueda
+            $('#secretaria option').each(function () {
+                var optionText = $(this).text().toLowerCase();
+                if (optionText.includes(query) || query === "") {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+        });
+    });
+</script>
+
+
+
 {% endblock %}
 

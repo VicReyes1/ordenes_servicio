@@ -65,7 +65,7 @@ class SolicitanteController extends AbstractController
         ]);
     }
 
-    #[Route('/generar-nota/{id}', name: 'generar_nota')]
+    #[Route('/solicitante/generar-nota/{id}', name: 'generar_nota')]
     public function guardarMateriales(Request $request, UrlGeneratorInterface $urlGenerator ,$id): Response
     {
         // Obtén los datos del formulario

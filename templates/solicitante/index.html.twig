@@ -196,6 +196,30 @@ a:hover {
   width:100%;
 
   }
+.pagination {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pagination button {
+    background-color: #9e2343;
+    color: #ffffff;
+    border: none;
+    padding: 8px 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    margin: 0 5px;
+}
+
+.pagination span {
+    padding: 8px 16px;
+    border-radius: 4px;
+    background-color: #9e2343;
+    color: #ffffff;
+    margin: 0 5px;
+}
 </style>
 
 
@@ -217,6 +241,16 @@ a:hover {
     <div id="capturas-section">
     
     <a href="#">PROYECTOS</a>
+    <div>
+        <label for="searchInput">Buscar por nombre de inspección:</label>
+        <input type="text" id="searchInput">
+    </div>
+
+    <div class="pagination">
+        <button id="prevPage">Anterior</button>
+        <span id="currentPage">1</span>
+        <button id="nextPage">Siguiente</button>
+    </div>
 
    <div style="margin: 20px; overflow: auto;">
     <table style="width: 100%; border-collapse: collapse;">
@@ -234,6 +268,7 @@ a:hover {
         {% for captura in capturas %}
             <tr style="background-color: #ffffff;">
                 <td style="padding: 10px; border: 1px solid #98989a;">{{ captura.fecha ? captura.fecha|date('Y-m-d') : '' }}</td>
+                <td style="padding: 10px; border: 1px solid #98989a;">{{ captura.NombreProyecto ?? '' }}</td>
                 <td style="padding: 10px; border: 1px solid #98989a;">{{ captura.areaSolicitante ?? '' }}</td>
                 <td style="padding: 10px; border: 1px solid #98989a;">{{ captura.centroTrabajo ?? '' }}</td>
                 <td style="padding: 10px; border: 1px solid #98989a;">{{ captura.nombreSolicitante ?? '' }}</td>
@@ -254,6 +289,73 @@ a:hover {
   <section class="spikes"></section>
 
 </ul>
- 
+
+<script>
+    $(document).ready(function () {
+        var rowsPerPage = 5; // Número de filas por página
+        var totalRows = {{ capturas|length }}; // Total de filas
+        var currentPage = 1; // Página actual
+        var filteredRows; // Filas filtradas después de la búsqueda
+
+        function showRows() {
+            var startIndex = (currentPage - 1) * rowsPerPage;
+            var endIndex = startIndex + rowsPerPage;
+
+            // Oculta todas las filas
+            $('tbody tr').hide();
+
+            // Muestra solo las filas de la página actual
+            if (filteredRows) {
+                filteredRows.slice(startIndex, endIndex).show();
+            } else {
+                $('tbody tr').slice(startIndex, endIndex).show();
+            }
+
+            // Actualiza el número de página actual
+            $('#currentPage').text(currentPage);
+        }
+
+        function searchByProjectName() {
+            $('#searchInput').on('input', function () {
+                var query = $(this).val().toLowerCase();
+
+                // Filtra las filas que coinciden con la búsqueda por nombre
+                filteredRows = $('tbody tr').filter(function () {
+                    var nameColumnText = $(this).find('td:eq(1)').text().toLowerCase();
+                    return nameColumnText.includes(query);
+                });
+
+                // Actualiza el total de filas y restablece la página actual
+                totalRows = filteredRows.length;
+                currentPage = 1;
+
+                // Muestra las filas filtradas
+                showRows();
+            });
+        }
+
+        // Maneja el evento de hacer clic en "Anterior"
+        $('#prevPage').click(function () {
+            if (currentPage > 1) {
+                currentPage--;
+                showRows();
+            }
+        });
+
+        // Maneja el evento de hacer clic en "Siguiente"
+        $('#nextPage').click(function () {
+            var totalPages = Math.ceil(totalRows / rowsPerPage);
+            if (currentPage < totalPages) {
+                currentPage++;
+                showRows();
+            }
+        });
+
+        // Inicializa la paginación y la búsqueda por nombre
+        showRows();
+        searchByProjectName();
+    });
+</script>
+
 
 {% endblock %}
