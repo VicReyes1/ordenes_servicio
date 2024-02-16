@@ -9,6 +9,7 @@ use App\Entity\Captura;
 use App\Entity\Secretaria;
 use App\Entity\Material;
 use App\Entity\Nota;
+use App\Entity\Entrada;
 use App\Entity\Salida;
 use App\Entity\NotaHasMateriales;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,6 +17,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class SolicitanteController extends AbstractController
 {
@@ -58,11 +60,21 @@ class SolicitanteController extends AbstractController
     public function crearOrden($id): Response
     {
         $materiales = $this->entityManager->getRepository(Material::class)->findAll();
-       
         
         return $this->render('solicitante/agregarNotas.html.twig', [
-            'materiales' => $materiales
+            'materiales' => $materiales,
+            
         ]);
+    }
+
+    #[Route('/ver-entrada/{id}', name: 'app_ver_entrada')]
+    public function verEntradas($id): JsonResponse
+    {
+        $entradas = $this->entityManager->getRepository(Entrada::class)->AllWithPrice($id);
+
+        
+        // Directamente devolver un JsonResponse con las entradas
+        return new JsonResponse($entradas);
     }
 
     #[Route('/solicitante/generar-nota/{id}', name: 'generar_nota')]

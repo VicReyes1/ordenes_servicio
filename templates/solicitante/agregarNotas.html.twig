@@ -265,6 +265,13 @@ a:hover {
         cursor: pointer;
         margin-bottom: 15px; /* Ajusta el valor según sea necesario */
     }
+  .entradasSelect {
+  display: none;  /* Oculta el select inicialmente */
+}
+
+.entradasSelect.mostrar {
+  display: inline-block;  /* Muestra el select cuando tiene la clase 'mostrar' */
+}
 </style>
  <ul class="background">
    <li></li>
@@ -288,7 +295,7 @@ a:hover {
         <label for="nombre">Nombre a asignar a la nota:</label>
         <input type="text" name="nombre" class="form-control">
 
-        <label for="materiales">Agregar Materiales a solicitar</label>
+        <label for="materiales">Agregar entradas y materiales</label>
         <div id="camposDinamicos"></div>
 
         <button type="button" onclick="agregarCampo()"  id="nueva-captura-button">Agregar Materiales</button>
@@ -304,7 +311,7 @@ a:hover {
         </label>
 
         <label for="imagen3">
-            Imagen 2:
+            Imagen 3:
             <input type="file" id="imagen3" name="imagen3" accept="image/jpeg,image/png">
         </label>
 
@@ -320,20 +327,53 @@ a:hover {
   </ul>
     <script>
         function agregarCampo() {
-            var nuevoCampo = '<div class="campoDinamico">' +
-                '<label for="nuevoCampo">Nueva partida:</label>' +
-                '<select name="materiales[]" class="nuevoCampo" >' +
-                '<option value="" disabled selected>Seleccione nuevo material</option>' + // Opción predeterminada
-                '{% for material in materiales %}' +
-                '<option value="{{material.id}}" >{{material.nombre}}</option>' +
-                '{% endfor %}' +
-                '</select>' +
-                '<label for="cantidad">Cantidad:</label>' +
-                '<input type="number" name="cantidades[]" class="nuevoCampo" step="any">' + // Permitir puntos decimales
-                '</div>';
+          var nuevoCampo = '<div class="campoDinamico">' +
+            '<button type="button" onclick="eliminarCampo(this)">X</button>' +
+            '<label for="nuevoCampo">Nueva partida:</label>' +
+            '<select name="materiales[]" class="nuevoCampo" onchange="cargarEntradas(this)">' +
+            '<option value="" disabled selected>Seleccione nuevo material</option>' +
+            '{% for material in materiales %}' +
+            '<option value="{{ material.id }}">{{ material.nombre }}</option>' +
+            '{% endfor %}' +
+            '</select>' +
+            '<label for="cantidad">Cantidad:</label>' +
+            '<input type="number" name="cantidades[]" class="nuevoCampo" step="any">' +
+            '<select name="entradas[]" class="entradasSelect"></select>' +
+            '</div>';
 
-            $('#camposDinamicos').append(nuevoCampo);
+          $('#camposDinamicos').append(nuevoCampo).trigger('create');
         }
+
+        function eliminarCampo(elemento) {
+          $(elemento).closest('.campoDinamico').remove();
+        }
+
+        function cargarEntradas(select) {
+          var materialId = $(select).val();
+          var entradasSelect = $(select).closest('.campoDinamico').find('.entradasSelect');
+          // Realizar la llamada AJAX para obtener las entradas
+          $.ajax({
+            url: '/ver-entrada/' + materialId, // Ruta del controlador Symfony
+            type: 'GET',
+            success: function (data) {
+              // Agregar las nuevas opciones
+
+              entradasSelect.empty();
+              
+              entradasSelect.prop('disabled', false).addClass('mostrar');
+              $.each(data, function (key, value) {
+                entradasSelect.append('<option value="' + value.id + '">' + 'Entrada realizada el día: ' + value.fecha + ' con la cantidad de material de: ' + value.cantidad + ' Por un valor de: $' + value.precio_adquirido + '</option>');
+              });
+
+              // Habilitar el segundo select
+              entradasSelect.prop('disabled', false);
+            },
+            error: function () {
+              console.error('Error al cargar las entradas');
+            }
+          });
+        }
+
     </script>
 
 {% endblock %}

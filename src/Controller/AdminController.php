@@ -16,6 +16,7 @@ use App\Entity\Salida;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use mPDF;
 
 #[Route('/admin')]
 class AdminController extends AbstractController
@@ -255,5 +256,25 @@ class AdminController extends AbstractController
 
         // Liberar la memoria
         imagedestroy($image);
+    }
+
+    #[Route('/generarProyectoPDF', name: 'generar_proyecto_pdf')]
+    public function generarPdf(Request $request): Response
+    {
+
+        // Renderizar la plantilla Twig en una variable
+        $html = $this->renderView('admin/imprimirProyecto.html.twig');
+
+        // Crear una instancia de mPDF
+        $mpdf = new \Mpdf\Mpdf();
+
+        // Añadir el contenido HTML al PDF
+        $mpdf->WriteHTML($html);
+
+        // Enviar el PDF como respuesta
+        return new Response($mpdf->Output(), 200, [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => 'inline; filename=archivo.pdf',
+        ]);
     }
 }

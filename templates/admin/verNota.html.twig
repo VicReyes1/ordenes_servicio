@@ -348,6 +348,8 @@ a:hover {
     {% endfor %}
 </ul2>
 
+ <button onclick="location.href='{{ path('generar_proyecto_pdf') }}'">Imprimir orden de trabajo</button>
+
 <!-- Agregar botones -->
 {% if nota.estatus != 'aceptado' %}
     <form method="post" action="{{ path('proyecto_aceptar_nota', {'id': nota.id}) }}">
@@ -360,4 +362,5 @@ a:hover {
 
 {% endif %}
 </ul>
+
 {% endblock %}

@@ -21,28 +21,24 @@ class EntradaRepository extends ServiceEntityRepository
         parent::__construct($registry, Entrada::class);
     }
 
-//    /**
-//     * @return Entrada[] Returns an array of Entrada objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('e')
-//            ->andWhere('e.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('e.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    public function AllWithPrice($materialId): ?array
+    {
+        $result = $this->createQueryBuilder('e')
+            ->select('e.id, e.precio_adquirido, e.precio_adquirido, e.cantidad, e.fecha') // Asegúrate de seleccionar la fecha
+            ->leftJoin('e.material', 'm')
+            ->andWhere('m.id = :materialId')
+            ->setParameter('materialId', $materialId)
+            ->getQuery()
+            ->getResult();
 
-//    public function findOneBySomeField($value): ?Entrada
-//    {
-//        return $this->createQueryBuilder('e')
-//            ->andWhere('e.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+        // Formatear la fecha antes de devolver los resultados
+        foreach ($result as &$entry) {
+            $entry['fecha'] = $entry['fecha']->format('d/m/Y H:i:s'); // Formato día/mes/año
+        }
+
+        return $result;
+    }
+
+
+
 }

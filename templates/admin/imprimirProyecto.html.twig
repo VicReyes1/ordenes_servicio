@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+
+<style>
+        /* Estilo para el contenedor principal */
+        .excel-container {
+            border: 1px solid #ddd; /* Borde gris */
+            padding: 10px; /* Espaciado interno */
+            margin-bottom: 20px; /* Margen inferior */
+        }
+
+        /* Estilo para los elementos div dentro del contenedor principal */
+        .excel-container > div {
+            display: inline-block;
+            width: 48%; /* Ancho del 48% para alinear dos divs en una fila */
+            margin-right: 2%; /* Margen derecho para espaciado entre divs */
+            vertical-align: top; /* Alineación superior */
+        }
+
+        /* Estilo para los elementos p dentro de los divs */
+        .excel-container p {
+            margin: 5px 0; /* Margen interno superior e inferior */
+        }
+
+        h1 {
+            color: red;
+        }
+    </style>
+
+<h1 >Orden de trabajo</h1>
+
+<div class="excel-container">
+    <div>
+        <h4>Área del solicitante:</h4>
+        <h4>Centro de trabajo:</h4>
+        <h4>Nombre del solicitante:</h4>
+        <h4>Puesto del solicitante:</h4>
+        <h4>Jerarquía de la orden:</h4>
+        <h4>Teléfono/ Ext:</h4>
+    </div>
+
+</div>
+
+<h2>Riesgos con trabajos</h2>
+<div class="excel-container">
+    <h4>Gas</h4>
+    <h4>Flama</h4>
+    <h4>Altura</h4>
+    <h4>Alta tensión</h4>
+</div>
+
+<div class="excel-container">
+    <div>
+        <p>Descripción de trabajo solicitado:</p>
+    </div>
+
+    <div>
+        <p>Descripción del trabajo a ejecutar:</p>
+    </div>
+</div>
+
+
+
+{% endblock %}

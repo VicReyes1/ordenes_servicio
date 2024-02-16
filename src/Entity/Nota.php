@@ -39,6 +39,24 @@ class Nota
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $imagen3 = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $gas = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?bool $flama = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?bool $altura = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?bool $alta_tension = null;
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $descripcion_trabajo_sol = null;
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $descripcion_trabajo_ej = null;
+
 
     public function getId(): ?int
     {
@@ -137,6 +155,78 @@ class Nota
     public function setImagen3(?string $imagen3): static
     {
         $this->imagen3 = $imagen3;
+
+        return $this;
+    }
+
+    public function isGas(): ?bool
+    {
+        return $this->gas;
+    }
+
+    public function setGas(?bool $gas): static
+    {
+        $this->gas = $gas;
+
+        return $this;
+    }
+
+    public function isFlama(): ?bool
+    {
+        return $this->flama;
+    }
+
+    public function setFlama(?bool $flama): static
+    {
+        $this->flama = $flama;
+
+        return $this;
+    }
+
+    public function isAltura(): ?bool
+    {
+        return $this->altura;
+    }
+
+    public function setAltura(?bool $altura): static
+    {
+        $this->altura = $altura;
+
+        return $this;
+    }
+
+    public function isAltaTension(): ?bool
+    {
+        return $this->alta_tension;
+    }
+
+    public function setAltaTension(?bool $alta_tension): static
+    {
+        $this->alta_tension = $alta_tension;
+
+        return $this;
+    }
+
+    public function getDescripcionTrabajoSol(): ?string
+    {
+        return $this->descripcion_trabajo_sol;
+    }
+
+    public function setDescripcionTrabajoSol(?string $descripcion_trabajo_sol): static
+    {
+        $this->descripcion_trabajo_sol = $descripcion_trabajo_sol;
+
+        return $this;
+    }
+
+    public function getDescripcionTrabajoEj(): ?string
+    {
+        return $this->descripcion_trabajo_ej;
+    }
+
+    public function setDescripcionTrabajoEj(?string $descripcion_trabajo_ej): static
+    {
+        $this->descripcion_trabajo_ej = $descripcion_trabajo_ej;
 
         return $this;
     }
