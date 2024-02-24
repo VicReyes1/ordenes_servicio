@@ -38,7 +38,6 @@ class CapturaRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('c')
         ->leftJoin('c.secretaria', 's') // Realiza un left join con la relación 'secretaria'
         ->addSelect('s') // Selecciona la entidad 'Secretaria' para incluir sus campos
-        ->where('c.nombre_proyecto IS NOT NULL')
         ->orderBy('c.id', 'ASC')
         ->getQuery()
         ->getResult();
