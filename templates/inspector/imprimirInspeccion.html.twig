@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Inspeccion PDF</title>
+    <style>
+        /* Establece la imagen de fondo */
+        body {
+            font-family: Arial, sans-serif;
+            margin-top: 40px;
+            margin-left: 40px;
+            padding: 0;
+            background-image: url('MAGUEY 1.png'); /* Ruta de la imagen de fondo */
+            background-repeat: repeat-y; /* Repetir verticalmente */
+            background-position: left top; /* Alinear a la izquierda arriba */
+        }
+
+        /* Estilos para el contenido del documento */
+        .header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-top:35px
+        }
+
+        .logo {
+            width: 200px;
+            height: 150px; /* Asigna un valor para la altura */
+        }
+
+        
+
+        .header-table {
+            flex: 2;
+            padding-left: 0px;
+        }
+
+        .header-table th, .header-table td {
+            padding: 5px 10px;
+            border: 1px solid #ccc;
+        }
+
+        .header-table th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+            text-align: left;
+        }
+
+        .header-table td {
+            text-align: left;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        /* Estilos para las columnas específicas */
+        .reporte, .folio, .fecha-solicitud, .hora-solicitud, .fecha-recibio, .hora-recibio {
+            width: 150px; /* Ajusta el ancho según tus necesidades */
+        }
+
+        .enc {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            margin-right: 20px; /* Puedes ajustar el margen según tus preferencias */
+        }
+
+        .orden-trabajo {
+            text-align: center; /* Alinea el contenido al centro si es necesario */
+            margin-top: -80px
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="enc">
+        <div class="logo">
+            <img src="{{ asset('images/oficialMayorLogo.jpeg') }}" alt="Logo">
+        </div>
+        <div class="orden-trabajo">
+            <h2>Levantamiento</h2>
+            <!-- Agrega aquí los detalles específicos de la orden de trabajo -->
+        </div>
+    </div>
+
+
+    <div class="header">
+        <div class="header-table">
+            <table>
+                <tr>
+                    
+                    <th class="reporte">NO. REPORTE</th>
+                    <td></td>
+                    <th class="folio">NO. FOLIO</th>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th colspan="2">JERARQUÍA</th>
+                    <th>ÁREA SOLICITANTE</th>
+                    <td colspan="4">{{levantamiento[0].area_solicitante}}</td>
+                </tr>
+                <tr>
+                    <th>EMERGENTE</th>
+                    <td></td>
+                    <th>CENTRO DE TRABAJO</th>
+                    <td colspan="4">{{levantamiento[0].centro_trabajo}}</td>
+                </tr>
+                <tr>
+                    <th>URGENTE</th>
+                    <td></td>
+                    <th>NOMBRE DEL SOLICITANTE</th>
+                    <td colspan="4">{{levantamiento[0].nombre_solicitante}}</td>
+                </tr>
+                <tr>
+                    <th>NORMAL</th>
+                    <td></td>
+                    <th>PUESTO DEL SOLICITANTE</th>
+                    <td colspan="4">{{levantamiento[0].puesto_solicitante}}</td>
+                </tr>
+                <tr>
+                    <th colspan="2">PROGRAMADA</th>
+
+                    <th class="fecha-solicitud">FECHA SOLICITUD</th>
+                    <td ></td>
+                    <th class="fecha-recibio">FECHA RECIBIO</th>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th colspan="2">TELÉFONO / EXT</th>
+                    <td></td>
+                    <th class="hora-solicitud">HORA SOLICITUD</th>
+                    <td></td>
+                    <th class="hora-recibio">HORA RECIBIO</th>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+
+    
+    </div>
+
+
+    <h2>Materiales y costos</h2>
+    <div style="margin: 20px; overflow: auto;">
+    <table style="width: 100%; border-collapse: collapse;">
+      <thead style="background-color: #9e2343; color: #ffffff; border: 1px solid #9e4323;">
+        <tr>
+          
+          <th scope="col" style="padding: 10px; border: 1px solid #9e4323;">Nombre material</th>
+          <th scope="col" style="padding: 10px; border: 1px solid #9e4323;">Descripción</th>
+          <th scope="col" style="padding: 10px; border: 1px solid #9e4323;">Cantidad solicitada</th>
+          <th scope="col" style="padding: 10px; border: 1px solid #9e4323;">Unidad de medida</th>
+        </tr>
+        </tr>
+      </thead>
+      <tbody>
+            {% for material in materiales %}
+                <tr style="background-color: #ffffff;">
+                    <td scope="col" style="padding: 10px; border: 1px solid #9e4323;">{{ material.nombre_material }}</td>
+                    <td scope="col" style="padding: 10px; border: 1px solid #9e4323;">{{ material.descripcion }}</td>
+                    <td scope="col" style="padding: 10px; border: 1px solid #9e4323;">{{ material.cantidad }}</td>
+                    <td scope="col" style="padding: 10px; border: 1px solid #9e4323;">{{ material.unidad_medida }}</td>
+                    
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>Firmas</h2>
+
+    <table style="width: 100%; border-collapse: collapse;">
+      <thead style="background-color: #9e2343; color: #ffffff; border: 1px solid #9e4323;">
+        <tr>
+          
+          <th scope="col" style="padding: 10px; border: 1px solid #9e4323;">Solicitante</th>
+          <th scope="col" style="padding: 10px; border: 1px solid #9e4323;">Jefe de cuadrilla</th>
+          <th scope="col" style="padding: 10px; border: 1px solid #9e4323;">Supervisor</th>
+        </tr>
+        </tr>
+      </thead>
+      <tbody>
+            
+            <tr style="background-color: #ffffff;">
+                <td scope="col" style="padding: 10px; border: 1px solid #9e4323;"><img src="{{ asset('firmas/' ~ levantamiento[0][0].getSolicitanteFirma) }}" class="img-fluid" width="250" height="auto" style="margin-bottom: 10px;" alt="Imagen 1"></td>
+                <td scope="col" style="padding: 10px; border: 1px solid #9e4323;"><img src="{{ asset('firmas/' ~ levantamiento[0][0].getJefeCuadrillaFirma) }}" class="img-fluid" width="250" height="auto" style="margin-bottom: 10px;" alt="Imagen 2"></td>
+                <td scope="col" style="padding: 10px; border: 1px solid #9e4323;"><img src="{{ asset('firmas/' ~ levantamiento[0][0].getSupervisorFirma) }}" class="img-fluid" width="250" height="auto" style="margin-bottom: 10px;" alt="Imagen 3"></td>
+                
+            </tr>
+            
+        </tbody>
+        <thead style="background-color: #9e2343; color: #ffffff; border: 1px solid #9e4323;">
+        <tr>
+          
+          <th scope="col" style="padding: 10px; border: 1px solid #9e4323;">{{levantamiento[0].nombre_solicitante}}</th>
+          <th scope="col" style="padding: 10px; border: 1px solid #9e4323;">{{levantamiento[0][0].getJefeCuadrilla.getNombre}}</th>
+          <th scope="col" style="padding: 10px; border: 1px solid #9e4323;">{{levantamiento[0][0].getSupervisor.getNombre}}</th>
+        </tr>
+        </tr>
+      </thead>
+    </table>
+   
+
+
+</div>
+
+</div>
+
+    
+</body>
+</html>

@@ -39,6 +39,19 @@ class EntradaRepository extends ServiceEntityRepository
         return $result;
     }
 
+    public function findEntradasInNota($notaID): array
+    {
+        return $this->createQueryBuilder('e')
+            ->select('e.id, e.fecha, e.cantidad, m.nombre as nombre_material, m.unidad_medida ,e.precio_adquirido')
+            ->leftJoin('e.material', 'm') 
+            ->leftJoin('e.nota', 'n') 
+            ->where('n.id = :notaID')  // Añade la condición para el parámetro :notaID
+            ->setParameter('notaID', $notaID)
+            ->orderBy('e.id', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
 
 
 }

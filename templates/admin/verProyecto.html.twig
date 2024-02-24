@@ -270,6 +270,7 @@ a:hover {
    <li></li>
      
     {% include 'components/navbar.html.twig' %}
+    {% set id = app.request.attributes.get('id') %}
 
  <div class="form-container"  >
      
@@ -291,39 +292,41 @@ a:hover {
 
   </div>
 
-<div class="container">
-    <h3>Imágenes de inspección</h3>
-    
-    <div class="row">
-        <div class="col-md-4 mb-4">
-            <img src="{{ asset('uploads/' ~ data.imagen1) }}" class="img-fluid" alt="Imagen 1">
-        </div>
 
-        <div class="col-md-4 mb-4">
-            <img src="{{ asset('uploads/' ~ data.imagen2) }}" class="img-fluid" alt="Imagen 1">
-        </div>
-
-        <div class="col-md-4 mb-4">
-            <img src="{{ asset('uploads/' ~ data.imagen3) }}" class="img-fluid" alt="Imagen 1">
-        </div>
-        
+    <div class="botones-container">
+        <button class="boton" onclick="mostrarTabla('tabla1')">Visualizar levantamientos</button>
+        <button class="boton" onclick="mostrarTabla('tabla2')">Ordenes de trabajo</button>
     </div>
+
+<div id="tabla1" class="tabla-container" style="display: block;">
+        
+     <table class="table">
+                <thead>
+                    <tr>
+                        <th>Categoria</th>
+                        <th>Fecha de realizacion del levantamiento</th>
+                        <th>Ver</th>
+                        <!-- Agrega más columnas según tus necesidades -->
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for levantamiento in levantamientos %}
+                        <tr>
+                            <td>{{ levantamiento.id}}</td>
+                            <td>{{ levantamiento.fecha_levantamiento|date('d-m-Y') }}</td>
+                            <td>
+                                <a href="{{ path('generar_proyecto_pdf_inspeccion', {'id': levantamiento.id}) }}" class="button2" target="_blank">Ver levantamiento y materiales</a>
+                            </td>
+
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+    <button id="nueva-captura-button" onclick="location.href='{{ path('app_iniciar_inspeccion', {'id': id}) }}'">Generar levantamiento</button>
 </div>
 
-
-
-  <button id="nueva-captura-button" onclick="location.href='{{ path('app_solicitante_crear_orden', {'id': data.id}) }}'">Generar orden nueva</button>
-  <div class="accordion" id="accordionExample">
-  <div class="accordion-item">
-    <h2 class="accordion-header">
-      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-        Ordenes Aceptadas
-      </button>
-    </h2>
-    <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
-      <div class="accordion-body">
-        {% if aceptadas is not empty %}
-            <table class="table">
+<div id="tabla2" class="tabla-container" style="display: none;">
+    <table class="table">
                 <thead>
                     <tr>
                         <th>Nombre</th>
@@ -336,7 +339,7 @@ a:hover {
                     {% for nota in aceptadas %}
                         <tr>
                             <td>{{ nota.nombre }}</td>
-                            <td>{{ nota.fechaPeticion|date('Y-m-d') }}</td>
+                            <td>{{ nota.fechaPeticion|date('d-m-Y') }}</td>
                             <td>
                                 <a href="{{ path('proyecto_ver_nota', {'id': nota.id}) }}" class="button2">Ver Nota Completa</a>
                             </td>
@@ -344,88 +347,35 @@ a:hover {
                     {% endfor %}
                 </tbody>
             </table>
-        {% else %}
-            <p>No hay información disponible.</p>
-        {% endif %}
-      </div>
-    </div>
-  </div>
-  <div class="accordion-item">
-    <h2 class="accordion-header">
-      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-       Ordenes Pendientes
-      </button>
-    </h2>
-    <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-      <div class="accordion-body">
-        {% if pendientes is not empty %}
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Fecha de orden</th>
-                        <th>Ver</th>
-                        <!-- Agrega más columnas según tus necesidades -->
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for nota in pendientes %}
-                        <tr>
-                            <td>{{ nota.nombre }}</td>
-                            <td>{{ nota.fechaPeticion|date('Y-m-d') }}</td>
-                            <td>
-                                <a href="{{ path('proyecto_ver_nota', {'id': nota.id}) }}" class="button2">Ver Nota Completa</a>
-                            </td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        {% else %}
-            <p>No hay información disponible.</p>
-        {% endif %}
-      </div>
-    </div>
-  </div>
-  <div class="accordion-item">
-    <h2 class="accordion-header">
-
-      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-        Ordenes rechazadas
-
-
-    </h2>
-    <div id="collapseTree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-      <div class="accordion-body">
-        {% if recahazadas is not empty %}
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Fecha de orden</th>
-                        <th>Ver</th>
-                        <!-- Agrega más columnas según tus necesidades -->
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for nota in recahazadas %}
-                        <tr>
-                            <td>{{ nota.nombre }}</td>
-                            <td>{{ nota.fechaPeticion|date('Y-m-d') }}</td>
-                            <td>
-                                <a href="{{ path('proyecto_ver_nota', {'id': nota.id}) }}" class="button2">Ver Nota Completa</a>
-                            </td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        {% else %}
-            <p>No hay información disponible.</p>
-        {% endif %}
-      </div>
-    </div>
-  </div>
+    <button id="nueva-captura-button" onclick="location.href='{{ path('app_solicitante_crear_orden', {'id': data.id}) }}'">Generar orden nueva</button>
 </div>
 
+{% for flash_message in app.flashes('success') %}
+        <script>
+            setTimeout(function() {
+                Swal.fire({
+                    icon: 'success',
+                    title: '¡Éxito!',
+                    text: '{{ flash_message }}',
+                    timer: 3000, // Duración en milisegundos
+                    timerProgressBar: true, // Barra de progreso del temporizador
+                    showConfirmButton: false // Ocultar botón de confirmación
+                });
+            }, 100); // Cambia el valor del retraso según sea necesario
+        </script>
+    {% endfor %}
+
+<script>
+    function mostrarTabla(tablaId) {
+        // Ocultar todas las tablas
+        document.querySelectorAll('.tabla-container').forEach(function(tabla) {
+            tabla.style.display = 'none';
+        });
+
+        // Mostrar la tabla seleccionada
+        document.getElementById(tablaId).style.display = 'block';
+    }
+</script>
 
   </div>
   

@@ -289,6 +289,7 @@ a:hover {
    <li></li>
    <li></li>
  {% include 'components/navbar.html.twig' %}
+ {% set id = app.request.attributes.get('id') %}
 
 <div class="responsive">
  <div class="form-container"  >
@@ -348,7 +349,8 @@ a:hover {
     {% endfor %}
 </ul2>
 
- <button onclick="location.href='{{ path('generar_proyecto_pdf') }}'">Imprimir orden de trabajo</button>
+<button onclick="location.href='{{ path('generar_proyecto_pdf', {'id': nota.id}) }}'">Imprimir orden de trabajo</button>
+
 
 <!-- Agregar botones -->
 {% if nota.estatus != 'aceptado' %}

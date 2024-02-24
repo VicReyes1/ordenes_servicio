@@ -21,21 +21,23 @@ class Material
     #[ORM\Column(type: Types::TEXT)]
     private ?string $nombre = null;
 
-    #[ORM\Column(length: 15)]
+    #[ORM\Column(length: 155)]
     private ?string $unidad_medida = null;
-
-    #[ORM\Column]
-    private ?float $precio = null;
-
-    #[ORM\ManyToOne(inversedBy: 'materiales')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Categoria $categoria = null;
 
     #[ORM\OneToMany(mappedBy: 'material', targetEntity: Entrada::class)]
     private Collection $entradas;
 
     #[ORM\OneToMany(mappedBy: 'material', targetEntity: Salida::class)]
     private Collection $salidas;
+
+    #[ORM\Column(length: 155)]
+    private ?string $familia = null;
+
+    #[ORM\Column(length: 155)]
+    private ?string $subfamilia = null;
+
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $descripcion = null;
 
     public function __construct()
     {
@@ -80,18 +82,6 @@ class Material
     public function setPrecio(float $precio): static
     {
         $this->precio = $precio;
-
-        return $this;
-    }
-
-    public function getCategoria(): ?Categoria
-    {
-        return $this->categoria;
-    }
-
-    public function setCategoria(?Categoria $categoria): static
-    {
-        $this->categoria = $categoria;
 
         return $this;
     }
@@ -152,6 +142,42 @@ class Material
                 $salida->setMaterial(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getFamilia(): ?string
+    {
+        return $this->familia;
+    }
+
+    public function setFamilia(string $familia): static
+    {
+        $this->familia = $familia;
+
+        return $this;
+    }
+
+    public function getSubfamilia(): ?string
+    {
+        return $this->subfamilia;
+    }
+
+    public function setSubfamilia(string $subfamilia): static
+    {
+        $this->subfamilia = $subfamilia;
+
+        return $this;
+    }
+
+    public function getDescripcion(): ?string
+    {
+        return $this->descripcion;
+    }
+
+    public function setDescripcion(string $descripcion): static
+    {
+        $this->descripcion = $descripcion;
 
         return $this;
     }

@@ -10,13 +10,17 @@ use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Captura;
 use App\Entity\Nota;
 use App\Entity\User;
+use App\Entity\Levantamiento;
+use App\Entity\LevantamientoHasMateriales;
 use App\Entity\Material;
+use App\Entity\Entrada;
 use App\Entity\NotaHasMateriales;
 use App\Entity\Salida;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use mPDF;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
 #[Route('/admin')]
 class AdminController extends AbstractController
@@ -66,15 +70,11 @@ class AdminController extends AbstractController
         $captura = $this->entityManager->getRepository(Captura::class)->findById($id);
         $captura['fecha'] = $captura['fecha']->format('d-m-Y');
         $notasAceptadas = $this->entityManager->getRepository(Nota::class)->getAllAceptedNotas($id);
-        $notasPendientes = $this->entityManager->getRepository(Nota::class)->getAllPendingNotas($id);
-        $notasRechazadas = $this->entityManager->getRepository(Nota::class)->getAllRefusedNotas($id);
-        
-        
+        $levantamientos = $this->entityManager->getRepository(Levantamiento::class)->findLevantamientos();
         return $this->render('admin/verProyecto.html.twig', [
             'data' => $captura,
             'aceptadas' => $notasAceptadas,
-            'pendientes' => $notasPendientes,
-            'recahazadas' => $notasRechazadas
+            'levantamientos' => $levantamientos
         ]);
     }
 
@@ -125,7 +125,11 @@ class AdminController extends AbstractController
         // Obtén los datos del formulario
         $data = $request->request->all();
         $materiales = $data['materiales'];
-        $cantidades = $data['cantidades'];
+        $entradas = $data['entradas'];
+
+        
+
+
 
         $nota = new Nota();
 
@@ -174,27 +178,21 @@ class AdminController extends AbstractController
         // Luego, haces el flush
         $this->entityManager->flush();
 
-
-        for ($i = 0; $i < sizeof($materiales); $i++) {
-            $notaHasMateriales = new NotaHasMateriales();
+        for ($i = 0; $i < sizeof($entradas); $i++) {
+            $entrada = $this->entityManager->getRepository(Entrada::class)->find($entradas[$i]);
+            $entrada->setNota($nota);
             $salida = new Salida();
-            $material = $this->entityManager->getRepository(Material::class)->find($materiales[$i]); // Corregir $material[$i]
-            $cantidad = $cantidades[$i];
-
-            // Asigna la relación con Nota y Material
-            $notaHasMateriales->setNota($nota);
-            $notaHasMateriales->setMaterial($material);
-            $notaHasMateriales->setCantidad($cantidad);
 
             $salida->setCaptura($captura);
             $salida->setFecha($fechaActual);
-            $salida->setMaterial($material);
-            $salida->setCantidad($cantidad);
+            $salida->setMaterial($entrada->getMaterial());
+            $salida->setCantidad($entrada->getCantidad());
             $salida->setNota($nota);
-
-            // Persiste el objeto NotaHasMateriales
-            $this->entityManager->persist($notaHasMateriales);
+        
+            $this->entityManager->persist($entrada);
             $this->entityManager->persist($salida);
+
+            
         }
 
         // Haz el flush después de agregar todas las relaciones
@@ -258,12 +256,30 @@ class AdminController extends AbstractController
         imagedestroy($image);
     }
 
-    #[Route('/generarProyectoPDF', name: 'generar_proyecto_pdf')]
-    public function generarPdf(Request $request): Response
+    #[Route('/verLevantamiento/{id}', name: 'ver_levantamiento_admin')]
+    public function verLevantamiento($id): Response
     {
+        
+        $levantamiento = $this->entityManager->getRepository(Levantamiento::class)->find($id);
+        $materiales = $this->entityManager->getRepository(LevantamientoHasMateriales::class)->findMateriales($id);
+        
+
+        return $this->render('admin/verLevantamiento.html.twig', [
+            'levantamiento' => $levantamiento,
+            'materiales' => $materiales
+        ]);
+
+    }
+
+    #[Route('/generarProyectoPDF/{id}', name: 'generar_proyecto_pdf')]
+    public function generarPdf(Request $request, $id): Response
+    {
+        
+        $nota = $this->entityManager->getRepository(Nota::class)->getNotaWithCaptura($id);
+        $materiales = $this->entityManager->getRepository(Entrada::class)->findEntradasInNota($id);
 
         // Renderizar la plantilla Twig en una variable
-        $html = $this->renderView('admin/imprimirProyecto.html.twig');
+        $html = $this->renderView('admin/imprimirProyecto.html.twig', ['nota' => $nota, 'materiales' => $materiales]);
 
         // Crear una instancia de mPDF
         $mpdf = new \Mpdf\Mpdf();

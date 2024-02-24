@@ -329,15 +329,13 @@ a:hover {
         function agregarCampo() {
           var nuevoCampo = '<div class="campoDinamico">' +
             '<button type="button" onclick="eliminarCampo(this)">X</button>' +
-            '<label for="nuevoCampo">Nueva partida:</label>' +
+            '<label for="nuevoCampo">Nueva entrada de material:</label>' +
             '<select name="materiales[]" class="nuevoCampo" onchange="cargarEntradas(this)">' +
             '<option value="" disabled selected>Seleccione nuevo material</option>' +
             '{% for material in materiales %}' +
             '<option value="{{ material.id }}">{{ material.nombre }}</option>' +
             '{% endfor %}' +
             '</select>' +
-            '<label for="cantidad">Cantidad:</label>' +
-            '<input type="number" name="cantidades[]" class="nuevoCampo" step="any">' +
             '<select name="entradas[]" class="entradasSelect"></select>' +
             '</div>';
 
@@ -362,7 +360,7 @@ a:hover {
               
               entradasSelect.prop('disabled', false).addClass('mostrar');
               $.each(data, function (key, value) {
-                entradasSelect.append('<option value="' + value.id + '">' + 'Entrada realizada el día: ' + value.fecha + ' con la cantidad de material de: ' + value.cantidad + ' Por un valor de: $' + value.precio_adquirido + '</option>');
+                entradasSelect.append('<option value="' + value.id + '" required>' + 'Entrada realizada el día: ' + value.fecha + ' con la cantidad de material de: ' + value.cantidad + ' Por un valor de: $' + value.precio_adquirido + ' pesos' + '</option>');
               });
 
               // Habilitar el segundo select

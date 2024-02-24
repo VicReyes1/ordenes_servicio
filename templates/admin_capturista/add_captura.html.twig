@@ -9,18 +9,6 @@
 <style>
 
 
-@keyframes animate {
-    0%{
-        transform: translateY(0) rotate(0deg);
-        opacity: 1;
-        border-radius: 0;
-    }
-    100%{
-        transform: translateY(-1000px) rotate(720deg);
-        opacity: 0;
-        border-radius: 50%;
-    }
-}
 
 .background {
     position: fixed;
@@ -33,90 +21,7 @@
     background: #d1d1d1;
     overflow: hidden;
 }
-.background li {
-    position: absolute;
-    display: block;
-    list-style: none;
-    width: 20px;
-    height: 20px;
-    background: rgba(255, 255, 255, 0.2);
-    animation: animate 19s linear infinite;
-    pointer-events: none; /* Esto permitirá que los eventos pasen a través de los elementos */
-}
 
-
-
-
-.background li:nth-child(0) {
-    left: 5%;
-    width: 179px;
-    height: 179px;
-    bottom: -179px;
-    animation-delay: 1s;
-}
-.background li:nth-child(1) {
-    left: 52%;
-    width: 141px;
-    height: 141px;
-    bottom: -141px;
-    animation-delay: 5s;
-}
-.background li:nth-child(2) {
-    left: 52%;
-    width: 109px;
-    height: 109px;
-    bottom: -109px;
-    animation-delay: 7s;
-}
-.background li:nth-child(3) {
-    left: 74%;
-    width: 196px;
-    height: 196px;
-    bottom: -196px;
-    animation-delay: 6s;
-}
-.background li:nth-child(4) {
-    left: 7%;
-    width: 155px;
-    height: 155px;
-    bottom: -155px;
-    animation-delay: 11s;
-}
-.background li:nth-child(5) {
-    left: 28%;
-    width: 194px;
-    height: 194px;
-    bottom: -194px;
-    animation-delay: 10s;
-}
-.background li:nth-child(6) {
-    left: 0%;
-    width: 170px;
-    height: 170px;
-    bottom: -170px;
-    animation-delay: 16s;
-}
-.background li:nth-child(7) {
-    left: 23%;
-    width: 188px;
-    height: 188px;
-    bottom: -188px;
-    animation-delay: 2s;
-}
-.background li:nth-child(8) {
-    left: 40%;
-    width: 141px;
-    height: 141px;
-    bottom: -141px;
-    animation-delay: 25s;
-}
-.background li:nth-child(9) {
-    left: 19%;
-    width: 182px;
-    height: 182px;
-    bottom: -182px;
-    animation-delay: 3s;
-}
 
 .container {
         max-height: 80vh; /* Altura máxima del contenedor */
@@ -189,21 +94,23 @@ a:hover {
 </style>
 
   <ul class="background">
-   <li></li>
-   <li></li>
-   <li></li>
-   <li></li>
-   <li></li>
-   <li></li>
-   <li></li>
-   <li></li>
-   <li></li>
-   <li></li>
+ 
 
 {% include 'components/navbar.html.twig' %}
 <div class="container mt-4">
+
     <a href="#">Captura nuevo proyecto </a>
     <form action="{{ path('app_admin_capturista_add_action') }}" method="post">
+        <input type="hidden" name="cantidad" id="cantidad" value="0">
+       
+        <div class="mb-3">
+            <label for="secretaria" class="form-label">Secretaría:</label>
+            <select id="secretaria" name="secretaria" style="width: 100%">
+                {% for secretaria in secretarias %}
+                    <option value="{{ secretaria.id }}" >{{ secretaria.nombre }}</option>
+                {% endfor %}
+            </select>
+        </div>
 
         <div class="mb-3">
             <label for="area_solicitante" class="form-label">Área solicitante:</label>
@@ -231,28 +138,17 @@ a:hover {
         </div>
 
         <div class="mb-3">
-            <label for="tipo_trabajo" class="form-label">Tipo de trabajo:</label>
-            <input type="text" id="tipo_trabajo" name="tipo_trabajo" class="form-control">
-        </div>
-
-        <div class="mb-3">
             <label for="descripcion_trabajo" class="form-label">Descripción del trabajo:</label>
             <textarea id="descripcion_trabajo" name="descripcion_trabajo" class="form-control"></textarea>
         </div>
-        
-        <div class="mb-3">
-            <label for="secretaria" class="form-label">Secretaría:</label>
-            <select id="secretaria" name="secretaria" class="form-select">
-                {% for secretaria in secretarias %}
-                    <option value="{{ secretaria.id }}">{{ secretaria.nombre }}</option>
-                {% endfor %}
-            </select>
+
+        <div id="personalFieldsContainer">
+                <!-- Aquí se agregarán los campos dinámicamente -->
         </div>
 
-        
-
-
+        <button type="button" class="btn btn-primary" id="agregarPersonalButton">Agregar personal</button>
         <button type="submit" id="nueva-captura-button">Agregar captura</button>
+        
       
  
     </form>
@@ -261,10 +157,12 @@ a:hover {
 </ul>
 
 <script>
+    var $cantidad = 0;
     $(document).ready(function () {
         // Inicializa el select2
         $('#secretaria').select2({
-            tags: true
+            tags: true,
+            width: 'resolve'
         });
 
         // Agrega un evento de cambio en el select
@@ -280,6 +178,45 @@ a:hover {
                     $(this).hide();
                 }
             });
+        });
+
+        // Manejar clic en el botón "Agregar personal"
+        $("#agregarPersonalButton").click(function () {
+            // Crear un nuevo contenedor para campos de personal con una clase única
+
+        
+            var newPersonalContainer = $("<div class='personalFieldsContainer'>");
+
+            // Agregar campos de personal al nuevo contenedor
+            newPersonalContainer.append(`
+                <hr>
+                <div class="mb-3">
+                    <label for="tipos" class="form-label">Selecciona los tipos:</label>
+                    <select name="tipos`+$cantidad+`" class="form-select form-control tipos" style="width: 100%">
+                        {% for categoria in categorias %}
+                            <option value="{{ categoria.id }}">{{ categoria.nombre }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="trabajadoresPersonal" class="form-label">Trabajadores:</label>
+                    <select name="trabajadoresPersonal`+$cantidad+`[]" class="form-control trabajadoresPersonal" multiple style="width: 100%">
+                        {% for trabajador in trabajadores %}
+                            <option value="{{ trabajador.id }}"> {{ trabajador.nombre }} - {{ trabajador.ocupacion }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            `);
+            $cantidad++;
+            $("#cantidad").val($cantidad);
+
+            // Agregar el nuevo contenedor al contenedor principal
+            $("#personalFieldsContainer").append(newPersonalContainer);
+
+            // Inicializa Select2 en los elementos select de los nuevos campos de personal
+            newPersonalContainer.find('.tipos').select2();
+            newPersonalContainer.find('.trabajadoresPersonal').select2();
         });
     });
 </script>

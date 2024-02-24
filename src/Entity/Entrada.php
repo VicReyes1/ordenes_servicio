@@ -16,9 +16,6 @@ class Entrada
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column]
-    private ?float $precio_compra = null;
-
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $fecha = null;
 
@@ -41,18 +38,6 @@ class Entrada
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getPrecioCompra(): ?float
-    {
-        return $this->precio_compra;
-    }
-
-    public function setPrecioCompra(float $precio_compra): static
-    {
-        $this->precio_compra = $precio_compra;
-
-        return $this;
     }
 
     public function getFecha(): ?\DateTimeInterface
@@ -118,3 +103,4 @@ class Entrada
     }
 
 }
+

@@ -2,323 +2,57 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <style>
-
-
- /* estilos fondo  */
-@keyframes animate {
-    0%{
-        transform: translateY(0) rotate(0deg);
-        opacity: 1;
-        border-radius: 0;
-    }
-    100%{
-        transform: translateY(-1000px) rotate(720deg);
-        opacity: 0;
-        border-radius: 50%;
-    }
-}
-
-.background {
-    position: fixed;
-    width: 100vw;
-    height: 100vh;
-    top: 0;
-    left: 0;
-    margin: 0;
-    padding: 0;
-    background: #d1d1d1;
-    overflow: hidden;
-}
-.background li {
-    position: absolute;
-    display: block;
-    list-style: none;
-    width: 20px;
-    height: 20px;
-    background: rgba(255, 255, 255, 0.2);
-    animation: animate 19s linear infinite;
-    pointer-events: none; /* Esto permitirá que los eventos pasen a través de los elementos */
-}
-
-
-
-
-.background li:nth-child(0) {
-    left: 5%;
-    width: 179px;
-    height: 179px;
-    bottom: -179px;
-    animation-delay: 1s;
-}
-.background li:nth-child(1) {
-    left: 52%;
-    width: 141px;
-    height: 141px;
-    bottom: -141px;
-    animation-delay: 5s;
-}
-.background li:nth-child(2) {
-    left: 52%;
-    width: 109px;
-    height: 109px;
-    bottom: -109px;
-    animation-delay: 7s;
-}
-.background li:nth-child(3) {
-    left: 74%;
-    width: 196px;
-    height: 196px;
-    bottom: -196px;
-    animation-delay: 6s;
-}
-.background li:nth-child(4) {
-    left: 7%;
-    width: 155px;
-    height: 155px;
-    bottom: -155px;
-    animation-delay: 11s;
-}
-.background li:nth-child(5) {
-    left: 28%;
-    width: 194px;
-    height: 194px;
-    bottom: -194px;
-    animation-delay: 10s;
-}
-.background li:nth-child(6) {
-    left: 0%;
-    width: 170px;
-    height: 170px;
-    bottom: -170px;
-    animation-delay: 16s;
-}
-.background li:nth-child(7) {
-    left: 23%;
-    width: 188px;
-    height: 188px;
-    bottom: -188px;
-    animation-delay: 2s;
-}
-.background li:nth-child(8) {
-    left: 40%;
-    width: 141px;
-    height: 141px;
-    bottom: -141px;
-    animation-delay: 25s;
-}
-.background li:nth-child(9) {
-    left: 19%;
-    width: 182px;
-    height: 182px;
-    bottom: -182px;
-    animation-delay: 3s;
-}
-
-
-.bodybotoon {
-  text-align: center; /* Centrar elementos hijos horizontalmente */
-}
-
-.button2 {
-  display: inline-block; /* Alinea los elementos en línea y al mismo nivel */
-  border: #9e2343 solid 0.15em;
-  border-radius: 0.25em;
-  color: #ffffff; /* Cambiado a #9e2343 */
-  background: #9e2343;
-  font-size: 1em; /* Tamaño de fuente más pequeño */
-  font-weight: 600;
-  cursor: pointer;
-  transition: border 300ms, color 300ms;
-  user-select: none;
-  margin: 0 5px; /* Ajusta el espacio entre los botones según sea necesario */
-  height: 40px;
-  line-height: 40px; /* Centra verticalmente el texto dentro del botón */
-}
-
-a {
-  font-size: 2.5em;
-  font-weight: bold;
-  font-family: sans-serif;
-  text-decoration: none;
-  color: transparent;
-  background: url("{{ asset('...') }}") repeat-x #9E2343;
-  background-position-x: 0%;
-  background-position-y: 0%;
-  background-size: auto;
-  background-clip: border-box;
-  -webkit-background-clip: text;
-  background-clip: text;
-  background-size: 200% 100%;
-  background-position-x: 0;
-  background-position-y: 2em;
-  -webkit-transition: background-position-y 0.6s ease;
-  transition: background-position-y 0.6s ease;
-  -webkit-animation: waveAnimation 4s infinite linear;
-  animation: waveAnimation 4s infinite linear;
-  animation-play-state: running;
-  -webkit-animation-play-state: paused;
-  animation-play-state: paused;
-}
-
-a:hover {
-  background-position-x: 0;
-  background-position-y: 0;
-  -webkit-animation-play-state: running;
-  animation-play-state: running;
-}
-
-@keyframes waveAnimation{
-  from {
-    background-position-x: 0%;
-  }
-  to {
-    background-position-x: 200%;
-  }
-}
-
-/* Add container styles */
-
-   .form-container {
-    max-width: 100%;
-    margin: 50px auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-     overflow-y: auto; /* Agrega una barra de desplazamiento vertical cuando el contenido desborda */
-    overflow-x: auto;
-    max-height: 70vh;
     
-  }
-
-   form {
-    max-width: 100%;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f4f4f4;
-    
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-     overflow-x: auto;
-  }
-
-   label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: bold;
-  }
-
-  input[type="text"],
-  input[type="date"], /* Estilo para el input de fecha */
-  input[type="number"], /* Estilo para el input numérico */
-  select {
-    width: 100%;
-    padding: 0.375rem 0.75rem;
-    margin-bottom: 1rem;
-    font-size: 1rem;
-    line-height: 1.5;
-    color: #495057;
-    background-color: #fff;
-    background-clip: padding-box;
-    border: 1px solid #ced4da;
-    border-radius: 0.25rem;
-    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-  }
-
-  input[type="checkbox"] {
-    width: auto;
-    margin-top: 0.3rem;
-    margin-bottom: 0;
-  }
-
-  button {
-    grid-column: span 2; /* Ocupar las dos columnas */
-    padding: 10px;
-    background-color: #9e2343;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-
-  .responsive{
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(10rem,100%),1fr));
-    grid-gap:1rem;
-  }
-
-</style>
-    <ul class="background"  >
-   <li></li>
-   <li></li>
-   <li></li>
-   <li></li>
-   <li></li>
-   <li></li>
-   <li></li>
-   <li></li>
-   <li></li>
-   <li></li>
      
     {% include 'components/navbar.html.twig' %}
- <div class="responsive">
- <div class="form-container"  >
 
-  <div class="w-60 bg-gradient-to-l from-slate-300 to-slate-100 text-slate-600 border border-slate-300 grid grid-col-2 justify-center p-4 gap-4 rounded-lg shadow-md" style="background-color: #f4f4f4; color: #000000; font-size:18px; font-weight:bold;">
-  <div class="col-span-2 text-lg font-bold capitalize rounded-md" >
-    <a href="#">Inventario de materiales</a>
-     </div>
+    <div class="responsive">
+    <div class="form-container">
 
-    <div class="col-span-2 rounded-md">
-    <h3>Entradas</h3>
-    <ul>
-        {% for entrada in entradas %}
-            <li2>{{ entrada.cantidad }} unidades de {{ entrada.material.nombre }} ({{ entrada.fecha|date('Y-m-d') }})</li2>
-        {% endfor %}
-    </ul>
-     </div>
-    
-     <div class="col-span-2 rounded-md">
-    <h3>Salidas</h3>
-    <ul>
-        {% for salida in salidas %}
-            <li2>{{ salida.cantidad }} unidades de {{ salida.material.nombre }} ({{ salida.fecha|date('Y-m-d') }})</li2>
-        {% endfor %}
-    </ul>
+        <div class="w-60 bg-gradient-to-l from-slate-300 to-slate-100 text-slate-600 border border-slate-300 grid grid-col-2 justify-center p-4 gap-4 rounded-lg shadow-md" style="background-color: #f4f4f4; color: #000000; font-size:18px; font-weight:bold;">
+            <div class="col-span-2 text-lg font-bold capitalize rounded-md">
+                <a href="#">Inventario de materiales</a>
+                <a href="{{ path('app_entrada_index') }}" class="button2">Ver entradas</a>
+                <a href="{{ path('app_salida_index') }}" class="button2">Ver salidas</a>
+            </div>
+
+            <h3>Materiales</h3>
+            <div style="margin: 20px; overflow: auto;">
+                <table style="width: 100%; border-collapse: collapse;" id="materialTable">
+                    <thead style="background-color: #9e2343; color: #ffffff; border: 1px solid #9e4323;">
+                        <tr>
+                            <th scope="col" style="padding: 10px; border: 1px solid #9e4323;">Id</th>
+                            <th scope="col" style="padding: 10px; border: 1px solid #9e4323;">Nombre</th>
+                            <th scope="col" style="padding: 10px; border: 1px solid #9e4323;">Descripcion</th>
+                            <th scope="col" style="padding: 10px; border: 1px solid #9e4323;">Unidad de medida</th>
+                            <th scope="col" style="padding: 10px; border: 1px solid #9e4323;">Inventario</th>
+                        </tr>
+                    </thead>
+
+                    {% for material in materiales %}
+                    <tr style="background-color: #ffffff;">
+                        <td scope="col" style="padding: 10px; border: 1px solid #9e4323;">{{ material.id }}</td>
+                        <td scope="col" style="padding: 10px; border: 1px solid #9e4323;">{{ material.nombre }}</td>
+                        <td scope="col" style="padding: 10px; border: 1px solid #9e4323;">{{ material.descripcion }}</td>
+                        <td scope="col" style="padding: 10px; border: 1px solid #9e4323;">{{ material.getUnidadMedida() }}</td>
+                        <td scope="col" style="padding: 10px; border: 1px solid #9e4323;">{{ inventarioPorMaterial[material.id] }}</td>
+                        {# Muestra el inventario correspondiente al material #} {# Agrega más celdas según tus campos de Material #}
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
     </div>
+</div>
 
-    
-    <h3>Materiales</h3>
-        <div style="margin: 20px; overflow: auto;">
-    <table style="width: 100%; border-collapse: collapse;">
-      <thead style="background-color: #9e2343; color: #ffffff; border: 1px solid #9e4323;">
-        <tr>
-          <th scope="col" style="padding: 10px; border: 1px solid #9e4323;">Id</th>
-          <th scope="col" style="padding: 10px; border: 1px solid #9e4323;">Nombre</th>
-          <th scope="col" style="padding: 10px; border: 1px solid #9e4323;">Unidad de medida</th>
-          <th scope="col" style="padding: 10px; border: 1px solid #9e4323;">Precio</th>
-          <th scope="col" style="padding: 10px; border: 1px solid #9e4323;">Inventario</th> 
-        </tr>
-      </thead>
 
-        {% for material in materiales %}
-            <tr style="background-color: #ffffff;">
-                <td scope="col" style="padding: 10px; border: 1px solid #9e4323;">{{ material.id }}</td>
-                <td scope="col" style="padding: 10px; border: 1px solid #9e4323;">{{ material.nombre }}</td>
-                <td scope="col" style="padding: 10px; border: 1px solid #9e4323;">{{ material.getUnidadMedida() }}</td>
-                <td scope="col" style="padding: 10px; border: 1px solid #9e4323;">{{ material.precio }}</td>
-                <td scope="col" style="padding: 10px; border: 1px solid #9e4323;">{{ inventarioPorMaterial[material.id] }}</td> {# Muestra el inventario correspondiente al material #}
-                {# Agrega más celdas según tus campos de Material #}
-            </tr>
-        {% endfor %}
-    </table>
-    </div>
-      <div class="bodybotoon">
-          <a href="{{ path('app_entrada_index') }}" class="button2">Ver entradas</a>
-          <a href="{{ path('app_salida_index') }}" class="button2">Ver salidas</a>
-      </div>
-     </div>
+<script>
+
+    $(document).ready( function () {
+        $('#materialTable').DataTable();
+    } );
+</script>
+
+
       
 {% endblock %}

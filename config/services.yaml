@@ -6,6 +6,7 @@
 parameters:
 
     app.upload_directory: '%kernel.project_dir%/public/uploads'
+    app.upload_firmas: '%kernel.project_dir%/public/firmas'
     
 services:
     # default configuration for services in *this* file

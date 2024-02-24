@@ -54,4 +54,23 @@ class NotaRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function getNotaWithCaptura($notaID): array
+    {
+        return $this->createQueryBuilder('n')
+            ->andWhere('n.id = :notaID')
+            ->join('n.captura', 'c')
+            ->select(
+                'n',
+                'c.fecha as fecha_captura',
+                'c.area_solicitante',
+                'c.centro_trabajo',
+                'c.nombre_solicitante',
+                'c.puesto_solicitante',
+                'c.telefono_ext',
+            )
+            ->setParameter('notaID', $notaID)
+            ->getQuery()
+            ->getResult();
+    }
 }

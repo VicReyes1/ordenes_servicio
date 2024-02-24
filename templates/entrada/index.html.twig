@@ -284,8 +284,8 @@ a:hover {
         <tr>
           <th scope="col" style="padding: 10px; border: 1px solid #9e4323;">Id</th>
           <th scope="col" style="padding: 10px; border: 1px solid #9e4323;">Material</th>
-          <th scope="col" style="padding: 10px; border: 1px solid #9e4323;">Precio de compra</th>
-          <th scope="col" style="padding: 10px; border: 1px solid #9e4323;">Fecha</th>
+          <th scope="col" style="padding: 10px; border: 1px solid #9e4323;">Fecha entrada</th>
+          <th scope="col" style="padding: 10px; border: 1px solid #9e4323;">Precio adquirido</th>
           <th scope="col" style="padding: 10px; border: 1px solid #9e4323;">Acciones</th> 
         </tr>
       </thead>
@@ -295,9 +295,8 @@ a:hover {
             <tr style="background-color: #ffffff;">
                 <td scope="col" style="padding: 10px; border: 1px solid #9e4323;">{{ entrada.id }}</td>
                 <td scope="col" style="padding: 10px; border: 1px solid #9e4323;">{{ entrada.material.nombre }}</td>
-                <td scope="col" style="padding: 10px; border: 1px solid #9e4323;">{{ entrada.material.precio }}</td>
-                <td scope="col" style="padding: 10px; border: 1px solid #9e4323;">{{ entrada.precioCompra }}</td>
-                <td scope="col" style="padding: 10px; border: 1px solid #9e4323;">{{ entrada.fecha ? entrada.fecha|date('Y-m-d') : '' }}</td>
+                <td scope="col" style="padding: 10px; border: 1px solid #9e4323;">{{ entrada.fecha ? entrada.fecha|date('d-m-Y') : '' }}</td>
+                <td scope="col" style="padding: 10px; border: 1px solid #9e4323;">${{ entrada.precioAdquirido }}</td>
                 <td scope="col" style="padding: 10px; border: 1px solid #9e4323;">
                
                     <a href="{{ path('app_entrada_edit', {'id': entrada.id}) }}" class="button">Editar</a>
