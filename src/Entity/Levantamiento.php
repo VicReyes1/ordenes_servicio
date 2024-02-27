@@ -18,13 +18,13 @@ class Levantamiento
     #[ORM\JoinColumn(nullable: false)]
     private ?Captura $captura = null;
 
-    #[ORM\Column(length: 155)]
+    #[ORM\Column(length: 155, nullable: true)]
     private ?string $imagen1 = null;
 
-    #[ORM\Column(length: 155)]
+    #[ORM\Column(length: 155, nullable: true)]
     private ?string $imagen2 = null;
 
-    #[ORM\Column(length: 155)]
+    #[ORM\Column(length: 155, nullable: true)]
     private ?string $imagen3 = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
@@ -73,7 +73,7 @@ class Levantamiento
         return $this->imagen1;
     }
 
-    public function setImagen1(string $imagen1): static
+    public function setImagen1(?string $imagen1): static
     {
         $this->imagen1 = $imagen1;
 
@@ -85,7 +85,7 @@ class Levantamiento
         return $this->imagen2;
     }
 
-    public function setImagen2(string $imagen2): static
+    public function setImagen2(?string $imagen2): static
     {
         $this->imagen2 = $imagen2;
 
@@ -97,12 +97,13 @@ class Levantamiento
         return $this->imagen3;
     }
 
-    public function setImagen3(string $imagen3): static
+    public function setImagen3(?string $imagen3): static
     {
         $this->imagen3 = $imagen3;
 
         return $this;
     }
+
 
     public function getFechaLevantamiento(): ?\DateTimeInterface
     {
