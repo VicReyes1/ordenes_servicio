@@ -1,13 +1,17 @@
-<h2>Reporte fotográfico</h2>
-
 <div class="col-md-4 mb-4">
-    <img src="{{ asset('uploads/' ~ levantamiento[0][0].imagen1) }}" class="img-fluid" style="max-width: 100%;" alt="Imagen 1">
+    {% if levantamiento[0][0].imagen1 is not null and levantamiento[0][0].imagen1 != '' %}
+        <img src="{{ asset('uploads/' ~ levantamiento[0][0].imagen1) }}" class="img-fluid" style="max-width: 100%;" alt="Imagen 1">
+    {% endif %}
 </div>
 
 <div class="col-md-4 mb-4">
-    <img src="{{ asset('uploads/' ~ levantamiento[0][0].imagen2) }}" class="img-fluid" style="max-width: 100%;" alt="Imagen 2">
+    {% if levantamiento[0][0].imagen2 is not null and levantamiento[0][0].imagen2 != '' %}
+        <img src="{{ asset('uploads/' ~ levantamiento[0][0].imagen2) }}" class="img-fluid" style="max-width: 100%;" alt="Imagen 2">
+    {% endif %}
 </div>
 
 <div class="col-md-4 mb-4">
-    <img src="{{ asset('uploads/' ~ levantamiento[0][0].imagen3) }}" class="img-fluid" style="max-width: 100%;" alt="Imagen 3">
+    {% if levantamiento[0][0].imagen3 is not null and levantamiento[0][0].imagen3 != '' %}
+        <img src="{{ asset('uploads/' ~ levantamiento[0][0].imagen3) }}" class="img-fluid" style="max-width: 100%;" alt="Imagen 3">
+    {% endif %}
 </div>

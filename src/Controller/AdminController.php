@@ -70,7 +70,7 @@ class AdminController extends AbstractController
         $captura = $this->entityManager->getRepository(Captura::class)->findById($id);
         $captura['fecha'] = $captura['fecha']->format('d-m-Y');
         $notasAceptadas = $this->entityManager->getRepository(Nota::class)->getAllAceptedNotas($id);
-        $levantamientos = $this->entityManager->getRepository(Levantamiento::class)->findLevantamientos();
+        $levantamientos = $this->entityManager->getRepository(Levantamiento::class)->levantamientosByProyecto($id);
         return $this->render('admin/verProyecto.html.twig', [
             'data' => $captura,
             'aceptadas' => $notasAceptadas,

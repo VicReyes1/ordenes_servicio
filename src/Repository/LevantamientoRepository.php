@@ -44,6 +44,17 @@ class LevantamientoRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function levantamientosByProyecto($proyectoId): array
+    {
+        return $this->createQueryBuilder('l')
+            ->select('l.id, l.fecha_levantamiento, c.nombre as nombre_categoria')
+            ->leftJoin('l.categoria', 'c')
+            ->andWhere('l.captura = :proyectoId')
+            ->setParameter('proyectoId', $proyectoId)
+            ->getQuery()
+            ->getResult();
+    }
+
     
 
 }
