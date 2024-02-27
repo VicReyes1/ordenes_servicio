@@ -13,6 +13,7 @@ use App\Entity\Material;
 use App\Entity\Levantamiento;
 use App\Entity\Categoria;
 use App\Entity\LevantamientoHasMateriales;
+use App\Entity\CapturaHasPersonal;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Intervention\Image\Image;
@@ -141,6 +142,7 @@ class InspectorController extends AbstractController
             ->setLevantamiento($levantamiento)
             ->setMaterial($this->entityManager->getRepository(Material::class)->find($data['materiales'][$i]))
             ->setCantidad($data['cantidades'][$i]);
+
             $this->entityManager->persist($lhm);
         }
         $this->entityManager->flush();
@@ -207,7 +209,8 @@ class InspectorController extends AbstractController
     {
         $levantamiento = $this->entityManager->getRepository(Levantamiento::class)->levantamientoWithCaptura($id);
         $materiales = $this->entityManager->getRepository(LevantamientoHasMateriales::class)->findMateriales($id);
-
+        //$trabajadores = $this->entityManager->getRepository(Levantamiento::class)->personalEnCapturaConMismaCategoria($levantamiento[0][0]->getId());
+       
         // Crear una instancia de mPDF
         $mpdf = new \Mpdf\Mpdf();
 
@@ -216,6 +219,7 @@ class InspectorController extends AbstractController
             'levantamiento' => $levantamiento,
             'materiales' => $materiales,
         ]);
+       
         $mpdf->WriteHTML($html);
 
         // Agregar una nueva página

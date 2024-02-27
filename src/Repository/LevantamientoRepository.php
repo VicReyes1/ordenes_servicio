@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Levantamiento;
+use App\Entity\CapturaHasPersonal;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -32,6 +33,7 @@ class LevantamientoRepository extends ServiceEntityRepository
 
     public function levantamientoWithCaptura($idLev): array
     {
+        
         return $this->createQueryBuilder('l')
             ->select('l, l.fecha_levantamiento,captura.area_solicitante, captura.centro_trabajo, captura.nombre_solicitante, captura.puesto_solicitante, c.nombre as captura_nombre')
             ->leftJoin('l.categoria', 'c')
@@ -42,6 +44,6 @@ class LevantamientoRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-
+    
 
 }

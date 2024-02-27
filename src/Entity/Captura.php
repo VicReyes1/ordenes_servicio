@@ -79,6 +79,9 @@ class Captura
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $imagen3 = null;
 
+    #[ORM\Column(length: 50, nullable: true)]
+    private ?string $Jerarquia = null;
+
     public function __construct()
     {
         $this->entradas = new ArrayCollection();
@@ -377,6 +380,18 @@ class Captura
     public function setImagen3(?string $imagen3): static
     {
         $this->imagen3 = $imagen3;
+
+        return $this;
+    }
+
+    public function getJerarquia(): ?string
+    {
+        return $this->Jerarquia;
+    }
+
+    public function setJerarquia(?string $Jerarquia): static
+    {
+        $this->Jerarquia = $Jerarquia;
 
         return $this;
     }

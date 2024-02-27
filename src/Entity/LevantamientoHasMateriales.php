@@ -25,7 +25,7 @@ class LevantamientoHasMateriales
     private ?float $cantidad = null;
 
     #[ORM\Column(nullable: true)]
-    private ?bool $actualmente_bodega = null;
+    private ?float $cantidad_al_solicitar = null;
 
     public function getId(): ?int
     {
@@ -68,14 +68,15 @@ class LevantamientoHasMateriales
         return $this;
     }
 
-    public function isActualmenteBodega(): ?bool
+
+    public function getCantidadAlSolicitar(): ?float
     {
-        return $this->actualmente_bodega;
+        return $this->cantidad_al_solicitar;
     }
 
-    public function setActualmenteBodega(?bool $actualmente_bodega): static
+    public function setCantidadAlSolicitar(?float $cantidad_al_solicitar): static
     {
-        $this->actualmente_bodega = $actualmente_bodega;
+        $this->cantidad_al_solicitar = $cantidad_al_solicitar;
 
         return $this;
     }

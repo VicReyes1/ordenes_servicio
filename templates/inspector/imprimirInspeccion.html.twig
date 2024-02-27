@@ -104,49 +104,42 @@
             <table>
                 <tr>
                     
-                    <th class="reporte">NO. REPORTE</th>
-                    <td></td>
                     <th class="folio">NO. FOLIO</th>
+                    <td></td>
+                    <th colspan="2">JERARQUÍA</th>
                     <td></td>
                 </tr>
                 <tr>
-                    <th colspan="2">JERARQUÍA</th>
                     <th>ÁREA SOLICITANTE</th>
                     <td colspan="4">{{levantamiento[0].area_solicitante}}</td>
                 </tr>
                 <tr>
-                    <th>EMERGENTE</th>
-                    <td></td>
+            
                     <th>CENTRO DE TRABAJO</th>
                     <td colspan="4">{{levantamiento[0].centro_trabajo}}</td>
                 </tr>
                 <tr>
-                    <th>URGENTE</th>
-                    <td></td>
+                    
                     <th>NOMBRE DEL SOLICITANTE</th>
                     <td colspan="4">{{levantamiento[0].nombre_solicitante}}</td>
                 </tr>
                 <tr>
-                    <th>NORMAL</th>
-                    <td></td>
+                    
                     <th>PUESTO DEL SOLICITANTE</th>
                     <td colspan="4">{{levantamiento[0].puesto_solicitante}}</td>
                 </tr>
                 <tr>
-                    <th colspan="2">PROGRAMADA</th>
-
+                    
                     <th class="fecha-solicitud">FECHA SOLICITUD</th>
-                    <td ></td>
-                    <th class="fecha-recibio">FECHA RECIBIO</th>
-                    <td></td>
+                    <td >{{ levantamiento[0][0].captura.fecha|date('d-m-Y') }}</td>
+                    <th class="fecha-recibio">FECHA LEVANTAMIENTO</th>
+                    <td>{{ levantamiento[0].fecha_levantamiento|date('d-m-Y') }}</td>
                 </tr>
                 <tr>
                     <th colspan="2">TELÉFONO / EXT</th>
-                    <td></td>
-                    <th class="hora-solicitud">HORA SOLICITUD</th>
-                    <td></td>
-                    <th class="hora-recibio">HORA RECIBIO</th>
-                    <td></td>
+                    <td>{{levantamiento[0][0].captura.getTelefonoExt}}</td>
+                    <th class="tipo_levantamiento">Tipo de levantamiento</th>
+                    <td>{{levantamiento[0][0].categoria.nombre}}</td>
                 </tr>
             </table>
         </div>
@@ -160,22 +153,24 @@
     <table style="width: 100%; border-collapse: collapse;">
       <thead style="background-color: #9e2343; color: #ffffff; border: 1px solid #9e4323;">
         <tr>
-          
+          <th scope="col" style="padding: 10px; border: 1px solid #9e4323;">Familia</th>
           <th scope="col" style="padding: 10px; border: 1px solid #9e4323;">Nombre material</th>
           <th scope="col" style="padding: 10px; border: 1px solid #9e4323;">Descripción</th>
           <th scope="col" style="padding: 10px; border: 1px solid #9e4323;">Cantidad solicitada</th>
           <th scope="col" style="padding: 10px; border: 1px solid #9e4323;">Unidad de medida</th>
+          <th scope="col" style="padding: 10px; border: 1px solid #9e4323;">Cantidad actual en el almacen</th>
         </tr>
         </tr>
       </thead>
       <tbody>
             {% for material in materiales %}
                 <tr style="background-color: #ffffff;">
+                    <td scope="col" style="padding: 10px; border: 1px solid #9e4323;">{{ material.familia }}</td>
                     <td scope="col" style="padding: 10px; border: 1px solid #9e4323;">{{ material.nombre_material }}</td>
                     <td scope="col" style="padding: 10px; border: 1px solid #9e4323;">{{ material.descripcion }}</td>
                     <td scope="col" style="padding: 10px; border: 1px solid #9e4323;">{{ material.cantidad }}</td>
                     <td scope="col" style="padding: 10px; border: 1px solid #9e4323;">{{ material.unidad_medida }}</td>
-                    
+                    <td scope="col" style="padding: 10px; border: 1px solid #9e4323;">{{ material.cantidad_actual }}</td>
                 </tr>
             {% endfor %}
         </tbody>
@@ -203,15 +198,13 @@
             </tr>
             
         </tbody>
-        <thead style="background-color: #9e2343; color: #ffffff; border: 1px solid #9e4323;">
-        <tr>
-          
-          <th scope="col" style="padding: 10px; border: 1px solid #9e4323;">{{levantamiento[0].nombre_solicitante}}</th>
-          <th scope="col" style="padding: 10px; border: 1px solid #9e4323;">{{levantamiento[0][0].getJefeCuadrilla.getNombre}}</th>
-          <th scope="col" style="padding: 10px; border: 1px solid #9e4323;">{{levantamiento[0][0].getSupervisor.getNombre}}</th>
-        </tr>
-        </tr>
-      </thead>
+        <tfoot>
+            <tr>
+                <td scope="col" style="padding: 10px; border: 1px solid #9e4323;">{{ levantamiento[0][0].getNombreSolicitante }}</td>
+                <td scope="col" style="padding: 10px; border: 1px solid #9e4323;">{{ levantamiento[0][0].getJefeCuadrilla.getNombre }}</td>
+                <td scope="col" style="padding: 10px; border: 1px solid #9e4323;">{{ levantamiento[0][0].getSupervisor.getNombre }}</td>
+            </tr>
+        </tfoot>
     </table>
    
 
