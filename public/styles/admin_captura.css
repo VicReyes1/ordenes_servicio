@@ -1,0 +1,48 @@
+a {
+    font-size: 3em;
+    font-weight: bold;
+    font-family: sans-serif;
+    text-decoration: none;
+    color: transparent;
+    background: url(/images/image.png) repeat-x #9E2343;
+    background-position-x: 0%;
+    background-position-y: 0%;
+    background-size: auto;
+    background-clip: border-box;
+    -webkit-background-clip: text;
+    background-clip: text;
+    background-size: 200% 100%;
+    background-position-x: 0;
+    background-position-y: 2em;
+    -webkit-transition: background-position-y 0.6s ease;
+    transition: background-position-y 0.6s ease;
+    -webkit-animation: waveAnimation 4s infinite linear;
+    animation: waveAnimation 4s infinite linear;
+    animation-play-state: running;
+    -webkit-animation-play-state: paused;
+    animation-play-state: paused;
+    margin-left: 15px;
+}
+#nueva-captura-button{
+    border: 1px solid #9E2343;
+    background-color: #9E2343;
+    color: white;
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 20%;
+    margin-left: 20px;
+    display: block;
+}
+@media  screen and (max-width: 450px) {
+    #nueva-captura-button{
+        width: 90%;
+    }
+    #capturas-section{
+        text-align: center;
+    }
+}

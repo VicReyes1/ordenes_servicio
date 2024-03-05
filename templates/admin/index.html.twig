@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-   
+   <link rel="stylesheet" href="{{ asset('styles/adm-index.css') }}">
    {% include 'components/navbar.html.twig' %}
 
     <div id="capturas-section">
@@ -30,7 +30,7 @@
                 <td style="padding: 10px; border: 1px solid #98989a;">{{ captura.nombreSolicitante ?? '' }}</td>
                 <td style="padding: 10px; border: 1px solid #98989a;">{{ captura.secretaria ? captura.secretaria.nombre ?? '' : '' }}</td>
                 <td style="padding: 10px; border: 1px solid #98989a;">
-                    <a class="button2" href="{{ path('app_proyecto', {'id': captura.id}) }}">Ver detalles</a>
+                    <a class="button2 btn btn-danger" href="{{ path('app_proyecto', {'id': captura.id}) }}">Ver Detalles</a>
                 </td>
                 <!-- Agrega más celdas según tus necesidades -->
             </tr>

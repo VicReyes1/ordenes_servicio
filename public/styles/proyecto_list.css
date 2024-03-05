@@ -1,0 +1,70 @@
+.principal-text{
+        font-size: 3em;
+        font-weight: bold;
+        font-family: sans-serif;
+        text-decoration: none;
+        color: transparent;
+        background: url(/images/image.png) repeat-x #9E2343;
+        background-position-x: 0%;
+        background-position-y: 0%;
+        background-size: auto;
+        background-clip: border-box;
+        -webkit-background-clip: text;
+        background-clip: text;
+        background-size: 200% 100%;
+        background-position-x: 0;
+        background-position-y: 2em;
+        -webkit-transition: background-position-y 0.6s ease;
+        transition: background-position-y 0.6s ease;
+        -webkit-animation: waveAnimation 4s infinite linear;
+        animation: waveAnimation 4s infinite linear;
+        animation-play-state: running;
+        -webkit-animation-play-state: paused;
+        animation-play-state: paused;
+        margin-left: 15px;
+}
+li2 {
+    margin-bottom: 6px;
+    font-size: large;
+    display: block;
+}
+.botones-container{
+    margin: 20px;
+    
+}
+.tabla-container{
+    margin: 20px;
+}
+.button2{
+    color: #9E2343;
+    font-size: 16px;
+    text-decoration: none;
+    font-weight: 700;
+}
+a.btn.btn-outline-danger{
+    border-color: #9E2343;
+
+}
+a.btn.btn-outline-danger:hover{
+    background-color: #9E2343;
+    color: white;
+}
+
+@media screen  and (max-width: 500px) {
+    .botones-container{
+        text-align: center;
+    }
+    button.boton.btn.btn-primary, button.boton.btn.btn-danger{
+        width: 45%;
+    }
+    .btn-lev-container{
+        margin-top: 20px;
+    }
+    .tabla-container{
+        margin: 10px;
+    }
+    .principal-text{
+        font-size: 40px;
+        margin-left: 8%;
+    }
+}

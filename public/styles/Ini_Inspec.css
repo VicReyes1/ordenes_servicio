@@ -1,0 +1,136 @@
+
+*{
+    margin: 0;
+    padding: 0;
+}
+#form-inspect{
+    padding-left: 20px;
+}
+
+.principal-text{
+    font-size: 3em;
+    font-weight: bold;
+    font-family: sans-serif;
+    text-decoration: none;
+    color: transparent;
+    background: url(/images/image.png) repeat-x #9E2343;
+    background-position-x: 0%;
+    background-position-y: 0%;
+    background-size: auto;
+    background-clip: border-box;
+    -webkit-background-clip: text;
+    background-clip: text;
+    background-size: 200% 100%;
+    background-position-x: 0;
+    background-position-y: 2em;
+    -webkit-transition: background-position-y 0.6s ease;
+    transition: background-position-y 0.6s ease;
+    -webkit-animation: waveAnimation 4s infinite linear;
+    animation: waveAnimation 4s infinite linear;
+    animation-play-state: running;
+    -webkit-animation-play-state: paused;
+    animation-play-state: paused;
+    margin-left: 0px;
+}
+#text-firm{
+    margin: 15px 0 15px 0;
+}
+li2 {
+    margin-bottom: 6px;
+    font-size: larger;
+    display: block;
+}
+label{
+    width: 100%;
+}
+.nombre_solicitante{
+    width: 50%;
+}
+input[type=text] {
+    width: 45%;
+    height: 35px;
+    border-radius: 4px;
+    border: 1px solid rgb(255, 232, 232);
+}
+.btn-container{
+    width: 100%;
+    height: auto;
+    text-align: end;
+
+}
+.btn-container-add{
+    width: 100%;
+    height: auto;
+    margin: 20px 0 20px 0;
+    text-align: start;
+}
+.btn-sub{
+    width: auto;
+    height: auto;
+    border-radius: 8px;
+    border: 1px solid #9E2343;
+    background-color: #9E2343;
+    color: white;
+    padding: 5px;
+}
+input#cantidades {
+    width: 15%;
+    padding-left: 8px;
+}
+.select2-dynamic, .form-select.form-control.categoria, .form-control.supervisor ,.form-control.jefe_cuadrilla{
+    width: 50%;
+}
+button.btn.btn-sub{
+    width: 200px;
+    height: 50px;
+    padding: 5px;
+}
+
+@media screen and (max-width: 450px) {
+    .pad, .sigWrapper, .sigPad{
+        max-width: 100% !important;
+
+    }
+    .principal-text{
+        font-size: 35px;
+        margin-bottom: 20px !important;
+        text-decoration: none;
+    }
+    .p-t-container{
+        margin-bottom: 20px;
+    }
+    label{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    input{
+        border: 1px solid rgb(255, 232, 232);
+        border-radius: 8px;
+        height: auto;
+    }
+
+    input[type = file]{
+        display: flex;
+        margin: 0 auto 20px 5px;
+        flex-direction: column;
+        width: 90%;
+    }
+    input[type=text] {
+        width: 90%;
+    }
+    .btn-container{
+        text-align: center;
+
+    }
+
+
+    li2 {
+        margin-bottom: 5px;
+        font-size: medium;
+    }
+    .select2-dynamic, .form-select.form-control.categoria, .form-control.supervisor ,.form-control.jefe_cuadrilla{
+        width: 100%;
+    }
+    
+}

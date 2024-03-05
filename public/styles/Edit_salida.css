@@ -1,0 +1,60 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background: #d1d1d1;
+}
+
+h1 {
+    font-size: 3em;
+    font-weight: bold;
+    font-family: sans-serif;
+    text-decoration: none;
+    color: transparent;
+    background: url(/images/image.png) repeat-x #9E2343;
+    background-position-x: 0%;
+    background-position-y: 0%;
+    background-size: auto;
+    background-clip: border-box;
+    -webkit-background-clip: text;
+    background-clip: text;
+    background-size: 200% 100%;
+    background-position-x: 0;
+    background-position-y: 2em;
+    -webkit-transition: background-position-y 0.6s ease;
+    transition: background-position-y 0.6s ease;
+    -webkit-animation: waveAnimation 4s infinite linear;
+    animation: waveAnimation 4s infinite linear;
+    animation-play-state: running;
+    -webkit-animation-play-state: paused;
+    animation-play-state: paused;
+    margin: 25px auto 25px 35px;
+}
+.btn{
+    background: #9E2343;
+    color: white;
+    border: 1px solid #9E2343;
+    text-align: end;
+    padding: 10px 20px;
+}
+#form_delete{
+    text-align: end;
+    margin-right: 15%;
+}
+.back-container{
+    margin: 20px auto;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+#btn-back{
+    background: #9E2343;
+    color: white;
+    border: 1px solid #9E2343;
+    text-align: end;
+    padding: 10px 65px;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 8px;
+}

@@ -2,7 +2,56 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    
+    <style>
+        a{
+            color: #9E2343;
+            font-size:25px;
+            text-decoration: none;
+            padding-right: 10px;
+        }
+        h3{
+            margin-top:15px;
+        }
+        .text-context{
+            display: block;
+            font-size: 2.2em;
+            text-align: center;
+
+        }
+        a.btn.btn-danger{
+            font-size: 1.4rem;
+            color:white;
+            background:#9E2343;
+            margin: 4px 8px;
+            width: 22%;
+            border-color: #9E2343;
+        }
+        .category-content{
+            text-align: end;
+            margin-top: 15px;
+        }
+        @media screen and (max-width: 450px) {
+            .col-span-2.text-lg.font-bold.capitalize.rounded-md{
+                text-align: center ;
+            }
+            a{
+                padding-right: auto;
+            }
+            h3{
+                margin-left:15px;
+            }
+            a.btn.btn-danger{
+                margin: 10px 0px;
+                width: auto;
+            }
+            .category-content{
+                text-align: center;
+                width: 100%;
+                
+            }
+        }
+
+    </style>
      
     {% include 'components/navbar.html.twig' %}
 
@@ -11,12 +60,14 @@
 
         <div class="w-60 bg-gradient-to-l from-slate-300 to-slate-100 text-slate-600 border border-slate-300 grid grid-col-2 justify-center p-4 gap-4 rounded-lg shadow-md" style="background-color: #f4f4f4; color: #000000; font-size:18px; font-weight:bold;">
             <div class="col-span-2 text-lg font-bold capitalize rounded-md">
-                <a href="#">Inventario de materiales</a>
-                <a href="{{ path('app_entrada_index') }}" class="button2">Ver entradas</a>
-                <a href="{{ path('app_salida_index') }}" class="button2">Ver salidas</a>
+                <a href="#" class="text-context">Inventario de materiales</a>
+                <div class="category-content">
+                    <a href="{{ path('app_entrada_index') }}" class="btn btn-danger">Ver entradas</a>
+                    <a href="{{ path('app_salida_index') }}" class="btn btn-danger">Ver salidas</a>
+                </div>
             </div>
 
-            <h3>Materiales</h3>
+            <h3 style="font-weight: bold; font-size: 2rem; ">Materiales</h3>
             <div style="margin: 20px; overflow: auto;">
                 <table style="width: 100%; border-collapse: collapse;" id="materialTable">
                     <thead style="background-color: #9e2343; color: #ffffff; border: 1px solid #9e4323;">

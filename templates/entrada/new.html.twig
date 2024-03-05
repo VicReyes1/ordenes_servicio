@@ -1,5 +1,12 @@
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
   /* Add container styles */
+  *{
+    font-family:  Arial;
+  }
+  body{
+        background: #d1d1d1;
+  }
   .form-container {
     max-width: 80%; /* Adjust the maximum width as needed */
     margin: 20px auto;
@@ -51,13 +58,57 @@
         cursor: pointer;
         margin-bottom: 15px; /* Ajusta el valor según sea necesario */
     }
+    #regresar-button{
+        top: 10px;
+        right: 10px;
+        background-color: #9e2343; /* Color de fondo del botón */
+        color: white; /* Color del texto del botón */
+        padding: 8.5px 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        text-decoration: none;
+        font-size: 14px;
+        margin-bottom: 15px; /* Ajusta el valor según sea necesario */
+        
+    }
+    .title-content{
+        text-align: left;
+        margin: 30px auto 15px 50px;
+    }
+    h1{
+        color: #9e2343;
+        font-size: 2rem;
+    }
+    @media only screen and (max-width: 325px) {
+        .title-content{
+            text-align: center;
+            margin: 20px auto;
+        }
+        h1{
+            color: #9e2343;
+            font-size: 2rem;
+        }
+        .form-container {
+            font-size: 16px !important; /* Ajusta el tamaño de fuente según sea necesario */
+        }
+        label {
+            font-size: 16px; /* Ajusta el tamaño de fuente según sea necesario */
+        }
+    }
+
 </style>
+
+<div class="title-content">
+    <h1>Crear Nueva Entrada</h1>
+</div>
 
 {{ form_start(form, {'attr': {'class': 'form-container'}}) }}
     {{ form_widget(form) }}
 
 
 <br>
+    <a id="regresar-button" href="http://localhost:8000/entrada">{{ button_label|default('Regresar') }}</a>
     <button id="nueva-captura-button">{{ button_label|default('Guardar') }}</button>
 {{ form_end(form) }}
 

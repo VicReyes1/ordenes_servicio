@@ -240,15 +240,14 @@ a:hover {
    <li></li>
    <li></li>
 
- {{ include('entrada/_delete_form.html.twig') }}
-<div class="container mt-4">
-    <a href="#">Editar entrada</a>
+    <div class="container mt-4">
+        {{ include('entrada/_delete_form.html.twig') }}
+        <a href="#">Editar entrada</a>
 
-    {{ include('entrada/_form.html.twig', {'button_label': 'Update'}) }}
+        {{ include('entrada/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('app_entrada_index') }}" class="button2">Regresar</a><br>
-
-      </div>
+        <a href="{{ path('app_entrada_index') }}" class="button2">Regresar</a><br>
+    </div>
 
 </ul>
 

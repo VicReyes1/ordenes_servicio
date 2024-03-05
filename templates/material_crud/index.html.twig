@@ -3,12 +3,84 @@
 {% block title %}Material index{% endblock %}
 
 {% block body %}
-
+    <style>
+    #capturas-section{
+        background-color: #f4f4f4;
+    }
+        a {
+            font-size: 3em;
+            font-weight: bold;
+            font-family: sans-serif;
+            text-decoration: none;
+            color: transparent;
+            background: url(/images/image.png) repeat-x #9E2343;
+            background-position-x: 0%;
+            background-position-y: 0%;
+            background-size: auto;
+            background-clip: border-box;
+            -webkit-background-clip: text;
+            background-clip: text;
+            background-size: 200% 100%;
+            background-position-x: 0;
+            background-position-y: 2em;
+            -webkit-transition: background-position-y 0.6s ease;
+            transition: background-position-y 0.6s ease;
+            -webkit-animation: waveAnimation 4s infinite linear;
+            animation: waveAnimation 4s infinite linear;
+            animation-play-state: running;
+            -webkit-animation-play-state: paused;
+            animation-play-state: paused;
+            margin-left: 15px;
+        }
+        .button2{
+            font-size: 1.2em;
+            line-height: normal;
+            text-align: center;
+        }
+        .btn-crea{
+            font-size: 1.2em;
+            line-height: normal;
+            text-align: center;
+            border: 1px solid #9E2343;
+            border-radius: 8px;
+            padding: 10px 20px;
+            background: #9E2343;
+            color:#fff;
+            margin: 15px;
+        }
+        .bodybotoon{
+            margin-top: 10px;
+        }
+        .btn-2{
+            display: inline;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            border: #9e2343 solid 0.12em;
+            border-radius: 0.25em;
+            color: #9e2343;
+            background: #fff;
+            font-size: .9em;
+            font-weight: 600;
+            cursor: pointer;
+            overflow: hidden;
+            transition: border 300ms, color 300ms;
+            user-select: none;
+            width: 30%;
+            height: 40px;
+            text-decoration: none;
+            padding: 8px 20px;
+            margin: auto;
+        }
+    </style>
    {% include 'components/navbar.html.twig' %}
 
     <div id="capturas-section">
-    <a href="#">MATERIAL </a>
-
+        <a href="#">MATERIAL </a>
+        <div class="bodybotoon">
+            <a href="{{ path('app_material_crud_new') }}" class="btn-crea">Crear nuevo</a>
+        </div>
 
         <div style="margin: 20px; overflow: auto;">
     <table style="width: 100%; border-collapse: collapse;" id="materialTable">
@@ -26,9 +98,9 @@
                 <td scope="col" style="padding: 10px; border: 1px solid #9e4323;">{{ material.id }}</td>
                 <td scope="col" style="padding: 10px; border: 1px solid #9e4323;">{{ material.nombre }}</td>
                 <td scope="col" style="padding: 10px; border: 1px solid #9e4323;">{{ material.unidadMedida }}</td>
-                <td scope="col" style="padding: 10px; border: 1px solid #9e4323;">
+                <td scope="col" style="padding: 10px; border: 1px solid #9e4323; width:15%;">
                 
-                    <a href="{{ path('app_material_crud_edit', {'id': material.id}) }}" class="button2">Editar</a>
+                    <a href="{{ path('app_material_crud_edit', {'id': material.id}) }}" class="btn-2">Editar</a>
 
                 </td>
             </tr>
@@ -41,9 +113,7 @@
 
     </table>
      </div>
-     <div class="bodybotoon">
-    <a href="{{ path('app_material_crud_new') }}" class="button2">Crear nuevo</a>
-    </div>
+
  </div>
 <script>
      $(document).ready( function () {

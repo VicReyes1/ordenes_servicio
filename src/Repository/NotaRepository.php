@@ -24,6 +24,7 @@ class NotaRepository extends ServiceEntityRepository
 
     public function getAllAceptedNotas($capturaID): array
     {
+        
         return $this->createQueryBuilder('n')
             ->andWhere('n.captura = :capturaID')
             ->andWhere('n.estatus = :aceptado') // Ajusta según tu mapeo de entidad

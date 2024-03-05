@@ -1,0 +1,43 @@
+a {
+    font-size: 3em;
+    font-weight: bold;
+    font-family: sans-serif;
+    text-decoration: none;
+    color: transparent;
+    background: url(/images/image.png) repeat-x #9E2343;
+    background-position-x: 0%;
+    background-position-y: 0%;
+    background-size: auto;
+    background-clip: border-box;
+    -webkit-background-clip: text;
+    background-clip: text;
+    background-size: 200% 100%;
+    background-position-x: 0;
+    background-position-y: 2em;
+    -webkit-transition: background-position-y 0.6s ease;
+    transition: background-position-y 0.6s ease;
+    -webkit-animation: waveAnimation 4s infinite linear;
+    animation: waveAnimation 4s infinite linear;
+    animation-play-state: running;
+    -webkit-animation-play-state: paused;
+    animation-play-state: paused;
+    margin-left: 15px;
+}
+
+.button2{
+    width: 100%;
+    text-align: center;
+    text-decoration: none;
+    font-weight:bold ;
+    color: #9E2343;
+    font-size: 16px;
+    margin: 0;
+}
+a.btn.btn-danger{
+    border: 1px solid #9E2343;
+    color: #9E2343;
+}
+a.btn.btn-danger:hover{
+    color: white;
+    background: #9E2343;
+}

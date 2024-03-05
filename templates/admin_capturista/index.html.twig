@@ -1,16 +1,16 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-   
+   <link rel="stylesheet" href="{{ asset('styles/admin_captura.css') }}">
     {% include 'components/navbar.html.twig' %}
     <div id="capturas-section">
     <a href="#">CAPTURAS</a>
 
     
+    <button id="nueva-captura-button" onclick="location.href='{{ path('app_admin_capturista_add') }}'">Nueva Captura</button>
     <div style="margin: 20px; overflow: auto;">
       
     <table style="width: 100%; border-collapse: collapse;" id="capturaTable">
-      <button id="nueva-captura-button" onclick="location.href='{{ path('app_admin_capturista_add') }}'">Nueva Captura</button>
       <thead style="background-color: #9e2343; color: #ffffff; border: 1px solid #9e4323;">
         <tr>
           <th scope="col" style="padding: 10px; border: 1px solid #9e4323;">Fecha de captura</th>

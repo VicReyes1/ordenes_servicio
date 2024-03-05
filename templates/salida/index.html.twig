@@ -15,9 +15,10 @@
         #capturas-section {
             text-align: center;
             margin-top: 50px;
-              max-height: 70%; /* Altura máxima del contenedor */
-    overflow-y: auto; /* Agrega una barra de desplazamiento vertical cuando el contenido desborda */
-    overflow-x: hidden;
+            height: 70%;
+            /* max-height: 70%;  Altura máxima del contenedor */
+            overflow-y: auto; /* Agrega una barra de desplazamiento vertical cuando el contenido desborda */
+            overflow-x: hidden;
         }
 
         #capturas-title {
@@ -265,25 +266,29 @@ h1:hover {
             
         }
 .button2 {
-  display: flex;
+  display: inline;
   align-items: center;
   justify-content: center; /* Centrar el contenido horizontalmente */
   text-align: center;
   position: relative;
-  border: #9e2343 solid 0.15em;
+  border: #9e2343 solid 0.12em;
   border-radius: 0.25em;
-  color: #ffffff; /* Cambiado a #9e2343 */
-  background: #9e2343;
-  font-size: 1em; /* Tamaño de fuente más pequeño */
+  color: #9e2343; /* Cambiado a #9e2343 */
+  background: #fff;
+  font-size: .9em; /* Tamaño de fuente más pequeño */
   font-weight: 600;
   cursor: pointer;
   overflow: hidden;
   transition: border 300ms, color 300ms;
   user-select: none;
-  margin-left: 35%;
-  margin-right: 35%;
   width: 30%;
   height: 40px;
+  text-decoration:none;
+  padding: 8px 20px;
+}
+.button2:hover {
+  color: #fff;
+  background: #9e2343;
 }
 
 .pagination {
@@ -310,6 +315,12 @@ h1:hover {
     color: #ffffff;
     margin: 0 5px;
 }
+.edit-btn{
+  width:100%;
+}
+#btn-create-user{
+    padding: 10px 30px;
+}
     </style>
     <ul class="background">
    <li></li>
@@ -323,10 +334,11 @@ h1:hover {
    <li></li>
    <li></li>
    {% include 'components/navbar.html.twig' %}
-
+    <div style="text-align: center; margin-top: 2%">
+      <h1>SALIDA </h1>
+    </div>
     <div id="capturas-section">
-    <h1>SALIDA </h1>
-    <div>
+    {# <div>
         <label for="searchInput">Buscar por nombre de material:</label>
         <input type="text" id="searchInput">
     </div>
@@ -335,10 +347,10 @@ h1:hover {
         <button id="prevPage">Anterior</button>
         <span id="currentPage">1</span>
         <button id="nextPage">Siguiente</button>
-    </div>
+    </div> #}
 
         <div style="margin: 20px; overflow: auto;">
-    <table style="width: 100%; border-collapse: collapse;">
+    <table style="width: 100%; border-collapse: collapse;" id="salidaTable">
       <thead style="background-color: #9e2343; color: #ffffff; border: 1px solid #9e4323;">
         <tr>
           <th scope="col" style="padding: 10px; border: 1px solid #9e4323;">Id</th>
@@ -358,7 +370,7 @@ h1:hover {
                 <td scope="col" style="padding: 10px; border: 1px solid #9e4323;">{{ salida.nombre_material}}</td>
                 <td scope="col" style="padding: 10px; border: 1px solid #9e4323;">{{ salida.cantidad }}</td>
                 <td scope="col" style="padding: 10px; border: 1px solid #9e4323;">
-                  <a href="{% if is_granted('ROLE_ADMIN') %}
+                  <a class="edit-btn" href="{% if is_granted('ROLE_ADMIN') %}
                               {{ path('app_proyecto', {'id': salida.captura_id}) }}
                             {% else %}
                               {{ path('app_proyecto_solicitante', {'id': salida.captura_id}) }}
@@ -392,13 +404,13 @@ h1:hover {
      </table>
      </div>
      <div class="bodybotoon">
-       <a href="{{ path('app_salida_new') }}" class="button2">Crear nuevo</a>
+       <a id="btn-create-user" href="{{ path('app_salida_new') }}" class="button2">Crear nuevo</a>
     </div>
  </div>
  </ul>
 
 <script>
-    $(document).ready(function () {
+    {# $(document).ready(function () {
         var rowsPerPage = 5; // Número de filas por página
         var totalRows = {{ salidas|length }}; // Total de filas
         var currentPage = 1; // Página actual
@@ -461,7 +473,10 @@ h1:hover {
         // Inicializa la paginación y la búsqueda por nombre
         showRows();
         searchByProjectName();
-    });
+    }); #}
+    $(document).ready( function () {
+        $('#salidaTable').DataTable();
+    } );
 </script>
 
 {% endblock %}

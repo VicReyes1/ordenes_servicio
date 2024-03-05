@@ -1,10 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-
-<style>
-
-</style>
+    <link rel="stylesheet" href="{{ asset('styles/Ini_Inspec.css') }}">
 
     {% include 'components/navbar.html.twig' %}
      
@@ -12,20 +9,20 @@
    
 
     <div class="w-60 bg-gradient-to-l from-slate-300 to-slate-100 text-slate-600 border border-slate-300 grid grid-col-2 justify-center p-4 gap-4 rounded-lg shadow-md" style="background-color: #f4f4f4; color: #000000; font-size:18px; font-weight:bold;">
-  <div class="col-span-2 text-lg font-bold capitalize rounded-md" >
-   <a href="#">Datos de la captura </a>
+  <div class="col-span-2 text-lg font-bold capitalize rounded-md p-t-container" >
+   <a class="principal-text" href="#">Datos de la captura </a>
   </div>
   <div class="col-span-2 rounded-md">
      <ul>
         
-        <li2>Fecha de captura: {{ data.fecha }}</li2><br>
-        <li2>Area solicitante: {{ data.area_solicitante }}</li2><br>
-        <li2>Centro de trabajo: {{ data.centro_trabajo}}</li2><br>
-        <li2>Nombre solicitante: {{ data.nombre_solicitante}}</li2><br>
-        <li2>Puesto solicitante: {{ data.puesto_solicitante}}</li2><br>
-        <li2 style="-webkit-;">Telefono y extensión: {{ data.telefono_ext}}</li2><br>
-        <li2>Tipo de trabajo: {{ data.tipo_trabajo}}</li2><br>
-        <li2>Descripción trabajo: {{ data.descripcion_trabajo}}</li2><br>
+        <li2>Fecha de captura: {{ data.fecha }}</li2>
+        <li2>Area solicitante: {{ data.area_solicitante }}</li2>
+        <li2>Centro de trabajo: {{ data.centro_trabajo}}</li2>
+        <li2>Nombre solicitante: {{ data.nombre_solicitante}}</li2>
+        <li2>Puesto solicitante: {{ data.puesto_solicitante}}</li2>
+        <li2 style="-webkit-;">Telefono y extensión: {{ data.telefono_ext}}</li2>
+        <li2>Tipo de trabajo: {{ data.tipo_trabajo}}</li2>
+        <li2>Descripción trabajo: {{ data.descripcion_trabajo}}</li2>
     </ul><br><br>
 
   </div>
@@ -33,7 +30,7 @@
   
 
   
-   <form action="{{ path('app_iniciar_inspeccion_edit', {'id': data.id}) }}" method="post" enctype="multipart/form-data" onsubmit="return enviar_datos()">
+   <form id="form-inspect" action="{{ path('app_iniciar_inspeccion_edit', {'id': data.id}) }}" method="post" enctype="multipart/form-data" onsubmit="return enviar_datos()">
 
 
      <div class="mb-3">
@@ -44,7 +41,7 @@
 
     <div style="margin-bottom: 10px;" class="mb-3">
             <label for="categoria" class="form-label">Selecciona la especialidad del levantamiento:</label>
-            <select name="categoria" class="form-select form-control categoria" style="width: 100%">
+            <select name="categoria" class="form-select form-control categoria">
                 {% for categoria in categorias %}
                     <option value="{{ categoria.id }}">{{ categoria.nombre }}</option>
                 {% endfor %}
@@ -54,38 +51,40 @@
         <div style="margin-bottom: 20px;" class="mb-3">
             <label for="imagen1">
                 Imagen 1:
-                <input type="file" id="imagen1" name="imagen1" accept="image/jpeg,image/png">
             </label>
+                <input type="file" id="imagen1" name="imagen1" accept="image/jpeg,image/png">
         </div>
 
         <div style="margin-bottom: 15px;" class="mb-3">
             <label for="imagen2">
                 Imagen 2:
-                <input type="file" id="imagen2" name="imagen2" accept="image/jpeg,image/png">
             </label>
+            <div class="input-container">
+                <input type="file" id="imagen2" name="imagen2" accept="image/jpeg,image/png">
+            </div>
         </div>
 
         <div style="margin-bottom: 15px;" class="mb-3">
             <label for="imagen3">
                 Imagen 3:
-                <input type="file" id="imagen3" name="imagen3" accept="image/jpeg,image/png">
             </label>
+            <input type="file" id="imagen3" name="imagen3" accept="image/jpeg,image/png">
         </div>
 
 
 
     <div id="materialesContainer"></div>
+    <div class="btn-container-add">
+        <button type="button" class="btn-sub" id="agregarMaterial" >Agregar Material a solicitar</button>
+    </div>
 
-    <button type="button" id="agregarMaterial">Agregar Material a solicitar</button>
-
-
-    <h1>Firmas</h1>
+    <h1 id="text-firm">Firmas</h1>
 
     <div class="mb-3">
     <label for="nombre_solicitante">
         Nombre solicitante:
-        <input type="text" id="nombre_solicitante" name="nombre_solicitante">
     </label>
+        <input type="text" id="nombre_solicitante" name="nombre_solicitante">
 </div>
 
 <div class="mb-3">
@@ -107,12 +106,12 @@
 <div class="mb-3">
     <label for="jefe_cuadrilla">
         Nombre jefe de cuadrilla:
-        <select name="jefe_cuadrilla" class="form-control jefe_cuadrilla" tyle="width: 100%">
-            {% for trabajador in trabajadores %}
-                <option value="{{ trabajador.id }}"> {{ trabajador.nombre }} - {{ trabajador.ocupacion }}</option>
-            {% endfor %}
-        </select>
     </label>
+    <select name="jefe_cuadrilla" class="form-control jefe_cuadrilla">
+        {% for trabajador in trabajadores %}
+            <option value="{{ trabajador.id }}"> {{ trabajador.nombre }} - {{ trabajador.ocupacion }}</option>
+        {% endfor %}
+    </select>
 </div>
 
 <div class="mb-3">
@@ -135,12 +134,12 @@
     <div class="mb-3">
     <label for="supervisor">
         Nombre supervisor:
-        <select name="supervisor" class="form-control supervisor" style="width: 100%">
+    </label>
+        <select name="supervisor" class="form-control supervisor" >
             {% for trabajador in trabajadores %}
                 <option value="{{ trabajador.id }}"> {{ trabajador.nombre }} - {{ trabajador.ocupacion }}</option>
             {% endfor %}
         </select>
-    </label>
 </div>
 
 <div class="mb-3">
@@ -160,8 +159,9 @@
 </div>
 
 
-
-    <button type="submit">Enviar</button>
+    <div class="btn-container">
+        <button class="btn btn-sub" type="submit">Enviar</button>
+    </div>
 </form>
   {#</div>#}
    </div>
@@ -188,23 +188,23 @@
 
             // Agregar campos de material al nuevo contenedor
             newMaterialContainer.append(`
-                <button type="button" class="quitarMaterial">X</button>
+                <button type="button" class="quitarMaterial btn btn-danger">X</button>
 
                 <div class="mb-3">
                     <label>
                         Material:
-                        <select name="materiales[]" class="select2-dynamic">
-                            {% for material in materiales %}
-                                <option value="{{ material.id }}">Nombre material: {{ material.nombre }} - Descripción: {{ material.descripcion }}</option>
-                            {% endfor %}
-                        </select>
                     </label>
+                    <select name="materiales[]" class="select2-dynamic" >
+                        {% for material in materiales %}
+                            <option value="{{ material.id }}">Nombre material: {{ material.nombre }} - Descripción: {{ material.descripcion }}</option>
+                        {% endfor %}
+                    </select>
                 </div>
 
                 <div class="mb-3">
                     <label>
                         Cantidad:
-                        <input type="text" name="cantidades[]">
+                        <input type="text" id="cantidades" name="cantidades[]">
                     </label>
                 </div>
 
@@ -227,7 +227,7 @@
     });
     </script>
 
-    <img id="imagen" width="400">
+    <img id="imagen" width="">
 		<p id="datos"></p>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 		<script src="{{ asset('firma-pad/assets/numeric-1.2.6.min.js') }}"></script> 

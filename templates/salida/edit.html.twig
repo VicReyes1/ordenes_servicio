@@ -1,13 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Salida{% endblock %}
+{% block title %}Editar Salida{% endblock %}
 
 {% block body %}
-    <h1>Edit Salida</h1>
+    <link rel="stylesheet" href="{{ asset('styles/Edit_salida.css') }}">
 
-    {{ include('salida/_form.html.twig', {'button_label': 'Update'}) }}
+    <h1>Editar Salida</h1>
 
-    <a href="{{ path('app_salida_index') }}">back to list</a>
-
+    {{ include('salida/_form.html.twig', {'button_label': 'Guardar'}) }}
     {{ include('salida/_delete_form.html.twig') }}
+    <div class="back-container">
+        <a id="btn-back" href="{{ path('app_salida_index') }}">Regresar</a>
+    </div>
 {% endblock %}

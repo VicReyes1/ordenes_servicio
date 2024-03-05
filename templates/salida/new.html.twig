@@ -11,11 +11,13 @@
         }
 
         #capturas-section {
-            text-align: center;
             margin-top: 50px;
-             max-height: 70%; /* Altura máxima del contenedor */
-    overflow-y: auto; /* Agrega una barra de desplazamiento vertical cuando el contenido desborda */
-    overflow-x: hidden; /
+            max-height: 70%; /* Altura máxima del contenedor */
+            overflow-y: auto; /* Agrega una barra de desplazamiento vertical cuando el contenido desborda */
+            overflow-x: hidden; /
+        }
+        .text-content{
+          text-align: center;
         }
 
         #capturas-title {
@@ -256,26 +258,35 @@ a:hover {
     background-position-x: 200%;
   }
 }
+.bodybotoon{
+  text-align: center;
+}
 
 .button3 {
-  display: flex;
-  align-items: center;
-  justify-content: center; /* Centrar el contenido horizontalmente */
-  text-align: center;
-  border: #9e2343 solid 0.15em;
-  border-radius: 0.25em;
-  color: #ffffff; 
-  background: #9e2343;
-  font-size: 1em; /* Tamaño de fuente más pequeño */
-  margin-left: 10%;
- 
-  width: 80%;
-  height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* text-align: center; */
+    border: #9e2343 solid 0.15em;
+    border-radius: 0.25em;
+    color: #ffffff;
+    background: #9e2343;
+    font-size: 1em;
+    /* margin-left: 10%; */
+    width: 30%;
+    height: 40px;
+    text-align: center;
+    margin: auto;
+}
+@media screen and  (max-width: 450px){
+  .button3{
+    width: 86%;
+  }
 }
     </style>
 
 
-    <ul class="background">
+<ul class="background">
    <li></li>
    <li></li>
    <li></li>
@@ -288,12 +299,14 @@ a:hover {
    <li></li>
    {% include 'components/navbar.html.twig' %}
     <div id="capturas-section">
-    <a href="#">Crear nueva salida</a>
-    
+      <div class="text-content">
+        <a href="#">Crear nueva salida</a>
+      </div>
 
-    {{ include('salida/_form.html.twig') }}
-    <div class="bodybotoon">
-    <a href="{{ path('app_salida_index') }}" class="button3">Regresar</a>
+      {{ include('salida/_form.html.twig') }}
+      <div class="bodybotoon">
+        <a href="{{ path('app_salida_index') }}" class="button3">Regresar</a>
+      </div>
     </div>
     </ul>
 

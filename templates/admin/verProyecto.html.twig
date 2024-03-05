@@ -1,34 +1,34 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-     
+    <link rel="stylesheet" href="{{ asset('styles/proyecto_list.css') }}">
     {% include 'components/navbar.html.twig' %}
     {% set id = app.request.attributes.get('id') %}
 
- <div class="form-container"  >
+<div class="form-container"  >
      
    
-   <a href="#">Lista de datos </a><br><br>
+   <a href="#" class="principal-text">Lista de datos </a><br><br>
 
   <div class="col-span-2 rounded-md">
      <ul>
         
-        <li2 style="font-weight: bold;">Fecha de captura: {{ data.fecha }}</li2><br>
-        <li2 style="font-weight: bold;">Area solicitante: {{ data.area_solicitante }}</li2><br>
-        <li2 style="font-weight: bold;">Centro de trabajo: {{ data.centro_trabajo}}</li2><br>
-        <li2 style="font-weight: bold;">Nombre Solicitante: {{ data.nombre_solicitante}}</li2><br>
-        <li2 style="font-weight: bold;">Puesto Solicitante: {{ data.puesto_solicitante}}</li2><br>
-        <li2 style="font-weight: bold;">Telefono y extensión: {{ data.telefono_ext}}</li2><br>
-        <li2 style="font-weight: bold;">Tipo de trabajo: {{ data.tipo_trabajo}}</li2><br>
-        <li2 style="font-weight: bold;">Descripción trabajo: {{ data.descripcion_trabajo}}</li2><br>
-    </ul><br><br>
+        <li2 style="font-weight: bold;">Fecha de captura: {{ data.fecha }}</li2>
+        <li2 style="font-weight: bold;">Area solicitante: {{ data.area_solicitante }}</li2>
+        <li2 style="font-weight: bold;">Centro de trabajo: {{ data.centro_trabajo}}</li2>
+        <li2 style="font-weight: bold;">Nombre Solicitante: {{ data.nombre_solicitante}}</li2>
+        <li2 style="font-weight: bold;">Puesto Solicitante: {{ data.puesto_solicitante}}</li2>
+        <li2 style="font-weight: bold;">Telefono y extensión: {{ data.telefono_ext}}</li2>
+        <li2 style="font-weight: bold;">Tipo de trabajo: {{ data.tipo_trabajo}}</li2>
+        <li2 style="font-weight: bold;">Descripción trabajo: {{ data.descripcion_trabajo}}</li2>
+    </ul><br>
 
   </div>
 
 
-    <div class="botones-container">
-        <button class="boton" onclick="mostrarTabla('tabla1')">Visualizar levantamientos</button>
-        <button class="boton" onclick="mostrarTabla('tabla2')">Ordenes de trabajo</button>
+    <div class="botones-container ">
+        <button class="boton btn btn-danger "onclick="mostrarTabla('tabla1')">Visualizar levantamientos</button>
+        <button class="boton btn btn-primary" onclick="mostrarTabla('tabla2')">Ordenes de trabajo</button>
     </div>
 
 <div id="tabla1" class="tabla-container" style="display: block;">
@@ -55,7 +55,7 @@
                     {% endfor %}
                 </tbody>
             </table>
-    <button id="nueva-captura-button" onclick="location.href='{{ path('app_iniciar_inspeccion', {'id': id}) }}'">Generar levantamiento</button>
+    <button id="nueva-captura-button" class="btn btn-success" onclick="location.href='{{ path('app_iniciar_inspeccion', {'id': id}) }}'">Generar levantamiento</button>
 </div>
 
 <div id="tabla2" class="tabla-container" style="display: none;">
@@ -74,13 +74,13 @@
                             <td>{{ nota.nombre }}</td>
                             <td>{{ nota.fechaPeticion|date('d-m-Y') }}</td>
                             <td>
-                                <a href="{{ path('proyecto_ver_nota', {'id': nota.id}) }}" class="button2">Ver Nota Completa</a>
+                                <a href="{{ path('proyecto_ver_nota', {'id': nota.id}) }}" class="button2 btn btn-outline-danger">Ver Nota Completa</a>
                             </td>
                         </tr>
                     {% endfor %}
                 </tbody>
             </table>
-    <button id="nueva-captura-button" onclick="location.href='{{ path('app_solicitante_crear_orden', {'id': data.id}) }}'">Generar orden nueva</button>
+    <button id="nueva-captura-button" class="btn btn-secondary" onclick="location.href='{{ path('app_solicitante_crear_orden', {'id': data.id}) }}'">Generar orden nueva</button>
 </div>
 
 {% for flash_message in app.flashes('success') %}
