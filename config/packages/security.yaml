@@ -33,13 +33,13 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
-        - { path: ^/material/crud, roles: [ROLE_ADMIN,ROLE_CAPTURA] }
-        - { path: ^/entrada, roles: [ROLE_ADMIN,ROLE_CAPTURA] }
-        - { path: ^/salida, roles: [ROLE_ADMIN,ROLE_CAPTURA] }
-        - { path: ^/proyecto, roles: ROLE_ADMIN }
-        - { path: ^/capturas, roles: [ROLE_ADMIN,ROLE_CAPTURA] }
-        - { path: ^/inspector, roles: [ROLE_ADMIN, ROLE_INSPECTOR] }
-        - { path: ^/solicitante, roles: [ROLE_ADMIN, ROLE_SOLICITANTE] }
+        # - { path: ^/material/crud, roles: [ROLE_ADMIN,ROLE_CAPTURA] }
+        # - { path: ^/entrada, roles: [ROLE_ADMIN,ROLE_CAPTURA] }
+        # - { path: ^/salida, roles: [ROLE_ADMIN,ROLE_CAPTURA] }
+        # - { path: ^/proyecto, roles: ROLE_ADMIN }
+        # - { path: ^/capturas, roles: [ROLE_ADMIN,ROLE_CAPTURA] }
+        # - { path: ^/inspector, roles: [ROLE_ADMIN, ROLE_INSPECTOR] }
+        # - { path: ^/solicitante, roles: [ROLE_ADMIN, ROLE_SOLICITANTE] }
         
 
 when@test:

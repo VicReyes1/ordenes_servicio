@@ -1,11 +1,9 @@
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
-  /* Add container styles */
-  *{
-    font-family:  Arial;
-  }
+ 
+  
   body{
-        background: #d1d1d1;
+        background:white;
   }
   .form-container {
     max-width: 80%; /* Adjust the maximum width as needed */
@@ -18,9 +16,11 @@
   }
 
   label {
+    font-family: 'Montserrat', sans-serif !important;
+    font-weight: bold !important;
+    font-size:1.5em;
     display: block;
     margin-bottom: 0.5rem;
-    font-weight: bold;
   }
 
   input[type="text"],
@@ -32,10 +32,10 @@
     margin-bottom: 1rem;
     font-size: 1rem;
     line-height: 1.5;
-    color: #495057;
+    color: gray;
     background-color: #fff;
     background-clip: padding-box;
-    border: 1px solid #ced4da;
+    border: 2px solid black;
     border-radius: 0.25rem;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   }
@@ -47,7 +47,6 @@
   }
 
   #nueva-captura-button {
-        
         top: 10px;
         right: 10px;
         background-color: #9e2343; /* Color de fondo del botón */
@@ -59,34 +58,58 @@
         margin-bottom: 15px; /* Ajusta el valor según sea necesario */
     }
     #regresar-button{
-        top: 10px;
-        right: 10px;
+        font-family: 'Montserrat', sans-serif !important;
+        font-weight: bold !important; 
         background-color: #9e2343; /* Color de fondo del botón */
         color: white; /* Color del texto del botón */
-        padding: 8.5px 15px;
-        border: none;
-        border-radius: 5px;
+        padding: 5px 30px;
+        border: 2px solid #9e2343;
+        border-radius: 10px;
         cursor: pointer;
         text-decoration: none;
-        font-size: 14px;
-        margin-bottom: 15px; /* Ajusta el valor según sea necesario */
-        
+        font-size: 1.2em;
+        margin-bottom: 15px; /* Ajusta el valor según sea necesario */   
+    }
+    #regresar-button:hover{
+        background-color: transparent; /* Color de fondo del botón */
+        color: #9e2343; /* Color del texto del botón */       
+    }
+    #nueva-captura-button{
+        font-family: 'Montserrat', sans-serif !important;
+        font-weight: bold !important; 
+        background-color: #9e2343; /* Color de fondo del botón */
+        color: white; /* Color del texto del botón */
+        padding: 5px 30px;
+        border: 2px solid #9e2343;
+        border-radius: 10px;
+        cursor: pointer;
+        text-decoration: none;
+        font-size: 1.2em;
+        margin-bottom: 15px; /* Ajusta el valor según sea necesario */   
+    }
+    #nueva-captura-button:hover{
+        background-color: transparent; /* Color de fondo del botón */
+        color: #9e2343; /* Color del texto del botón */       
     }
     .title-content{
         text-align: left;
-        margin: 30px auto 15px 50px;
+        border-bottom:4px solid black;
     }
-    h1{
-        color: #9e2343;
-        font-size: 2rem;
+
+    .title-content h1{
+        color: black;
+        font-family: 'Montserrat', sans-serif !important;
+        font-weight: bold !important;
+        font-size: 4em;
+        margin-top:2%;
+        margin-left:2%;
     }
     @media only screen and (max-width: 325px) {
         .title-content{
             text-align: center;
             margin: 20px auto;
         }
-        h1{
-            color: #9e2343;
+        .title-content h1{
             font-size: 2rem;
         }
         .form-container {

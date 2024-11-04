@@ -1,4 +1,7 @@
-<nav class="navbar navbar-expand-lg" style="background: linear-gradient(180deg, #691b32, #b3415a); box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); margin-right: 0px;">
+
+
+
+{# <nav class="navbar navbar-expand-lg" style="background: linear-gradient(180deg, #691b32, #b3415a); box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); margin-right: 0px;">
     <img src="{{ asset('images/Logo_escudo_blanco.png') }}" alt="Logo" style="width: 300px; height: 100%; margin-right: 20px;">
 
     <div class="container-fluid">
@@ -7,32 +10,151 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-              {% if is_granted('ROLE_CAPTURA') %}
+              
                    <a class="nav-link" href="{{ path('app_admin_capturista') }}" style="color: #ffffff; font-size: 24px; font-weight: bold;">Solicitudes</a>
                    <a class="nav-link" href="{{ path('app_material_crud_index') }}" style="color: #ffffff; font-size: 24px; font-weight: bold;">Materiales</a>
                     <a class="nav-link" href="{{ path('app_material_inventario') }}"  style="color: #ffffff; font-size: 24px; font-weight: bold;">Inventario</a>
-                {% endif %}
+  
             
-                {% if is_granted('ROLE_ADMIN') %}
+ 
                     <a class="nav-link" href="{{ path('app_admin_capturista') }}" style="color: #ffffff; font-size: 24px; font-weight: bold;">Solicitudes</a>
                     <a class="nav-link active" aria-current="page" href="{{ path('app_admin') }}" style="color: #ffffff; font-size: 24px; font-weight: bold;">Proyectos</a>
                     <a class="nav-link" href="{{ path('app_material_crud_index') }}" style="color: #ffffff; font-size: 24px; font-weight: bold;">Materiales</a>
                     <a class="nav-link" href="{{ path('app_material_inventario') }}"  style="color: #ffffff; font-size: 24px; font-weight: bold;">Inventario</a>
-                {% endif %}
+           
 
-                {% if is_granted('ROLE_INSPECTOR') %}
+                
                     <a class="nav-link" href="{{ path('app_admin_capturista') }}" style="color: #ffffff; font-size: 24px; font-weight: bold;">Solicitudes</a>
-                {% endif %}
+     
 
-                {% if is_granted('ROLE_SOLICITANTE') %}
                     <a class="nav-link active" aria-current="page" href="{{ path('app_solicitante') }}" style="color: #ffffff; font-size: 24px; font-weight: bold;">Proyectos</a>
-                {% endif %}
+
 
                 <a class="nav-link" href="{{ path('app_logout') }}"  style="color: #ffffff; font-size: 24px; font-weight: bold;">Salir</a>
             </div>
         </div>
     </div>
-</nav>
+</nav> #}
 
 
 
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <style>
+        .text-nav:hover {
+            color: #A02142 !important;
+            transform: scale(1.2);  /* Aumentar ligeramente el texto al pasar el mouse */
+        }
+        
+        .bg-gradiente {
+            background: linear-gradient(90deg, #691B31 15%, #9E2343 100%) !important;
+            color: white;
+        }
+
+        .logo-img {
+			width: 20%; /* Ajuste general del tamaño basado en el ancho del contenedor */
+			min-width: 170px; /* Tamaño mínimo de la imagen */
+			max-width: 230px; /* Tamaño máximo de la imagen */
+			height: auto; /* Mantener la proporción */
+		}
+
+        .cerrar-sesion {
+            display: flex;
+            align-items: center;
+            margin-left: auto; /* Mueve "Cerrar Sesión" a la derecha del contenedor padre */
+            justify-content: flex-end; /* Alinea el contenido dentro de "cerrar-sesion" a la derecha */
+        }
+
+        .cerrar-sesion a {
+            color: #ffffff !important;
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-right: 10px;
+            text-decoration: none !important;
+            transition: color 0.3s, transform 0.2s !important;
+            margin-left: auto;
+        }
+
+        .cerrar-sesion a, .cerrar-sesion i{
+            cursor: pointer;
+        }
+
+
+        .cerrar-sesion:hover a, .cerrar-sesion:hover i, .cerrar-sesion:focus a, .cerrar-sesion:focus i {
+            color: #ffffff !important;  /* Cambiar color del enlace y del icono al pasar el mouse o enfocar */
+            transform: scale(1.1);  /* Aumentar ligeramente el texto al pasar el mouse */
+        }
+        .nav-link:hover{
+            transform: scale(1.2);
+            color:white;
+        }
+        .nav-link{
+            font-family: 'Montserrat', sans-serif !important;
+                font-weight: bold !important;
+                font-size: 1.4em;
+                text-align: center;
+                color:white;
+        }
+
+		@media (max-width: 1200px) {
+			.logo-img {
+				content: url("{{ asset('images/flor-hidalgo-blanco.png') }}");
+				width: 10%; /* Ajuste general del tamaño basado en el ancho del contenedor */
+				min-width: 15px; /* Tamaño mínimo de la imagen */
+				max-width: 30px; /* Tamaño máximo de la imagen */
+				height: auto; /* Mantener la proporción */ 
+			}
+            .nav-link {
+                font-size: 0.8em;
+            }
+		}
+        @media (max-width: 700px) {
+			
+            .nav-link {
+                font-size: 0.6em;
+            }
+		}
+        
+
+    </style>
+    <nav class="navbar navbar-expand-lg bg-gradiente py-2">
+        <div class="container-fluid d-flex justify-content-between align-items-center">
+            <!-- Logo al inicio -->
+            {# <a class="navbar-brand d-flex align-items-center" href="#"> #}
+                <img src="{{ asset('images/logotipo-15.png') }}" alt="Logo Institucional" class="navbar-brand logo-img ">
+            {# </a> #}
+            <!-- Nombre en el centro -->
+            <div class="navbar-text text-white fw-bold text-center flex-grow-1 fs-5">
+                {# {{ app.user.nombreCompleto }} #}
+            </div>
+            <!-- Cerrar Sesión al final -->
+            <div class="cerrar-sesion nav-link text-white fw-bolder" id="">
+                <!-- Texto "Cerrar Sesión" visible solo en pantallas medianas o mayores -->
+                <a href="{{ path('app_logout') }}" class="d-flex align-items-center">
+                    <span class="d-none d-md-inline">Cerrar Sesión</span>
+                    <i class="fs-5 bi bi-box-arrow-right ms-2"></i> <!-- Icono visible en todos los tamaños de pantalla -->
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="nav-container p-2" style="background:#A02142">
+        <div class="d-flex justify-content-around">
+                
+                <a class="nav-link" href="{{ path('app_admin_capturista') }}">Solicitudes</a>
+                <a class="nav-link" href="{{ path('app_material_crud_index') }}">Materiales</a>
+                <a class="nav-link" href="{{ path('app_material_inventario') }}">Inventario</a>
+                <a class="nav-link" href="{{ path('app_admin_capturista') }}">Solicitudes</a>
+                <a class="nav-link active" aria-current="page" href="{{ path('app_admin') }}">Proyectos</a>
+                <a class="nav-link" href="{{ path('app_material_crud_index') }}">Materiales</a>
+                <a class="nav-link" href="{{ path('app_material_inventario') }}">Inventario</a> 
+                <a class="nav-link" href="{{ path('app_admin_capturista') }}">Solicitudes</a>
+                <a class="nav-link active" aria-current="page" href="{{ path('app_solicitante') }}">Proyectos</a>        
+        </div>
+    </div>
+
+    
+
+{% endblock %}
