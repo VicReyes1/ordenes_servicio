@@ -74,18 +74,6 @@ class Material
         return $this;
     }
 
-    public function getPrecio(): ?float
-    {
-        return $this->precio;
-    }
-
-    public function setPrecio(float $precio): static
-    {
-        $this->precio = $precio;
-
-        return $this;
-    }
-
     /**
      * @return Collection<int, Entrada>
      */

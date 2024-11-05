@@ -15,12 +15,9 @@ class MaterialType extends AbstractType
     {
         $builder
             ->add('nombre')
+            ->add('descripcion')
             ->add('unidad_medida')
-            ->add('precio')
-            ->add('categoria', EntityType::class, [
-                'class' => Categoria::class,
-'choice_label' => 'nombre',
-            ])
+            
         ;
     }
 

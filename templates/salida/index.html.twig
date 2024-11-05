@@ -358,7 +358,6 @@ h1:hover {
           <th scope="col" style="padding: 10px; border: 1px solid #9e4323;">Material</th>
           <th scope="col" style="padding: 10px; border: 1px solid #9e4323;">Cantidad</th>
           <th scope="col" style="padding: 10px; border: 1px solid #9e4323;">Proyecto al que pertenece</th>
-          <th scope="col" style="padding: 10px; border: 1px solid #9e4323;">Nota especifica a la que pertenece</th>
           <th scope="col" style="padding: 10px; border: 1px solid #9e4323;">Acciones</th> 
         </tr>
       </thead>
@@ -367,7 +366,7 @@ h1:hover {
             <tr style="background-color: #ffffff;">
                 <td scope="col" style="padding: 10px; border: 1px solid #9e4323;">{{ salida.id }}</td>
                 <td scope="col" style="padding: 10px; border: 1px solid #9e4323;">{{ salida.fecha ? salida.fecha|date('Y-m-d') : '' }}</td>
-                <td scope="col" style="padding: 10px; border: 1px solid #9e4323;">{{ salida.nombre_material}}</td>
+                <td scope="col" style="padding: 10px; border: 1px solid #9e4323;">{{ salida.descripcion_material}}</td>
                 <td scope="col" style="padding: 10px; border: 1px solid #9e4323;">{{ salida.cantidad }}</td>
                 <td scope="col" style="padding: 10px; border: 1px solid #9e4323;">
                   <a class="edit-btn" href="{% if is_granted('ROLE_ADMIN') %}
@@ -376,15 +375,6 @@ h1:hover {
                               {{ path('app_proyecto_solicitante', {'id': salida.captura_id}) }}
                             {% endif %}">
                     {{ salida.nombre_proyecto }}
-                  </a>
-                </td>
-                <td scope="col" style="padding: 10px; border: 1px solid #9e4323;">
-                  <a href="{% if is_granted('ROLE_ADMIN') %}
-                              {{ path('proyecto_ver_nota', {'id': salida.nota_id}) }}
-                            {% else %}
-                              {{ path('solicitante_ver_nota', {'id': salida.nota_id}) }}
-                            {% endif %}">
-                    {{ salida.nombre_nota }}
                   </a>
                 </td>
                 
