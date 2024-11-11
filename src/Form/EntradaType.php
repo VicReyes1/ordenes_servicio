@@ -22,7 +22,7 @@ class EntradaType extends AbstractType
             ->add('fecha')
             ->add('Material', EntityType::class, [
                 'class' => Material::class,
-                'choice_label' => 'nombre',
+                'choice_label' => 'descripcion',
                 'choice_value' => 'id', 
                 'placeholder' => 'Seleccionar',
             ])
