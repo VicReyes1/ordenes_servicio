@@ -131,7 +131,8 @@
 
 
 <br>
-    <a id="regresar-button" href="http://localhost:8000/entrada">{{ button_label|default('Regresar') }}</a>
+
+    <a id="regresar-button" href="{{ path('app_entrada_index') }}">{{ button_label|default('Regresar') }}</a>
     <button id="nueva-captura-button">{{ button_label|default('Guardar') }}</button>
 {{ form_end(form) }}
 
