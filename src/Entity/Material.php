@@ -30,10 +30,10 @@ class Material
     #[ORM\OneToMany(mappedBy: 'material', targetEntity: Salida::class)]
     private Collection $salidas;
 
-    #[ORM\Column(length: 155)]
+    #[ORM\Column(length: 155, nullable: true)]
     private ?string $familia = null;
 
-    #[ORM\Column(length: 155)]
+    #[ORM\Column(length: 155, nullable: true)]
     private ?string $subfamilia = null;
 
     #[ORM\Column(type: Types::TEXT)]
@@ -49,6 +49,14 @@ class Material
     {
         return $this->id;
     }
+
+    // Setter para el ID (esto no es común ni recomendable)
+    public function setId(int $id): self
+    {
+        $this->id = $id;
+        return $this;
+    }
+
 
     public function getNombre(): ?string
     {

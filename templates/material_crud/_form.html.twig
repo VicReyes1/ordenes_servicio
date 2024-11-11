@@ -58,8 +58,11 @@
 {{ form_start(form, {'attr': {'class': 'form-container'}}) }}
     {{ form_widget(form) }}
     <button id="nueva-captura-button">{{ button_label|default('Guardar') }}</button>
-
-    {{ include('material_crud/_delete_form.html.twig') }}
+    
+    {% if material.id is not empty %}
+        {# Solo mostramos el formulario de eliminación si el material ya tiene un id #}
+        {{ include('material_crud/_delete_form.html.twig') }}
+    {% endif %}
     
 {{ form_end(form) }}
 

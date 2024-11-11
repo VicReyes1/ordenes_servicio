@@ -66,22 +66,47 @@ class MaterialCrudController extends AbstractController
     #[Route('/new', name: 'app_material_crud_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
+        // Crear una nueva instancia de Material
         $material = new Material();
+
+        // Obtener el último ID de la base de datos
+        $lastMaterial = $entityManager->getRepository(Material::class)->findOneBy([], ['id' => 'DESC']);
+
+        // Si hay un registro existente, obtener el último id y asignar el siguiente
+        if ($lastMaterial) {
+            $newId = $lastMaterial->getId() + 1;
+        } else {
+            // Si no hay ningún registro, empezar desde el 1
+            $newId = 1;
+        }
+
+        // Asignar el nuevo ID al material
+        $material->setId($newId);
+
+        // Crear el formulario
         $form = $this->createForm(MaterialType::class, $material);
         $form->handleRequest($request);
 
+        // Verificar si el formulario ha sido enviado y es válido
         if ($form->isSubmitted() && $form->isValid()) {
+            // Persistir el material en la base de datos
             $entityManager->persist($material);
+            
+            $material->setId($newId);
+
             $entityManager->flush();
 
+            // Redirigir al listado de materiales
             return $this->redirectToRoute('app_material_crud_index', [], Response::HTTP_SEE_OTHER);
         }
 
+        // Renderizar la vista con el formulario
         return $this->render('material_crud/new.html.twig', [
             'material' => $material,
             'form' => $form,
         ]);
     }
+
 
     #[Route('/{id}', name: 'app_material_crud_show', methods: ['GET'])]
     public function show(Material $material): Response
