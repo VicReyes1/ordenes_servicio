@@ -2,17 +2,44 @@
 
 {% block body %}
     <link rel="stylesheet" href="{{ asset('styles/proyecto_list.css') }}">
+    <style>
+    .text-content h1{
+        font-family: 'Montserrat', sans-serif !important;
+        font-weight: bold !important;
+        font-size: 4em;
+        text-align: center;
+        color:#681831;
+        margin-top:2%;
+    }
+    .lista{
+        text-align: justify;
+        border: 2px solid black;
+        width:50%;
+        margin-left:25%;
+        border-radius:20px;
+        padding:20px;
+    }
+    .botones-container{
+        width:50%;
+        margin-left:25%;
+        padding:20px;
+    }
+    .tabla-container{
+        max-width:80%;
+        margin-left:10%;
+    }
+    </style>
     {% include 'components/navbar.html.twig' %}
     {% set id = app.request.attributes.get('id') %}
 
 <div class="form-container"  >
      
-   
-   <a href="#" class="principal-text">Lista de datos </a><br><br>
+    <div class="text-content">
+        <h1 >Lista de datos </h1>
+    </div><br><br>
 
   <div class="col-span-2 rounded-md">
-     <ul>
-        
+     <ul class="lista">
         <li2 style="font-weight: bold;">Fecha de captura: {{ data.fecha }}</li2>
         <li2 style="font-weight: bold;">Area solicitante: {{ data.area_solicitante }}</li2>
         <li2 style="font-weight: bold;">Centro de trabajo: {{ data.centro_trabajo}}</li2>

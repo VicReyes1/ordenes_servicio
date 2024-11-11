@@ -2,10 +2,22 @@
 
 {% block body %}
    <link rel="stylesheet" href="{{ asset('styles/adm-index.css') }}">
+   <style>
+   .text-content h1{
+        font-family: 'Montserrat', sans-serif !important;
+        font-weight: bold !important;
+        font-size: 4em;
+        text-align: center;
+        color:#681831;
+        margin-top:2%;
+    }
+   </style>
    {% include 'components/navbar.html.twig' %}
 
     <div id="capturas-section">
-    <a href="#">PROYECTOS</a>
+    <div class="text-content">
+      <h1>Proyectos</h1>
+    </div>
 
    <div style="margin: 20px; overflow: auto;">
     <table style="width: 100%; border-collapse: collapse;" id="proyectoTable">

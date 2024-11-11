@@ -9,16 +9,18 @@
             margin: 0;
             padding: 0;
             font-family: Arial, sans-serif;
+            background: #f4f4f4;
         }
+
 
 
         #capturas-section {
             text-align: center;
             margin-top: 50px;
             height: 70%;
-            /* max-height: 70%;  Altura máxima del contenedor */
             overflow-y: auto; /* Agrega una barra de desplazamiento vertical cuando el contenido desborda */
             overflow-x: hidden;
+            padding:20px 40px;
         }
 
         #capturas-title {
@@ -27,115 +29,7 @@
             margin-bottom: 20px;
         }
 
-        /* estilos fondo  */
-@keyframes animate {
-    0%{
-        transform: translateY(0) rotate(0deg);
-        opacity: 1;
-        border-radius: 0;
-    }
-    100%{
-        transform: translateY(-1000px) rotate(720deg);
-        opacity: 0;
-        border-radius: 50%;
-    }
-}
-
-.background {
-    position: fixed;
-    width: 100vw;
-    height: 100vh;
-    top: 0;
-    left: 0;
-    margin: 0;
-    padding: 0;
-    background: #d1d1d1;
-    overflow: hidden;
-}
-.background li {
-    position: absolute;
-    display: block;
-    list-style: none;
-    width: 20px;
-    height: 20px;
-    background: rgba(255, 255, 255, 0.2);
-    animation: animate 19s linear infinite;
-    pointer-events: none; /* Esto permitirá que los eventos pasen a través de los elementos */
-}
-
-
-
-
-.background li:nth-child(0) {
-    left: 5%;
-    width: 179px;
-    height: 179px;
-    bottom: -179px;
-    animation-delay: 1s;
-}
-.background li:nth-child(1) {
-    left: 52%;
-    width: 141px;
-    height: 141px;
-    bottom: -141px;
-    animation-delay: 5s;
-}
-.background li:nth-child(2) {
-    left: 52%;
-    width: 109px;
-    height: 109px;
-    bottom: -109px;
-    animation-delay: 7s;
-}
-.background li:nth-child(3) {
-    left: 74%;
-    width: 196px;
-    height: 196px;
-    bottom: -196px;
-    animation-delay: 6s;
-}
-.background li:nth-child(4) {
-    left: 7%;
-    width: 155px;
-    height: 155px;
-    bottom: -155px;
-    animation-delay: 11s;
-}
-.background li:nth-child(5) {
-    left: 28%;
-    width: 194px;
-    height: 194px;
-    bottom: -194px;
-    animation-delay: 10s;
-}
-.background li:nth-child(6) {
-    left: 0%;
-    width: 170px;
-    height: 170px;
-    bottom: -170px;
-    animation-delay: 16s;
-}
-.background li:nth-child(7) {
-    left: 23%;
-    width: 188px;
-    height: 188px;
-    bottom: -188px;
-    animation-delay: 2s;
-}
-.background li:nth-child(8) {
-    left: 40%;
-    width: 141px;
-    height: 141px;
-    bottom: -141px;
-    animation-delay: 25s;
-}
-.background li:nth-child(9) {
-    left: 19%;
-    width: 182px;
-    height: 182px;
-    bottom: -182px;
-    animation-delay: 3s;
-}
+       
 /* estilos boton  */
   #add-captura-container {
         text-align: right;
@@ -143,153 +37,33 @@
         margin-right: 80px;
         margin-left: 1520px;
     }
-.button1 {
-  all: unset;
-  display: flex;
-  align-items: center;
-  position: relative;
-  padding: 0.5em 1.5em; /* Ajustado el padding */
-  border: #9e2343 solid 0.15em;
-  border-radius: 0.25em;
-  color: #9e2343; /* Cambiado a #9e2343 */
-  font-size: 1.2em; /* Tamaño de fuente más pequeño */
-  font-weight: 600;
-  cursor: pointer;
-  overflow: hidden;
-  transition: border 300ms, color 300ms;
-  user-select: none;
-    max-width:20%;
-  margin-left: 40%;
-}
-
-.button1 p {
-  z-index: 1;
-}
-
-.button1:hover {
-  color: #9e2343; /* Cambiado a #9e2343 */
-}
-
-.button1:active {
-  border-color: teal;
-}
-
-.button1::after,
-.button1::before {
-  content: "";
-  position: absolute;
-  width: 6em; /* Ajustado el tamaño del pseudo-elemento */
-  aspect-ratio: 1;
-  background: #9e2343; /* Cambiado a #9e2343 */
-  opacity: 50%;
-  border-radius: 50%;
-  transition: transform 500ms, background 300ms;
-}
-
-.button1::before {
-  left: 0;
-  transform: translateX(-5em);
-}
-
-.button1::after {
-  right: 0;
-  transform: translateX(5em);
-}
-
-.button1:hover:before {
-  transform: translateX(-0.5em);
-}
-
-.button1:hover:after {
-  transform: translateX(0.5em);
-}
-
-.button1:active:before,
-.button1:active:after {
-  background: teal;
-  
-}
 
 /* estilos titulo  */
-body {
-  background: #001224;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-h1 {
-  font-size: 3em;
-  font-weight: bold;
-  font-family: sans-serif;
-  text-decoration: none;
-  color: transparent;
-  background: url("{{ asset('images/image.png') }}") repeat-x #9E2343;
-  background-position-x: 0%;
-  background-position-y: 0%;
-  background-size: auto;
-  background-clip: border-box;
-  -webkit-background-clip: text;
-  background-clip: text;
-  background-size: 200% 100%;
-  background-position-x: 0;
-  background-position-y: 2em;
-  -webkit-transition: background-position-y 0.6s ease;
-  transition: background-position-y 0.6s ease;
-  -webkit-animation: waveAnimation 4s infinite linear;
-  animation: waveAnimation 4s infinite linear;
-  animation-play-state: running;
-  -webkit-animation-play-state: paused;
-  animation-play-state: paused;
-}
-
-h1:hover {
-  background-position-x: 0;
-  background-position-y: 0;
-  -webkit-animation-play-state: running;
-  animation-play-state: running;
-}
-
-@keyframes waveAnimation{
-  from {
-    background-position-x: 0%;
-  }
-  to {
-    background-position-x: 200%;
-  }
-}
 
  .bodybotoon {
-         
-            align-items: center;
-            
-        }
-.button2 {
-  display: inline;
-  align-items: center;
-  justify-content: center; /* Centrar el contenido horizontalmente */
-  text-align: center;
-  position: relative;
-  border: #9e2343 solid 0.12em;
-  border-radius: 0.25em;
-  color: #9e2343; /* Cambiado a #9e2343 */
-  background: #fff;
-  font-size: .9em; /* Tamaño de fuente más pequeño */
-  font-weight: 600;
-  cursor: pointer;
-  overflow: hidden;
-  transition: border 300ms, color 300ms;
-  user-select: none;
-  width: 30%;
-  height: 40px;
-  text-decoration:none;
-  padding: 8px 20px;
-}
-.button2:hover {
-  color: #fff;
-  background: #9e2343;
-}
+    align-items: center;    
+  }
+   .button2 {
+        background-color: #691B31 !important;
+        border: #691B31 !important;
+        color: white !important;
+        padding: 10px 20px !important; 
+        border-radius: 10px !important;
+        cursor: pointer !important;
+        font-family: 'Montserrat', sans-serif !important;
+        font-weight: bold !important;
+        display: inline-flex !important;
+        align-items: center !important; 
+        height: 50px !important; 
+        text-decoration:none;
+        
+    }
+     .button2:hover {
+        background: transparent !important;
+        border: 2px solid #691B31 !important;
+        color: #691B31 !important;
+        text-decoration: none !important;
+    }
 
 .pagination {
     margin-top: 20px;
@@ -321,21 +95,21 @@ h1:hover {
 #btn-create-user{
     padding: 10px 30px;
 }
+
+.text-content h1{
+        font-family: 'Montserrat', sans-serif !important;
+        font-weight: bold !important;
+        font-size: 4em;
+        text-align: center;
+        color:#681831;
+        margin-top:2%;
+    }
+
     </style>
-    <ul class="background">
-   <li></li>
-   <li></li>
-   <li></li>
-   <li></li>
-   <li></li>
-   <li></li>
-   <li></li>
-   <li></li>
-   <li></li>
-   <li></li>
+   
    {% include 'components/navbar.html.twig' %}
-    <div style="text-align: center; margin-top: 2%">
-      <h1>SALIDA </h1>
+    <div class="text-content">
+      <h1>Salida </h1>
     </div>
     <div id="capturas-section">
     {# <div>
@@ -397,7 +171,7 @@ h1:hover {
        <a id="btn-create-user" href="{{ path('app_salida_new') }}" class="button2">Crear nuevo</a>
     </div>
  </div>
- </ul>
+
 
 <script>
     {# $(document).ready(function () {

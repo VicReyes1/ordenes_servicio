@@ -30,6 +30,25 @@
             text-align: end;
             margin-top: 15px;
         }
+        .text-content h1{
+            font-family: 'Montserrat', sans-serif !important;
+            font-weight: bold !important;
+            font-size: 4em;
+            text-align: center;
+            color:#681831;
+            margin-top:2%;
+        }
+        .text-content h3{
+            font-family: 'Montserrat', sans-serif !important;
+            font-weight: bold !important;
+            font-size: 2em;
+            text-align: left;
+            color:#681831;
+            margin-left:1%;
+        }
+        .form-container{
+            padding:20px 40px;
+        }
         @media screen and (max-width: 450px) {
             .col-span-2.text-lg.font-bold.capitalize.rounded-md{
                 text-align: center ;
@@ -47,7 +66,6 @@
             .category-content{
                 text-align: center;
                 width: 100%;
-                
             }
         }
 
@@ -55,19 +73,22 @@
      
     {% include 'components/navbar.html.twig' %}
 
-    <div class="responsive">
+
     <div class="form-container">
 
-        <div class="w-60 bg-gradient-to-l from-slate-300 to-slate-100 text-slate-600 border border-slate-300 grid grid-col-2 justify-center p-4 gap-4 rounded-lg shadow-md" style="background-color: #f4f4f4; color: #000000; font-size:18px; font-weight:bold;">
+        {# <div class="w-60 bg-gradient-to-l from-slate-300 to-slate-100 text-slate-600 border border-slate-300 grid grid-col-2 justify-center p-4 gap-4 rounded-lg shadow-md" > #}
             <div class="col-span-2 text-lg font-bold capitalize rounded-md">
-                <a href="#" class="text-context">Inventario de materiales</a>
+                <div class="text-content">
+                    <h1>Inventario de materiales</h1>
+                </div>
                 <div class="category-content">
                     <a href="{{ path('app_entrada_index') }}" class="btn btn-danger">Ver entradas</a>
                     <a href="{{ path('app_salida_index') }}" class="btn btn-danger">Ver salidas</a>
                 </div>
             </div>
-
-            <h3 style="font-weight: bold; font-size: 2rem; ">Materiales</h3>
+            <div class="text-content">
+                <h3>Materiales</h3>
+            </div>
             <div style="margin: 20px; overflow: auto;">
                 <table style="width: 100%; border-collapse: collapse;" id="materialTable">
                     <thead style="background-color: #9e2343; color: #ffffff; border: 1px solid #9e4323;">
@@ -92,9 +113,9 @@
                     {% endfor %}
                 </table>
             </div>
-        </div>
+        {# </div> #}
     </div>
-</div>
+
 
 
 <script>

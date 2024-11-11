@@ -8,8 +8,6 @@
 
 <style>
 
-
-
 .background {
     position: fixed;
     width: 100vw;
@@ -23,64 +21,30 @@
 }
 
 
-.container {
+    {# .container {
         max-height: 80vh; /* Altura máxima del contenedor */
         overflow-y: auto; /* Barra de desplazamiento vertical cuando es necesario */
         padding: 20px; /* Ajuste del espacio interno del contenedor */
+    } #}
+    
+    /* estilos titulo  */
+    body {
+        background: white;
+   
+       
     }
 
-    /* estilos titulo  */
-body {
-  background: #001224;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+    .text-content h1{
+        font-family: 'Montserrat', sans-serif !important;
+        font-weight: bold !important;
+        font-size: 4em;
+        text-align: center;
+        color:#681831;
+        margin-top:2%;
+    }
 
-a {
-  font-size: 3em;
-  font-weight: bold;
-  font-family: sans-serif;
-  text-decoration: none;
-  color: transparent;
-  background: url("{{ asset('.') }}") repeat-x #9E2343;
-  background-position-x: 0%;
-  background-position-y: 0%;
-  background-size: auto;
-  background-clip: border-box;
-  -webkit-background-clip: text;
-  background-clip: text;
-  background-size: 200% 100%;
-  background-position-x: 0;
-  background-position-y: 2em;
-  -webkit-transition: background-position-y 0.6s ease;
-  transition: background-position-y 0.6s ease;
-  -webkit-animation: waveAnimation 4s infinite linear;
-  animation: waveAnimation 4s infinite linear;
-  animation-play-state: running;
-  -webkit-animation-play-state: paused;
-  animation-play-state: paused;
-}
 
-a:hover {
-  background-position-x: 0;
-  background-position-y: 0;
-  -webkit-animation-play-state: running;
-  animation-play-state: running;
-}
-
-@keyframes waveAnimation{
-  from {
-    background-position-x: 0%;
-  }
-  to {
-    background-position-x: 200%;
-  }
-}
-
-#nueva-captura-button {
-        
+    #nueva-captura-button {
         top: 10px;
         right: 10px;
         background-color: #9e2343; /* Color de fondo del botón */
@@ -91,15 +55,17 @@ a:hover {
         cursor: pointer;
         margin-bottom: 15px; /* Ajusta el valor según sea necesario */
     }
+
 </style>
 
-  <ul class="background">
+
  
 
 {% include 'components/navbar.html.twig' %}
 <div class="container mt-4">
-
-    <a href="#">Captura nuevo proyecto </a>
+    <div class="text-content">
+        <h1 >Captura nuevo proyecto </h1>
+    </div>
     <form action="{{ path('app_admin_capturista_add_action') }}" method="post">
         <input type="hidden" name="cantidad" id="cantidad" value="0">
        
@@ -154,7 +120,7 @@ a:hover {
     </form>
 </div>
 
-</ul>
+
 
 <script>
     var $cantidad = 0;

@@ -4,34 +4,11 @@
 
 {% block body %}
     <style>
-    #capturas-section{
-        background-color: #f4f4f4;
-    }
-        a {
-            font-size: 3em;
-            font-weight: bold;
-            font-family: sans-serif;
-            text-decoration: none;
-            color: transparent;
-            background: url(/images/image.png) repeat-x #9E2343;
-            background-position-x: 0%;
-            background-position-y: 0%;
-            background-size: auto;
-            background-clip: border-box;
-            -webkit-background-clip: text;
-            background-clip: text;
-            background-size: 200% 100%;
-            background-position-x: 0;
-            background-position-y: 2em;
-            -webkit-transition: background-position-y 0.6s ease;
-            transition: background-position-y 0.6s ease;
-            -webkit-animation: waveAnimation 4s infinite linear;
-            animation: waveAnimation 4s infinite linear;
-            animation-play-state: running;
-            -webkit-animation-play-state: paused;
-            animation-play-state: paused;
-            margin-left: 15px;
+        #capturas-section{
+            background-color: #f4f4f4;
+            padding:30px;
         }
+        
         .button2{
             font-size: 1.2em;
             line-height: normal;
@@ -39,19 +16,27 @@
         }
         .btn-crea{
             font-size: 1.2em;
-            line-height: normal;
-            text-align: center;
-            border: 1px solid #9E2343;
-            border-radius: 8px;
-            padding: 10px 20px;
-            background: #9E2343;
-            color:#fff;
-            margin: 15px;
+            background:#A02142;
+            border: 2px solid #A02142;
+            border-radius: 10px;
+            text-decoration:none;
+            color:white;
+            font-family: 'Montserrat', sans-serif !important;
+            font-weight: bold !important;
+            padding:5px 30px;
+            margin-left:1%;
+        }
+        .btn-crea:hover{
+            background:transparent;
+            border: 2px solid #A02142;
+            color:#A02142;
         }
         .bodybotoon{
             margin-top: 10px;
         }
         .btn-2{
+            font-family: 'Montserrat', sans-serif !important;
+            font-weight: bold !important;
             display: inline;
             align-items: center;
             justify-content: center;
@@ -73,11 +58,21 @@
             padding: 8px 20px;
             margin: auto;
         }
+        .text-content h1{
+            font-family: 'Montserrat', sans-serif !important;
+            font-weight: bold !important;
+            font-size: 4em;
+            text-align: center;
+            color:#681831;
+            margin-top:2%;
+        }
     </style>
    {% include 'components/navbar.html.twig' %}
 
     <div id="capturas-section">
-        <a href="#">MATERIAL </a>
+        <div class="text-content">
+            <h1>Material </h1>
+        </div>
         <div class="bodybotoon">
             <a href="{{ path('app_material_crud_new') }}" class="btn-crea">Crear nuevo</a>
         </div>
