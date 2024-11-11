@@ -1,7 +1,5 @@
-
 <style>
- #nueva-captura-button2 {
-        
+    #nueva-captura-button2 {
         top: 10px;
         margin-left: 80%;
         background-color: #9e2343; /* Color de fondo del botón */
@@ -11,10 +9,38 @@
         border-radius: 5px;
         cursor: pointer;
         margin-bottom: 15px; /* Ajusta el valor según sea necesario */
-    
-}
+    }
 </style>
-<form method="post" action="{{ path('app_material_crud_delete', {'id': material.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
-    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ material.id) }}">
-    <button id="nueva-captura-button2">Delete</button>
-</form>
+
+<a href="#" onclick="deleteMaterial({{ material.id }}); return false;">Borrar</a>
+
+<script>
+    function deleteMaterial(id) {
+        console.log(id); // Muestra el ID en la consola
+        if (confirm('¿Está seguro de borrar el material?')) {
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = '{{ path('app_material_crud_delete', {'id': 'id'}) }}';
+
+            // Crear el input de CSRF Token
+            const inputToken = document.createElement('input');
+            inputToken.type = 'hidden';
+            inputToken.name = '_token';
+            inputToken.value = '{{ csrf_token('delete' ~ material.id) }}'; // Esto es opcional si decides usar el CSRF token más adelante
+
+            // Crear el input para el id
+            const inputId = document.createElement('input');
+            inputId.type = 'hidden'; // Usar 'hidden' para enviar el id sin mostrarlo
+            inputId.name = 'id'; // El name debe coincidir con lo que espera el backend
+            inputId.value = id; // Asignar el id al valor
+
+            // Agregar los inputs al formulario
+            form.appendChild(inputToken);
+            form.appendChild(inputId);
+            
+            // Agregar el formulario al cuerpo del documento y enviarlo
+            document.body.appendChild(form);
+            form.submit();
+        }
+    }
+</script>

@@ -134,16 +134,21 @@ class MaterialCrudController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_material_crud_delete', methods: ['POST'])]
-    public function delete(Request $request, Material $material, EntityManagerInterface $entityManager): Response
+    #[Route('/{id}/delete', name: 'app_material_crud_delete', methods: ['POST'])]
+    public function delete(EntityManagerInterface $entityManager, Request $request): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$material->getId(), $request->request->get('_token'))) {
-            $entityManager->remove($material);
-            $entityManager->flush();
-        }
+
+        $data = $request->request->all();
+
+        $material = $entityManager->getRepository(Material::class)->find($data['id']);
+
+        // Eliminar el material
+        $entityManager->remove($material);
+        $entityManager->flush();
 
         return $this->redirectToRoute('app_material_crud_index', [], Response::HTTP_SEE_OTHER);
     }
+
 
     #[Route("/obtener-precio/{id}", name:"obtener_precio_material", methods:["GET"])]
     public function obtenerPrecio(MaterialRepository $materialRepository, $id): Response
