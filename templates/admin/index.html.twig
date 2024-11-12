@@ -1,72 +1,185 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-   <link rel="stylesheet" href="{{ asset('styles/adm-index.css') }}">
+   <!-- CSS de DataTables -->
+   <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+
+
    <style>
-   .text-content h1{
+   .text-content h1 {
         font-family: 'Montserrat', sans-serif !important;
         font-weight: bold !important;
         font-size: 4em;
         text-align: center;
-        color:#681831;
-        margin-top:2%;
+        color: #681831;
+        margin-top: 2%;
+    }
+    .button2-dorado {
+        background-color: #BC955B !important;
+        border: #BC955B !important;
+        color: white !important;
+        padding: 5px 20px !important; 
+        border-radius: 20px !important;
+        cursor: pointer !important;
+        font-family: 'Montserrat', sans-serif !important;
+        font-weight: bold !important;
+        display: inline-flex !important;
+        align-items: center !important; 
+        text-decoration:none;
+        
+    }
+     .button2-dorado:hover {
+        background: transparent !important;
+        border: 2px solid #BC955B !important;
+        color: #BC955B !important;
+        text-decoration: none !important;
+    }
+
+    /* Estilos personalizados para la tabla */
+    .tabla-body {
+        max-width: 90%;
+        margin-left: 5%;
+        margin-top: 20px; 
+    }
+
+    .table-red th, .table-red td {
+        font-family: 'Montserrat', sans-serif !important;
+        text-align: center !important; 
+    }
+
+    .table-red th {
+        background-color: #A02142 !important;
+        color: white !important;
+        font-weight: bold !important;
+        font-size: 1.2em !important;
+    }
+
+    .table-red td {
+        font-size: 1em !important;
+    }
+
+    table.table-red {
+        border-collapse: collapse !important;
+        width: 100% !important;
+        border-radius: 10px 10px 0 0 !important; 
+        overflow: hidden !important; 
+    }
+
+    table.table-red th{
+        border-bottom: 1px solid grey !important;
+        border-right: 1px solid #E7E4E4 !important; 
+        border-top: none !important; 
+    }
+    table.table-red td{
+        border-bottom: 1px solid grey !important;
+        border-top: none !important; 
+    }
+
+    /* DataTables - Personalización de la barra de búsqueda y de la paginación */
+
+    .dataTables_wrapper .dataTables_paginate,
+    .dt-paging {
+        font-family: 'Montserrat', sans-serif !important;
+        font-size: 1.5em !important;
+    }
+
+    .dataTables_wrapper .dataTables_paginate .paginate_button,
+    .dt-paging-button {
+        padding: 5px !important;
+        font-family: 'Montserrat', sans-serif !important;
+        font-size: .7em !important;
+    }
+
+    select[name="proyectoTable_length"]{
+        border: 2px solid #BC955B !important; 
+        padding: 2px 10px;
+        border-radius: 15px !important;
+        font-family: 'Montserrat', sans-serif !important;
+        font-size: 1em !important;
+        text-align: center !important;
+        width: 60px !important;
+    }
+    .dt-search label{
+        font-family: 'Montserrat', sans-serif !important;
+        font-size:1.2em !important;
+        font-weight:bold;
+        display: none !important;
+    }
+    .dt-length label{
+        font-family: 'Montserrat', sans-serif !important;
+        font-size:1.2em !important;
+        font-weight:normal;
+    }
+    .dt-input{
+        
+        border: 2px solid #BC955B !important; 
+        padding: 2px 10px;
+        border-radius: 15px !important;
+        font-family: 'Montserrat', sans-serif !important;
+        font-size: 1em !important;
+        font-weight: normal !important;
     }
    </style>
+
    {% include 'components/navbar.html.twig' %}
 
     <div id="capturas-section">
-    <div class="text-content">
-      <h1>Proyectos</h1>
+        <div class="text-content">
+            <h1>Proyectos</h1>
+        </div>
+
+       <div class="tabla-body">
+            <table class="table-red" id="proyectoTable">
+                <thead>
+                    <tr>
+                        <th scope="col">Fecha de captura</th>
+                        <th scope="col">Nombre del proyecto</th>
+                        <th scope="col">Area solicitante</th>
+                        <th scope="col">Centro de trabajo</th>
+                        <th scope="col">Nombre del solicitante</th>
+                        <th scope="col">Nombre secretaria</th>
+                        <th scope="col">Iniciar inspección</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for captura in capturas %}
+                        <tr>
+                            <td>{{ captura.fecha ? captura.fecha|date('Y-m-d') : '' }}</td>
+                            <td>{{ captura.NombreProyecto ?? '' }}</td>
+                            <td>{{ captura.areaSolicitante ?? '' }}</td>
+                            <td>{{ captura.centroTrabajo ?? '' }}</td>
+                            <td>{{ captura.nombreSolicitante ?? '' }}</td>
+                            <td>{{ captura.secretaria ? captura.secretaria.nombre ?? '' : '' }}</td>
+                            <td>
+                                <a class="button2-dorado" href="{{ path('app_proyecto', {'id': captura.id}) }}">Ver Detalles</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
 
-   <div style="margin: 20px; overflow: auto;">
-    <table style="width: 100%; border-collapse: collapse;" id="proyectoTable">
-      <thead style="background-color: #9e2343; color: #ffffff; border: 1px solid #9e4323;">
-        <tr>
-          <th scope="col" style="padding: 10px; border: 1px solid #9e4323;">Fecha de captura</th>
-          <th scope="col" style="padding: 10px; border: 1px solid #9e4323;">Nombre del proyecto</th>
-          <th scope="col" style="padding: 10px; border: 1px solid #9e4323;">Area solicitante</th>
-          <th scope="col" style="padding: 10px; border: 1px solid #9e4323;">Centro de trabajo</th>
-          <th scope="col" style="padding: 10px; border: 1px solid #9e4323;">Nombre del solicitante</th>
-          <th scope="col" style="padding: 10px; border: 1px solid #9e4323;">Nombre secretaria</th>
-          <th scope="col" style="padding: 10px; border: 1px solid #9e4323;">Inicar inspeccion</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for captura in capturas %}
-            <tr style="background-color: #ffffff;">
-                <td style="padding: 10px; border: 1px solid #98989a;">{{ captura.fecha ? captura.fecha|date('Y-m-d') : '' }}</td>
-                <td style="padding: 10px; border: 1px solid #98989a;">{{ captura.NombreProyecto ?? '' }}</td>
-                <td style="padding: 10px; border: 1px solid #98989a;">{{ captura.areaSolicitante ?? '' }}</td>
-                <td style="padding: 10px; border: 1px solid #98989a;">{{ captura.centroTrabajo ?? '' }}</td>
-                <td style="padding: 10px; border: 1px solid #98989a;">{{ captura.nombreSolicitante ?? '' }}</td>
-                <td style="padding: 10px; border: 1px solid #98989a;">{{ captura.secretaria ? captura.secretaria.nombre ?? '' : '' }}</td>
-                <td style="padding: 10px; border: 1px solid #98989a;">
-                    <a class="button2 btn btn-danger" href="{{ path('app_proyecto', {'id': captura.id}) }}">Ver Detalles</a>
-                </td>
-                <!-- Agrega más celdas según tus necesidades -->
-            </tr>
-        {% endfor %}
+    <section class="spikes"></section>
 
-        <!-- Agrega más filas según sea necesario -->
-      </tbody>
-    </table>
-  </div>
-</div>
+    <!-- Scripts de jQuery y DataTables -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 
-  <section class="spikes"></section>
-
-</ul>
-
-<script>
-
-    $(document).ready( function () {
-        $('#proyectoTable').DataTable();
-    } );
-</script>
-
-
-
- 
-
+    <!-- Inicialización de DataTable -->
+    <script>
+        $(document).ready(function () {
+    $('#proyectoTable').DataTable({
+        language: {
+            info: 'Mostrando página _PAGE_ de _PAGES_',
+            infoEmpty: 'No hay registros para mostrar',
+            infoFiltered: '(filtered from _MAX_ total records)',
+            lengthMenu: 'Mostrar _MENU_ registros por página',
+            zeroRecords: 'No hay registros para mostrar',
+            search: 'Buscar'
+        }
+    });
+    $("#dt-search-0").attr("placeholder", "Buscar...").placeholder();
+});
+    </script>
 {% endblock %}
